@@ -68,3 +68,6 @@ class Files_for_individual_orders(models.Model):
     comment = models.CharField(max_length=200)
 
 
+class Files_Orders(models.Model):
+    files = models.ForeignKey(Files_for_individual_orders, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
