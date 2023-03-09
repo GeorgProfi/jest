@@ -3,11 +3,18 @@
     font-family: "Montserrat";
     src: url("../fonts/Montserrat/static/Montserrat-Medium.ttf");
   }
+ @font-face {
+    font-family: "Montserrat bold";
+    src: url("../fonts/Montserrat/static/Montserrat-Bold.ttf");
+  }
 
 /*Color const*/
 html[theme="main"]{
     --body-bg:#ECECEC;
     --body-fg: #ff0000;
+    --body-focus:#E3874F;
+    --body-h:#000000;
+    --body-text:#FFFFFF;
     --footer-text:#FFFFFF;
     --nav-link:#707070;
     --nav-link-active:#000000;
@@ -15,8 +22,14 @@ html[theme="main"]{
 
 body{
     margin: 0;
+    font-family: 'Montserrat';
     background: var(--body-bg);
-    color: var(--body-fg);
+}
+
+.flex-column{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
 header{
@@ -26,6 +39,16 @@ header{
     overflow: hidden;
     margin:0;
     filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.25));
+    position: relative;
+    z-index: 0;
+}
+
+
+.body-content{
+    width: 100%;
+    background: var(--body-bg);
+    overflow: hidden;
+    margin:0;
     position: relative;
     z-index: 0;
 }
@@ -195,9 +218,7 @@ footer{
         max-width: 100%;
         height: 100%;
         margin: 0 auto;
-        align-items: center;
         position: relative;
-        justify-content: space-between;
     }
     .menu{
         display:none;
