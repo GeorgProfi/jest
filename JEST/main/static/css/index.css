@@ -1,0 +1,125 @@
+.banner-index{
+    background-image: url("../images/banner_image.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    width: 100vw;
+    max-width: 100%;
+
+}
+.banner-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25% 0;
+}
+
+h1{
+    font-family: 'Montserrat bold';
+    color:var(--body-text);
+    margin:9px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+h2{
+    color:var(--body-text);
+    margin:9px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+h3{
+    font-family: 'Montserrat bold';
+    color: var(--body-h);
+    font-weight:700;
+    margin: 35px auto;
+    font-size: 24px;
+}
+
+h4{
+    font-family: 'Montserrat';
+    margin:5px auto;
+    text-align: center;
+    color:var(--body-h);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.popular-products{
+    display: flex;
+}
+
+.products-row{
+    padding: 0px 10px;
+    justify-content: space-around;
+    display: grid;
+    grid-template-columns:repeat(5, 1fr);
+    column-gap: 110px;
+    row-gap: 35px;
+}
+
+.product-card{
+    width: 170px;
+    height: 230px;
+}
+
+.product-image{
+    width: 100%;
+    height: 74%;
+    background-color: var(--body-no-image);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    object-fit: cover;
+}
+
+.link-no-dec{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+
+}
+.product-price{
+    width: fit-content;
+    margin: 0 auto;
+    display: block;
+    align-items: center;
+    color:var(--body-h);
+    font-family: 'Montserrat bold';
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.why-block{
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 75px;
+}
+
+.why-reason{
+    width: 200px;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0 110px;
+}
+
+.why-image{
+    margin: 5px auto;
+    width: 160px;
+    height: 160px;
+}
+
+.why-text{
+    margin: 5px auto;
+    color:var(--body-h);
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
