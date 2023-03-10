@@ -76,13 +76,13 @@ WSGI_APPLICATION = 'JEST.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-DB_SERVER_IP = '217.151.229.222'
+DB_SERVER_IP = '80.243.140.96'
 DB_PORT = 5432
 SSH_PORT = 22
 db_tunnel = SSHTunnelForwarder(
     (DB_SERVER_IP, SSH_PORT),
     ssh_username="root",
-    ssh_password="h1vfwH2N",
+    ssh_password="g7EThEFj",
     remote_bind_address=('127.0.0.1', DB_PORT)
 )
 db_tunnel.start()
