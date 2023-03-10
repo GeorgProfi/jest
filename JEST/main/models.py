@@ -122,6 +122,10 @@ class AboutUs(models.Model):
     title = models.CharField(max_length=30)
     info = models.CharField(max_length=1000)
     photo = models.CharField(max_length=30)
+    
+class Faqs(models.Model):
+    question = models.CharField(max_length=200)
+    answer = models.CharField(max_length=200)
 
 
 
