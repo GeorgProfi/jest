@@ -21,13 +21,25 @@ def api_test(request):
     )
 
 def why_us(request):
-    json = {}
+    json = {
+        'title':'',
+        'text':'',
+        'image':''
+            }
+    data = []
     for el in About.objects.all():
-        data.append(el.text)
-        print (el.text)
+        json = {'title':el.title,
+                'text': el.text,
+                'image':el.image
+                }
+
+        data.append(json)
+    print ()
+
     return JsonResponse(
         {
-            'emploee': f'{data}'
+            'count': f'{len(data)}',
+           'data': f"{data}"
         }
     )
 

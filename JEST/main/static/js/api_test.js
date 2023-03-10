@@ -3,7 +3,7 @@
 var xhr = new XMLHttpRequest()
 xhr.open(
     'GET',
-    '/api_test?name=aboba',
+    '/why-us',
     true,
 )
 

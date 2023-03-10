@@ -8,6 +8,6 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('', views.render_main),
-    path('api_test/', views.api_test),
+    path('why-us/', views.why_us),
 
 ]
