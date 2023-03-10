@@ -112,7 +112,7 @@ class FileOrder(models.Model):
 
 class History(models.Model):
     title = models.CharField(max_length=30)
-    info = models.CharField(max_length=500)
+    info = models.CharField(max_length=1000)
     photo = models.CharField(max_length=30)
 class Common(models.Model):
     title = models.CharField(max_length=30)
@@ -120,7 +120,7 @@ class Common(models.Model):
 
 class AboutUs(models.Model):
     title = models.CharField(max_length=30)
-    info = models.CharField(max_length=500)
+    info = models.CharField(max_length=1000)
     photo = models.CharField(max_length=30)
 
 
