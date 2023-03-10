@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'D;B№PFO]sxXMyF$lHDf<8DX8:O0s,!',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': db_tunnel.local_bind_port
     }
 }
