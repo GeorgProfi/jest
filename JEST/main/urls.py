@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.render_main),
     path('why-us/', views.why_us),
-    path('faq', views.faq)
+    path('faq', views.faq),
+    path('reviews', views.reviews),
 
 ]

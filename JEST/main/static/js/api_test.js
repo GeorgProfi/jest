@@ -31,7 +31,7 @@ function create_why_reasons(data){
 var xhr = new XMLHttpRequest()
 xhr.open(
     'GET',
-    '/why-us',
+    '/reviews?count=5',
     true,
 )
 
