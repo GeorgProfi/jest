@@ -3,7 +3,7 @@
 var xhr = new XMLHttpRequest()
 xhr.open(
     'GET',
-    '/why-us',
+    '/faq',
     true,
 )
 

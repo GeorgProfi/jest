@@ -13,7 +13,7 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
-    weight = models.IntegerField()
+    weight = models.FloatField()
     probe = models.CharField(max_length=30)
     count = models.IntegerField(default=0)
     price = models.IntegerField()
@@ -76,3 +76,8 @@ class About (models.Model):
      title = models.CharField(max_length=20)
      text = models.CharField(max_length=200)
      image = models.CharField(max_length=100)
+
+
+class Faqs(models.Model):
+    question = models.CharField(max_length=200)
+    answer = models.CharField(max_length=200)

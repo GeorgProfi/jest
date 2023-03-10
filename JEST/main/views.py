@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Emploee, About
+from .models import Emploee, About,Faqs
 from django.http import JsonResponse
-
+import json
 
 
 def render_main (request):
@@ -21,25 +21,43 @@ def api_test(request):
     )
 
 def why_us(request):
-    json = {
+    block_data = {
         'title':'',
         'text':'',
         'image':''
             }
     data = []
-    for el in About.objects.all():
-        json = {'title':el.title,
+    for el in AboutUs.objects.all():
+        block_data = {'title':el.title,
                 'text': el.text,
                 'image':el.image
                 }
-
         data.append(json)
+
+    return JsonResponse(
+        {
+            'count': f'{len(data)}',
+           'data': f"{json.dumps(data)}"
+        }
+    )
+
+def faq(request):
+    block_data = {
+        'question':'',
+        'answer':''
+            }
+    data = []
+    for el in Faqs.objects.all():
+        block_data = {'question':el.question,
+                'answer': el.answer,
+                }
+        data.append(block_data)
     print ()
 
     return JsonResponse(
         {
             'count': f'{len(data)}',
-           'data': f"{data}"
+           'data': f"{json.dumps(data)}"
         }
     )
 
