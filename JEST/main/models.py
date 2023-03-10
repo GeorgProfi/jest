@@ -71,3 +71,8 @@ class Files_for_individual_orders(models.Model):
 class Files_Orders(models.Model):
     files = models.ForeignKey(Files_for_individual_orders, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+class About (models.Model):
+     title = models.CharField(max_length=20)
+     text = models.CharField(max_length=200)
+     image = models.CharField(max_length=100)

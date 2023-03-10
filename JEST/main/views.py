@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Emploee
+from .models import Emploee, About
 from django.http import JsonResponse
 
 
@@ -14,6 +14,17 @@ def api_test(request):
         "select * from main_emploee\n"
         f"where name = '{name_for_filter}'"):
         data.append(el)
+    return JsonResponse(
+        {
+            'emploee': f'{data}'
+        }
+    )
+
+def why_us(request):
+    json = {}
+    for el in About.objects.all():
+        data.append(el.text)
+        print (el.text)
     return JsonResponse(
         {
             'emploee': f'{data}'
