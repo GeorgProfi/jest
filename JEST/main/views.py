@@ -24,7 +24,7 @@ def api_test(request):
 
 def why_us(request):
     data = []
-    for el in About.objects.all():
+    for el in AboutUs.objects.all():
         block_data = {'title': el.title,
                       'text': el.text,
                       'image': el.image
