@@ -19,7 +19,6 @@ class Product(models.Model):
     price = models.IntegerField()
     gems = models.JSONField()
     photos = models.JSONField()
-    metals = models.CharField(max_length=30)
     is_active = models.BooleanField(default=False)
 
 
