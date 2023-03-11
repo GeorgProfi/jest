@@ -14,10 +14,8 @@ class Product(models.Model):
     title = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
     weight = models.FloatField()
-    probe = models.CharField(max_length=30)
     count = models.IntegerField(default=0)
     price = models.IntegerField()
-    gems = models.JSONField()
     photos = models.JSONField()
     is_active = models.BooleanField(default=False)
 
