@@ -16,9 +16,10 @@
     padding: 25% 0;
 }
 
-.button-left, .button-right{
+.arrow-btn{
     display: flex;
     width: 20px;
+    border: none;
     height: 35px;
     margin: auto 55px;
 }
@@ -196,3 +197,45 @@ h4{
 .reviews-inner{
     margin-bottom: 35px;
 }
+
+#faq{
+    padding-bottom: 130px;
+}
+
+#faq-block{
+    row-gap: 28px;
+}
+
+.faq-container{
+    display: flex;
+    row-gap: 28px;
+    flex-direction: column;
+    cursor: pointer;
+    width: 780px;
+    padding: 28px 0;
+    height: fit-content;
+    border: 3px solid var(--body-border);
+    border-radius: 10px;
+}
+
+.faq-question{
+    font-family: 'Montserrat bold';
+    font-size: 20px;
+    padding: 0px 20px;
+    color: var(--body-h);
+}
+
+.faq-line{
+    width: 100%;
+    display: none;
+    border-bottom: 3px solid var(--body-border);
+}
+
+.faq-answer{
+    font-family: 'Montserrat medium';
+    display: none;
+    font-size: 16px;
+    padding: 0px 20px;
+    color: var(--body-h);
+}
+

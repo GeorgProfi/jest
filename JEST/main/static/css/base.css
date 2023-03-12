@@ -36,6 +36,10 @@ html[theme="main"]{
     margin-left: auto;
     margin-right: auto;
 }
+.centered-v{
+    margin-top: auto;
+    margin-bottom: auto;
+}
 
 .content-center{
     justify-content: center;
@@ -82,7 +86,6 @@ body{
 
 header{
     width: 100%;
-    display:flex;
     background: var(--body-bg);
     overflow: hidden;
     margin:0;
@@ -101,103 +104,90 @@ header{
     z-index: 0;
 }
 
-.header-content, .footer-content{
+#header-content, #footer-content{
     max-width: 1920px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
 }
-.header-content{
+
+#nav-left-side, #nav-right-side{
+    align-items: center; 
+    justify-content: center;
+}
+#nav-right-side{
+    column-gap: 90px;
+}
+#header-content{
+    column-gap: 350px;
     padding:10px;
 }
-.footer-content{
+#footer-content{
     padding: 50px 55px;
+    column-gap: 350px;
 }
 
-.nav-links{
-    display: flex;
-    margin-left: 350px;
+#nav-links{
     width: fit-content;
+    height: fit-content;
+    column-gap: 85px;
+    justify-content: center;
 }
 
 .nav-link{
+    width: fit-content;
+    height: fit-content;
     color:var(--nav-link);
+    text-align: center;
     text-decoration: none;
     font-size: 16px;
-    padding-right: 85px;
     font-family: 'Montserrat';
 }
 
-.logos{
-    flex: 0;
+#nav-icons-links{
+    column-gap: 90px;
     position: relative;
-    align-self: stretch;
-    display: flex;
-    align-items: center
 }
 
-.logo{
+#logo{
     background: url("../svg/LOGO5.svg") center center no-repeat;
     padding: 0 1px;
     width: 238px;
     height: 40px;
 }
 
-.logo-white{
+#logo-white{
     background: url("../svg/LOGO5W.svg") center center no-repeat;
     display: flex;
     max-width: 238px;
     height: 40px;
 }
 
-.logo-mini{
+#logo-mini{
     background: url("../svg/LOGO-mini.svg") center center no-repeat;
     padding: 0 1px;
     width: 40px;
     height: 40px;
 }
 
-.account-icon{
+#account-icon{
     background-image: url("../svg/user_nav_logo.svg");
-    margin-left: 95px;
     width: 30px;
     height: 30px;
 }
 
-.cart-icon{
-    margin-left: 95px;
+#cart-icon{
     background-image: url("../svg/cart_nav_logo.svg");
     width: 30px;
     height: 30px;
 }
 
-.logo, .logo-mini{
-    margin-top: auto;
-    margin-bottom: auto;
-    float:left;
-    display: flex;
-}
-
-.cart-icon, .account-icon{
-    margin-top: auto;
-    margin-bottom: auto;
-    float: right;
-    display: flex;
-
-}
-
-.searchbox{
+#searchbox{
     width: fit-content;
     height: auto;
-    display:flex;
-    margin-top: auto;
-    margin-bottom: auto;
     border: 2px var(--nav-link) solid;
     border-radius: 10px;
 }
 
-.search-input{
+#search-input{
     font-size: 16px;
     padding: 5px 25px;
     font-family: 'Montserrat';
@@ -207,35 +197,18 @@ header{
     color:var(--nav-link-active);
     background: none;
 }
-.search-input::placeholder{
+#search-input::placeholder{
     opacity: 1;
     color: var(--nav-link);
 }
 
-.lupa-icon{
+#lupa-icon{
     width: 25px;
     height: 25px;
     margin:7px 16px;
     background-image: url("../svg/search.svg");
 }
 
-.socials-block{
-
-}
-
-.politics-block{
-    margin-left:418px;
-}
-
-.contacts-block{
-    margin-right:275px;
-    margin-left:310px;
-}
-
-.socials-block, .contacts-block, .politics-block{
-    display: flex;
-    flex-direction: column;
-}
 
 .footer-text{
     color:var(--footer-text);
@@ -274,38 +247,31 @@ footer{
     }
 }
 @media screen and (max-width: 1600px){
-    .nav-links{
-        margin-left: 135px;
+    #nav-links{
+        column-gap: 60px;
     }
-    .nav-link{
-        padding-right: 60px;
+    #header-content{
+        column-gap: 135px;
     }
-    .politics-block{
-        margin-left:209px;
-    }
-    .contacts-block{
-        margin-left: 155px;
-        margin-right: 140px;
+    #footer-content{
+        column-gap: 300px;
     }
 }
 @media screen and (max-width: 1380px){
-    .search-input{
+    #search-input{
         display: none;
     }
-    .nav-links{
-        margin-left: 88px;
+    #nav-links{
+        column-gap: 40px;
     }
-    .account-icon, .cart-icon{
-        margin-left: 50px;
+    #header-content{
+        column-gap: 80px;
     }
-    .nav-link{
-        padding-right: 40px;
+    #nav-icons-links, #nav-right-side{
+        column-gap: 45px;
     }
-    .politics-block{
-        margin-left:105px;
+    #footer-content{
+        column-gap: 155px;
     }
-    .contacts-block{
-        margin-left: 80px;
-        margin-right: 70px;
-    }
+
 }
