@@ -39,21 +39,21 @@ class Emploee(models.Model):
 
 
 class Clients_Reviews(models.Model):
-    client_id = models.ForeignKey(Client, on_delete=models.CASCADE)
-    review_id = models.ForeignKey(Review, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
     
     
 class Products_Orders(models.Model):
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 class Clients_Orders(models.Model):
-    client_id = models.ForeignKey(Client, on_delete=models.CASCADE)
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 class Emploee_Order(models.Model):
-    emploee_id = models.ForeignKey(Emploee, on_delete=models.CASCADE)
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    emploee = models.ForeignKey(Emploee, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
 class Collection(models.Model):
@@ -73,6 +73,13 @@ class AboutUs (models.Model):
      title = models.CharField(max_length=20)
      text = models.CharField(max_length=200)
      image = models.CharField(max_length=100)
+
+
+class History(models.Model):
+    title = models.CharField(max_length=20)
+    text = models.CharField(max_length=200)
+    image = models.CharField(max_length=100)
+
 
 
 class Faqs(models.Model):
