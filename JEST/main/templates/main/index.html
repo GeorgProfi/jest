@@ -13,25 +13,27 @@
 <body>
     <header>
         <div class="container">
-            <div class="header-content">
-                <div class="logos">
-                    <a class="logo-mini" href="#"></a>
-                    <a class="logo" href="#"></a>
+            <div id="header-content" class="flex-row">
+                <div id="nav-left-side" class="flex-row">
+                    <a id="logo-mini" href="#"></a>
+                    <a id="logo" href="#"></a>
                 </div>
-                <div class="nav-links">
-                    <a class="nav-link" href="#">Каталог</a>
-                    <a class="nav-link" href="#">История</a>
-                    <a class="nav-link" href="#">Контакты</a>
+                <div id="nav-right-side" class="flex-row">
+                    <div id="nav-links" class="flex-row">
+                        <a class="nav-link" href="#">Каталог</a>
+                        <a class="nav-link" href="#">История</a>
+                        <a class="nav-link" href="#">Контакты</a>
+                    </div>
+                    <div id="searchbox" class="flex-row">
+                        <input id="search-input" placeholder="Поиск ...">
+                        <a id="lupa-icon"></a>
+                    </div>
+                    <div id="nav-icons-links" class="flex-row">
+                        <a id="cart-icon"></a>
+                        <a id="account-icon"></a>
+                    </div>
+                    <a href="" class="menu">☰</a>
                 </div>
-                <div class="searchbox">
-                    <input class="search-input" placeholder="Поиск ...">
-                    <a class="lupa-icon"></a>
-                </div>
-                <div class="logos">
-                    <a class="cart-icon"></a>
-                    <a class="account-icon"></a>
-                </div>
-                <a href="" class="menu">☰</a>
             </div>
         </div>
     </header>
@@ -68,7 +70,7 @@
             <div class="container">
                 <div class="flex-column">
                     <h3 class="centered">ПОЧЕМУ ИМЕННО МЫ?</h3>
-                    <div id="#why-block" class="why-block">
+                    <div id="why-block" class="why-block">
                     </div>
                 </div>
             </div>
@@ -90,19 +92,28 @@
                     <div class="flex-column">
                         <h3 class="centered">ОТЗЫВЫ ПОКУПАТЕЛЕЙ</h3>
                         <div class="reviews-control-box">
-                            <a class="button-left" href="javascript:void(0)">
+                            <button class="arrow-btn" href="javascript:void(0)">
                                 <svg width="25" height="35" viewBox="0 0 25 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2049 1.36224C20.0592 0.326397 18.2016 0.326397 17.0559 1.36224L1.40898 15.5086C0.263261 16.5444 0.263261 18.2239 1.40898 19.2597L17.0559 33.406C18.2016 34.4419 20.0592 34.4419 21.2049 33.406C22.3506 32.3702 22.3506 30.6908 21.2049 29.6549L7.63251 17.3841L21.2049 5.11336C22.3506 4.07751 22.3506 2.39808 21.2049 1.36224Z" fill="black"/>
                                 </svg>                                    
-                            </a>
-                            <div id="#reviews-block" class="reviews-block">
+                            </button>
+                            <div id="reviews-block" class="reviews-block">
                             </div>
-                            <a class="button-right" href="javascript:void(0)">
+                            <button class="arrow-btn" href="javascript:void(0)">
                                 <svg width="25" height="35" viewBox="0 0 25 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M1.79508 1.24029C2.9408 0.204449 4.79838 0.204449 5.9441 1.24029L21.591 15.3866C22.7367 16.4225 22.7367 18.1019 21.591 19.1378L5.9441 33.2841C4.79838 34.3199 2.9408 34.3199 1.79508 33.2841C0.649361 32.2483 0.649361 30.5688 1.79508 29.533L15.3675 17.2622L1.79508 4.99141C0.649361 3.95556 0.649361 2.27613 1.79508 1.24029Z" fill="black"/>
                                 </svg>
-                            </a>
+                            </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="faq">
+            <div class="container">
+                <div class="flex-column">
+                    <h3 class="centered">ЧАСТЫЕ ВОПРОСЫ</h3>
+                    <div id="faq-block" class="flex-column">
                     </div>
                 </div>
             </div>
@@ -112,15 +123,15 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="socials-block">
-                    <a class="logo-white" href="#"></a>
+            <div id="footer-content" class="flex-row">
+                <div class="flex-column">
+                    <a id="logo-white" href="#"></a>
                     <p class="footer-text ">Ювелирная мастерская “Arts &amp; Crafts“</p>
                 </div>
-                <div class="politics-block">
+                <div class="flex-column">
                     <p class="footer-header-text">Политика</p>
                 </div>
-                <div class="contacts-block">
+                <div class="flex-column">
                     <p class="footer-header-text">Контакты</p>
                 </div>
             </div>
