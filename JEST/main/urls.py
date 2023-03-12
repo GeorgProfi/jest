@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import views
+from . import views, history
 
 urlpatterns = [
 
@@ -11,5 +11,6 @@ urlpatterns = [
     path('why-us/', views.why_us),
     path('faq', views.faq),
     path('reviews', views.reviews),
+    path('history', history.history),
 
 ]
