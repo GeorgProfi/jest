@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page.render_main),
     path('why-us/', main_page.why_us),
-    path('faq', main_page.faq),
+    path('faq/', main_page.faq),
     path('reviews', main_page.reviews),
     path('history', history.history),
 
