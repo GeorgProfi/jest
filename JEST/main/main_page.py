@@ -97,4 +97,28 @@ def reviews(request):
             }
         )
 
+
+
+def most_popular(request):
+    count = request.GET.get('count')
+    data = []
+    with connection.cursor() as cursor:
+        cursor.execute("select * from most_popular_product;")
+
+        for i in range(int(count)):
+            row = cursor.fetchone()
+            block_data = {
+	'product-name':f'{row[2]}',
+	'product-price':f'{row[3]}' ,
+	'product-image':f'{row[4]}'
+}
+
+            data.append(block_data)
+        return JsonResponse(
+            {
+                'count': f'{len(data)}',
+                'data': f"{json.dumps(data)}"
+            }
+        )
+
 # Create your views here.

@@ -12,5 +12,5 @@ urlpatterns = [
     path('faq', main_page.faq),
     path('reviews', main_page.reviews),
     path('history', history.history),
-
+    path('most-popular-products',main_page.most_popular)
 ]
