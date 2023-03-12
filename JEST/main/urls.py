@@ -2,14 +2,15 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import views
+from . import main_page, history
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('', views.render_main),
-    path('why-us/', views.why_us),
-    path('faq', views.faq),
-    path('reviews', views.reviews),
+    path('', main_page.render_main),
+    path('why-us/', main_page.why_us),
+    path('faq', main_page.faq),
+    path('reviews', main_page.reviews),
+    path('history', history.history),
 
 ]

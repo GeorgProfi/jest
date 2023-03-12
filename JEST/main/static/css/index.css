@@ -1,6 +1,7 @@
 .banner-index{
     background-image: url("../images/banner_image.jpg");
     background-size: cover;
+    position: relative;
     background-position: center;
     display: flex;
     width: 100vw;
@@ -15,6 +16,13 @@
     padding: 25% 0;
 }
 
+.button-left, .button-right{
+    display: flex;
+    width: 20px;
+    height: 35px;
+    margin: auto 55px;
+}
+
 h1{
     font-family: 'Montserrat bold';
     color:var(--body-text);
@@ -22,6 +30,7 @@ h1{
     font-size: 32px;
     font-weight: 700;
 }
+
 
 h2{
     color:var(--body-text);
@@ -31,11 +40,16 @@ h2{
     text-align: center;
 }
 
+.focus-banner-text{
+    text-align: left; margin: 8px 0; width: 1000px;
+}
+
 h3{
     font-family: 'Montserrat bold';
     color: var(--body-h);
     font-weight:700;
-    margin: 35px auto;
+    margin-top: 35px;
+    margin-bottom: 35px; 
     font-size: 24px;
 }
 
@@ -50,6 +64,7 @@ h4{
 
 .popular-products{
     display: flex;
+    position: relative;
 }
 
 .products-row{
@@ -92,6 +107,10 @@ h4{
     font-size: 32px;
     font-weight: 700;
 }
+.why-us{
+    display: flex;
+    position: relative;
+}
 
 .why-block{
     height: fit-content;
@@ -122,4 +141,58 @@ h4{
     font-size: 16px;
     font-family: 'Montserrat';
     font-weight: 500;
+}
+
+.reviews{
+    display: flex;
+    position: relative;
+}
+
+.reviews-control-box{
+    height: fit-content;
+    display: flex;
+    flex-direction: row; 
+}
+
+.reviews-block{
+    display: flex;
+    flex-direction: row;
+    gap: 20px 20px;
+    justify-content: space-between; 
+}
+
+.review-container{
+    border: 3px solid var(--body-border);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 248px;
+    height: 277px;
+    padding: 18px;
+}
+
+.review-container[extend="y"]{
+    height: fit-content;
+}
+
+.review-name{
+    font-family: 'Montserrat bold';
+    font-size: 20px;
+}
+.review-text, .review-date, .review-more{
+    font-family: 'Montserrat medium';
+    font-size: 18px;
+}
+.review-date, .review-more{  
+    color:var(--nav-link);
+}
+.review-text{
+    margin-top: 18px;
+}
+.review-date{
+    margin-top: auto;
+}
+
+.reviews-inner{
+    margin-bottom: 35px;
 }

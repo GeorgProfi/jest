@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from .models import Emploee, AboutUs, Faqs,Review
+from .models import Emploee, AboutUs, Faqs
 from django.http import JsonResponse
 import json
 from django.db import connection
 import datetime
+
+
 def render_main(request):
     return render(request, 'main/index.html')
 
@@ -30,7 +32,6 @@ def why_us(request):
                       'image': el.image
                       }
         data.append(block_data)
-
     return JsonResponse(
         {
             'count': f'{len(data)}',
@@ -39,33 +40,17 @@ def why_us(request):
     )
 
 
-def faq(request):
-    data = []
-    for el in Faqs.objects.all():
-        block_data = {'question': el.question,
-                      'answer': el.answer,
-                      }
-        data.append(block_data)
-    print()
-
-    return JsonResponse(
-        {
-            'count': f'{len(data)}',
-            'data': f"{json.dumps(data)}"
-        }
-    )
 def reviews(request):
     count = request.GET.get('count')
-
     data = []
     with connection.cursor() as cursor:
         cursor.execute("select * from last_reviews;")
         row = cursor.fetchall()
         for i in range(int(count)):
             block_data = {
-                'name' : f'{row[i][1]} {row[i][2]}',
-                "review_text" : f"{row[i][4]}",
-                "date" : f"{row[i][5].date()}"
+                'name': f'{row[i][1]} {row[i][2]}',
+                "review_text": f"{row[i][4]}",
+                "date": f"{row[i][5].date()}"
             }
             data.append(block_data)
         return JsonResponse(
@@ -75,5 +60,41 @@ def reviews(request):
             }
         )
 
+
+def faq(request):
+    data = []
+    for el in Faqs.objects.all():
+        block_data = {'question': el.question,
+                      'answer': el.answer,
+                      }
+        data.append(block_data)
+
+    return JsonResponse(
+        {
+            'count': f'{len(data)}',
+            'data': f"{json.dumps(data)}"
+        }
+    )
+
+
+def reviews(request):
+    count = request.GET.get('count')
+    data = []
+    with connection.cursor() as cursor:
+        cursor.execute("select * from last_reviews;")
+        row = cursor.fetchall()
+        for i in range(int(count)):
+            block_data = {
+                'name': f'{row[i][1]} {row[i][2]}',
+                "review_text": f"{row[i][4]}",
+                "date": f"{row[i][5].date()}"
+            }
+            data.append(block_data)
+        return JsonResponse(
+            {
+                'count': f'{len(data)}',
+                'data': f"{json.dumps(data)}"
+            }
+        )
 
 # Create your views here.

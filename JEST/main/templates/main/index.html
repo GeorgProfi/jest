@@ -1,14 +1,14 @@
-<html theme="main" lang="ru"><head>
-    <!--meta info-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0">
-    <!--links-->
-    <link rel="stylesheet" href="/static/css/base.css">
-    <link rel="stylesheet" href="/static/css/index.css">
+<html theme="main" lang="ru">
+    <head>
+        <!--meta info-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+        <!--links-->
+        <link rel="stylesheet" href="/static/css/base.css">
+        <link rel="stylesheet" href="/static/css/index.css">
 
-    <script src="/static/js/api_test.js"></script>
-    <title>Главная страница</title>
-<style>[id*='google_ads_iframe'],[id*='taboola-'],.taboolaHeight,.taboola-placeholder,#credential_picker_container,#credential_picker_iframe,.google-one-tap-modal-div{display:none!important;min-height:0!important;height:0!important;}</style></head>
+        <title>Главная страница</title>
+    </head>
 
 <body>
     <header>
@@ -58,7 +58,7 @@
         <div class="popular-products">
             <div class="container">
                 <div class="flex-column">
-                    <h3>ПОПУЛЯРНЫЕ ТОВАРЫ</h3>
+                    <h3 class="centered">ПОПУЛЯРНЫЕ ТОВАРЫ</h3>
                     <div id="#popprod" class="products-row">
                     </div>
                 </div>
@@ -67,12 +67,48 @@
         <div class="why-us">
             <div class="container">
                 <div class="flex-column">
-                    <h3>ПОЧЕМУ ИМЕННО МЫ?</h3>
+                    <h3 class="centered">ПОЧЕМУ ИМЕННО МЫ?</h3>
                     <div id="#why-block" class="why-block">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="focus-banner">
+            <div class="container">
+                    <div class="focus-banner-inner">
+                        <div class="flex-column">
+                            <h3 class="orange">СОЗДАЙТЕ СВОЁ СОБСТВЕННОЕ УКРАШЕНИЕ</h3>
+                            <h2 class="focus-banner-text">Профессионалы изготовят для вас ювелирные изделия превосходного качества и любой сложности по эскизу, фотографии или описанию</h2>
+                            <a href="#" class="focus-banner-link">Оставить заявку</a>
+                        </div>
+                    </div>
+                </div>                
+        </div>
+        <div class="reviews">
+            <div class="container">
+                <div class="reviews-inner">
+                    <div class="flex-column">
+                        <h3 class="centered">ОТЗЫВЫ ПОКУПАТЕЛЕЙ</h3>
+                        <div class="reviews-control-box">
+                            <a class="button-left" href="javascript:void(0)">
+                                <svg width="25" height="35" viewBox="0 0 25 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2049 1.36224C20.0592 0.326397 18.2016 0.326397 17.0559 1.36224L1.40898 15.5086C0.263261 16.5444 0.263261 18.2239 1.40898 19.2597L17.0559 33.406C18.2016 34.4419 20.0592 34.4419 21.2049 33.406C22.3506 32.3702 22.3506 30.6908 21.2049 29.6549L7.63251 17.3841L21.2049 5.11336C22.3506 4.07751 22.3506 2.39808 21.2049 1.36224Z" fill="black"/>
+                                </svg>                                    
+                            </a>
+                            <div id="#reviews-block" class="reviews-block">
+                            </div>
+                            <a class="button-right" href="javascript:void(0)">
+                                <svg width="25" height="35" viewBox="0 0 25 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.79508 1.24029C2.9408 0.204449 4.79838 0.204449 5.9441 1.24029L21.591 15.3866C22.7367 16.4225 22.7367 18.1019 21.591 19.1378L5.9441 33.2841C4.79838 34.3199 2.9408 34.3199 1.79508 33.2841C0.649361 32.2483 0.649361 30.5688 1.79508 29.533L15.3675 17.2622L1.79508 4.99141C0.649361 3.95556 0.649361 2.27613 1.79508 1.24029Z" fill="black"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    </div>
 
     <footer>
         <div class="container">
