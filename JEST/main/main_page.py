@@ -77,24 +77,4 @@ def faq(request):
     )
 
 
-def reviews(request):
-    count = request.GET.get('count')
-    data = []
-    with connection.cursor() as cursor:
-        cursor.execute("select * from last_reviews;")
-        row = cursor.fetchall()
-        for i in range(int(count)):
-            block_data = {
-                'name': f'{row[i][1]} {row[i][2]}',
-                "review_text": f"{row[i][4]}",
-                "date": f"{row[i][5].date()}"
-            }
-            data.append(block_data)
-        return JsonResponse(
-            {
-                'count': f'{len(data)}',
-                'data': f"{json.dumps(data)}"
-            }
-        )
-
 # Create your views here.
