@@ -55,11 +55,11 @@ async function create_why_reasons(){
     reason = reasons_data[i];
 
     reason_block_html = document.createElement('div');
-    reason_block_html.className = "why-reason";
+    reason_block_html.className = "why-reason flex-column";
 
     image = document.createElement('img');
     image.src = reason["image"];
-    image.className = "why-image";
+    image.className = "why-image centered";
     reason_block_html.appendChild(image);
 
     title = document.createElement('h4');
@@ -68,7 +68,7 @@ async function create_why_reasons(){
 
     text = document.createElement('span');
     text.innerHTML = reason["text"];
-    text.className = "why-text";
+    text.className = "why-text centered";
     reason_block_html.appendChild(text);
 
     reasons_container_html.appendChild(reason_block_html);
@@ -105,6 +105,31 @@ async function create_faq(){
   };
 }
 
+async function create_mpp(){
+  data = await createAsyncGETRequest('most-popular-products?count=5');
+  count = data['count']
+  mpps_data = JSON.parse(data['data']);
+  mpps_block_html = document.getElementById('popprod');
+  for(i = 0; i<count; i++){
+    mpp = mpps_data[i];
+
+    mpp_container = document.createElement('a');
+    mpp_container.className = "product-card";
+
+    image = document.createElement('img');
+    image.className = 'product-image';
+    image.src = mpp['product-image'];
+    mpp_container.appendChild(image);
+
+    price = document.createElement('span')
+    price.className = 'product-price';
+    price.innerHTML = mpp['product-price'];
+    mpp_container.appendChild(price);
+
+    mpps_block_html.appendChild(mpp_container);
+  }
+}
+
 async function open_faq(elem){
   elem.setAttribute('onclick',"close_faq(this)");
   for(let i = 1; i<elem.children.length; i++){
@@ -122,4 +147,4 @@ async function close_faq(elem){
 create_why_reasons();
 create_reviews();
 create_faq();
-
+create_mpp();

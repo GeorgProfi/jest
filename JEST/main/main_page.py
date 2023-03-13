@@ -6,12 +6,10 @@ from django.db import connection
 from django.views.decorators.csrf import csrf_protect
 
 
-import datetime
-
-
 @csrf_protect
 def render_main(request):
     return render(request, 'main/index.html')
+
 
 @csrf_protect
 def api_test(request):
@@ -26,6 +24,7 @@ def api_test(request):
             'emploee': f'{data}'
         }
     )
+
 
 @csrf_protect
 def why_us(request):
@@ -42,6 +41,7 @@ def why_us(request):
             'data': f"{json.dumps(data)}"
         }
     )
+
 
 @csrf_protect
 def reviews(request):
@@ -64,6 +64,7 @@ def reviews(request):
             }
         )
 
+
 @csrf_protect
 def faq(request):
     data = []
@@ -80,24 +81,26 @@ def faq(request):
         }
     )
 
+
 def most_popular(request):
     count = request.GET.get('count')
     data = []
     with connection.cursor() as cursor:
         cursor.execute("select * from most_popular_product;")
-
         for i in range(int(count)):
             row = cursor.fetchone()
-            images = json.loads(row[4])
-            print(images['img1'])
-            block_data = {
-    'product-id':f'{row[0]}',
-	'product-name':f'{row[2]}',
-	'product-price':f'{row[3]}' ,
-	'product-image':f"{images['img1']}"
-}
-
-            data.append(block_data)
+            try:
+                img = str(json.loads(row[4])['img1'])
+                block_data = {
+                    'product-id': f'{row[0]}',
+                    'product-name': f'{row[2]}',
+                    'product-price': f'{row[3]}',
+                    'product-image': f"{img}"
+                }
+                data.append(block_data)
+            except TypeError:
+                print('Not enough products!')
+                continue
         return JsonResponse(
             {
                 'count': f'{len(data)}',

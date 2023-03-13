@@ -49,14 +49,14 @@ html[theme="main"]{
     width: 100%;
     background-color: var(--body-banner-bg);
 }
-.focus-banner-inner{
+#focus-banner-inner{
     display: flex;
-    padding-left: 50px;
-    padding-right: 450px;
+    padding: 43px 0px;
+    padding-right: 500px;
+    row-gap: 43px;
 }
 
-.focus-banner-link{
-    margin: 35px 0;
+#focus-banner-link{
     width: fit-content;
     color: var(--focus-link);
     font-family: 'Montserrat';
@@ -95,7 +95,7 @@ header{
 }
 
 
-.body-content{
+#body-content{
     width: 100%;
     background: var(--body-bg);
     overflow: hidden;
@@ -238,7 +238,6 @@ footer{
         display: flex;
         width: fit-content;
         max-width: 100%;
-        height: fit-content;
         margin: 0 auto;
         position: relative;
     }

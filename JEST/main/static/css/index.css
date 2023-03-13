@@ -1,19 +1,24 @@
-.banner-index{
+#body-content{
+    padding-bottom: 130px;
+}
+
+#banner-index{
     background-image: url("../images/banner_image.jpg");
     background-size: cover;
     position: relative;
-    background-position: center;
     display: flex;
+    background-position: center;
     width: 100vw;
+    height: 450px;
     max-width: 100%;
 
 }
-.banner-text{
+#banner-text{
     display: flex;
+    row-gap: 9px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 25% 0;
 }
 
 .arrow-btn{
@@ -21,55 +26,66 @@
     width: 20px;
     border: none;
     height: 35px;
-    margin: auto 55px;
 }
 
 h1{
     font-family: 'Montserrat bold';
+    margin: 0 0;
     color:var(--body-text);
-    margin:9px;
     font-size: 32px;
     font-weight: 700;
 }
 
 
 h2{
+    margin: 0 0;
     color:var(--body-text);
-    margin:9px;
     font-size: 20px;
     font-weight: 500;
     text-align: center;
 }
 
-.focus-banner-text{
-    text-align: left; margin: 8px 0; width: 1000px;
+#focus-banner-text{
+    text-align: left;
+    width: 1000px;
 }
 
 h3{
     font-family: 'Montserrat bold';
     color: var(--body-h);
     font-weight:700;
-    margin-top: 35px;
-    margin-bottom: 35px; 
+    margin: 0 0;
     font-size: 24px;
 }
 
 h4{
+    margin: 0 0;
     font-family: 'Montserrat';
-    margin:5px auto;
     text-align: center;
     color:var(--body-h);
     font-weight: 600;
     font-size: 20px;
 }
 
-.popular-products{
-    display: flex;
+#popular-products{
     position: relative;
 }
 
+#popular-produtcts-inner{
+    padding: 35px 10px;
+    row-gap: 35px;
+}
+
+#why-us-inner{
+    padding: 35px 10px;
+    row-gap: 35px;
+}
+
+#why-block{
+    column-gap: 220px;
+}
+
 .products-row{
-    padding: 0px 10px;
     justify-content: space-around;
     display: grid;
     grid-template-columns:repeat(5, 1fr);
@@ -113,30 +129,18 @@ h4{
     position: relative;
 }
 
-.why-block{
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 75px;
-}
-
 .why-reason{
     width: 200px;
+    row-gap: 10px;
     height: fit-content;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin: 0 110px;
 }
 
 .why-image{
-    margin: 5px auto;
     width: 160px;
     height: 160px;
 }
 
 .why-text{
-    margin: 5px auto;
     color:var(--body-h);
     text-align: center;
     font-size: 16px;
@@ -144,15 +148,14 @@ h4{
     font-weight: 500;
 }
 
-.reviews{
+#reviews{
     display: flex;
     position: relative;
 }
 
-.reviews-control-box{
+#reviews-control-box{
     height: fit-content;
-    display: flex;
-    flex-direction: row; 
+    column-gap: 55px ;
 }
 
 .reviews-block{
@@ -194,12 +197,18 @@ h4{
     margin-top: auto;
 }
 
-.reviews-inner{
-    margin-bottom: 35px;
+#reviews-inner{
+    padding: 35px 0;
+    row-gap: 35px;
 }
 
 #faq{
-    padding-bottom: 130px;
+    position: relative;
+}
+
+#faq-inner{
+    row-gap: 35px;
+    padding: 35px 0;
 }
 
 #faq-block{
