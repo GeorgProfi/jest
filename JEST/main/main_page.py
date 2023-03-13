@@ -6,12 +6,12 @@ from django.db import connection
 from django.views.decorators.csrf import csrf_protect
 
 
-@csrf_protect
+
 def render_main(request):
     return render(request, 'main/index.html')
 
 
-@csrf_protect
+
 def api_test(request):
     name_for_filter = request.GET.get('name')
     data = []
@@ -26,7 +26,7 @@ def api_test(request):
     )
 
 
-@csrf_protect
+
 def why_us(request):
     data = []
     for el in AboutUs.objects.all():
@@ -43,7 +43,7 @@ def why_us(request):
     )
 
 
-@csrf_protect
+
 def reviews(request):
     count = request.GET.get('count')
     data = []
@@ -65,7 +65,7 @@ def reviews(request):
         )
 
 
-@csrf_protect
+
 def faq(request):
     data = []
     for el in Faqs.objects.all():

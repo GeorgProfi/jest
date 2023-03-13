@@ -1,26 +1,34 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
-from .models import Emploee, MasterInfo
 from django.db import connection
 
 
+def dictfetchall(cursor):
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+
 
 def get_masters(request):
-    pass
-    """with connection.cursor() as cursor:
+    with connection.cursor() as cursor:
         data = []
-        cursor.execute(
-            "select id, name, surname, post from"
-            "main_post join "
-        )
-
-        row = cursor.fetchall()
-        for i in range(int(count)):
+        cursor.execute("select * from master;")
+        rows = dictfetchall(cursor)
+        for row in rows:
             block_data = {
-                'name': f'{row[i][1]} {row[i][2]}',
-                "review_text": f"{row[i][4]}",
-                "date": f"{row[i][5].date()}"
+                'name': f"{row['name']}",
+                "surname": f"{row['surname']}",
+                "email": f"{row['email']}",
+                "text": f"{row['info']}",
+                "image": f"{row['image']}"
             }
             data.append(block_data)
-        return JsonResponse("""
+        return JsonResponse(
+            {
+                'count': f"{len(data)}",
+                'data': f"{json.dumps(data)}"
+            }
+        )
