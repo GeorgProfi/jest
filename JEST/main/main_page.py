@@ -1,5 +1,5 @@
 from django.shortcuts import render
-#from .models import Emploee, AboutUs, Faqs
+from .models import Emploee, AboutUs, Faqs
 from django.http import JsonResponse
 import json
 from django.db import connection
