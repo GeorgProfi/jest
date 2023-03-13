@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from .models import AboutUs
 from django.http import JsonResponse
 import json
-from django.db import connection
-import datetime
 from .models import History
 
 
-def history(request):
+def render_history(request):
+    return render(request, 'main/index.html') #изменить шаблон
+
+
+def get_history(request):
     data = []
     for el in History.objects.all():
         block_data = {'title': el.title,
