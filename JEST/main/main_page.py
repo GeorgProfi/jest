@@ -91,6 +91,7 @@ def most_popular(request):
             images = json.loads(row[4])
             print(images['img1'])
             block_data = {
+    'product-id':f'{row[0]}',
 	'product-name':f'{row[2]}',
 	'product-price':f'{row[3]}' ,
 	'product-image':f"{images['img1']}"
