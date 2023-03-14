@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import main_page, history, contacts
+from . import main_page, history, contacts, catalog
 
 urlpatterns = [
 
@@ -15,5 +15,7 @@ urlpatterns = [
     path('get_history', history.get_history),
     path('history', history.render_history),
     path('masters', contacts.get_masters),
-
+    path('contacts', contacts.render_contacts),
+    path('catalog', catalog.render_catalog),
+    path('products', catalog.products),
 ]

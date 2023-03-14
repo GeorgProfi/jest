@@ -2,21 +2,19 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 from django.db import connection
+from . import dictfetchall as df
 
 
-def dictfetchall(cursor):
-    desc = cursor.description
-    return [
-        dict(zip([col[0] for col in desc], row))
-        for row in cursor.fetchall()
-    ]
+
+def render_contacts(request):
+    return render(request, 'main/index.html') #изменить шаблон
 
 
 def get_masters(request):
     with connection.cursor() as cursor:
         data = []
         cursor.execute("select * from master;")
-        rows = dictfetchall(cursor)
+        rows = df.dictfetchall(cursor)
         for row in rows:
             block_data = {
                 'name': f"{row['name']}",

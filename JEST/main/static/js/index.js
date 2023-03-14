@@ -143,8 +143,17 @@ async function close_faq(elem){
    elem.children[i].style='display:none';
   }
 }
+async function test(){
+    console.log('efefewfwegewg')
+    data = await createAsyncGETRequest('products?category=летняя&count=10&title=title&min_price=9000&max_price=15000&already_in_page=10')
+
+  }
+
 
 create_why_reasons();
 create_reviews();
 create_faq();
 create_mpp();
+
+
+test();

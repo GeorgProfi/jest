@@ -78,7 +78,6 @@ class Metal(models.Model):
 
 class Gem(models.Model):
     type = models.CharField(max_length=50)
-    weight = models.IntegerField()
 
 
 class Product(models.Model):
@@ -89,6 +88,7 @@ class Product(models.Model):
     price = models.IntegerField()
     count = models.IntegerField(default=0)
     photos = models.JSONField()
+    size = models.JSONField()
     is_active = models.BooleanField(default=False)
     description = models.CharField(max_length=300)
 
@@ -101,6 +101,7 @@ class ProductMetal(models.Model):
 class ProductGem(models.Model):
     gem = models.ForeignKey(Gem, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    count = models.IntegerField()
 
 
 class ProductOrder(models.Model):
