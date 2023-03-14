@@ -85,7 +85,7 @@ class Product(models.Model):
     title = models.CharField(max_length=50)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
-    weight = models.IntegerField()
+    weight = models.FloatField()
     price = models.IntegerField()
     count = models.IntegerField(default=0)
     photos = models.JSONField()
