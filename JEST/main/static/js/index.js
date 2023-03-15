@@ -147,7 +147,7 @@ async function close_faq(elem){
 /*
 async function test(){
     console.log('efefewfwegewg')
-    data = await createAsyncGETRequest('products?category=Кольцо&count=10&min_price=9000&max_price=15000&already_in_page=0')
+    data = await createAsyncGETRequest('products?category=Кольцо+Подвеска&count=10&min_price=0&max_price=45000&already_in_page=0')
     console.log(JSON.parse(data['data']));
     count = data['count']
     mpps_data = JSON.parse(data['data']);
@@ -169,9 +169,9 @@ async function test(){
     mpp_container.appendChild(price);
     mpps_block_html.appendChild(mpp_container);
     }
-  }*/
+  }
 
-
+*/
 create_why_reasons();
 create_reviews();
 create_faq();

@@ -23,8 +23,11 @@ def products(request):
 
     if 'category' in url_parameters:
         category = request.GET['category'].split()
-        for el in category:
-            query += f" and products.category = '{el}'"
+        query += f"and (products.category = '{category[0]}'"
+        for i in range(1, len(category)):
+            query += f" or products.category = '{category[i]}'"
+        query += ')'
+
     if 'min_price' in url_parameters:
         min_price = request.GET['min_price']
         query += f" and products.price >= {min_price}"
@@ -33,12 +36,16 @@ def products(request):
         query += f" and products.price <= {max_price}"
     if 'collection' in url_parameters:
         collection = request.GET['collection'].split()
-        for el in collection:
-            query += f" and products.collection = '{el}'"
+        query += f"and (products.collection = '{collection[0]}'"
+        for i in range(1, len(collection)):
+            query += f" or products.collection = '{collection[i]}'"
+        query += ')'
     if 'probe' in url_parameters:
         probe = request.GET['probe'].split()
-        for el in probe:
-            query += f" and products.probe = {el}"
+        query += f"and (products.probe = '{probe[0]}'"
+        for i in range(1, len(probe)):
+            query += f" or products.probe = '{probe[i]}'"
+        query += ')'
     if 'title' in url_parameters:
         title = request.GET['title']
         query += f" and products.title = '{title}'"
