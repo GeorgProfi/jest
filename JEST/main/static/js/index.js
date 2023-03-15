@@ -143,11 +143,33 @@ async function close_faq(elem){
    elem.children[i].style='display:none';
   }
 }
+
+/*
 async function test(){
     console.log('efefewfwegewg')
-    data = await createAsyncGETRequest('products?category=летняя&count=10&title=title&min_price=9000&max_price=15000&already_in_page=10')
+    data = await createAsyncGETRequest('products?category=Кольцо&count=10&min_price=9000&max_price=15000&already_in_page=0')
+    console.log(JSON.parse(data['data']));
+    count = data['count']
+    mpps_data = JSON.parse(data['data']);
+    mpps_block_html = document.getElementById('popprod');
+    for(i = 0; i<count; i++){
+        mpp = mpps_data[i];
 
-  }
+    mpp_container = document.createElement('a');
+    mpp_container.className = "product-card";
+
+    image = document.createElement('img');
+    image.className = 'product-image';
+    image.src = mpp['image'];
+    mpp_container.appendChild(image);
+
+    price = document.createElement('span')
+    price.className = 'product-price';
+    price.innerHTML = mpp['price'];
+    mpp_container.appendChild(price);
+    mpps_block_html.appendChild(mpp_container);
+    }
+  }*/
 
 
 create_why_reasons();
@@ -156,4 +178,4 @@ create_faq();
 create_mpp();
 
 
-test();
+//test();
