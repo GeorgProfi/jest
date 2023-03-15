@@ -1,5 +1,4 @@
 
-
 async function createAsyncGETRequest(url){
     return new Promise((resolve, reject) => {
       fetch(url).then(response=>{
@@ -20,11 +19,13 @@ async function create_reviews(){
   count = data['count'];
   reviews_data = JSON.parse(data['data']);
   reviews_container_html = document.getElementById('reviews-block');
-  for(i = 0; i<count; i++){
+  column_count = getComputedStyle(reviews_container_html).getPropertyValue("grid-template-columns").split(" ").length;
+  for(i = 0; i<column_count; i++){
     review = reviews_data[i];
 
     review_container = document.createElement('div');
     review_container.className = "review-container";
+    review_container.style="";
 
     client_name = document.createElement('span');
     client_name.innerHTML = review['name'];
@@ -43,6 +44,30 @@ async function create_reviews(){
 
     reviews_container_html.appendChild(review_container);
     }
+    for(i = column_count; i<count; i++){
+      review = reviews_data[i];
+  
+      review_container = document.createElement('div');
+      review_container.className = "review-container";
+      review_container.style="display:none";
+  
+      client_name = document.createElement('span');
+      client_name.innerHTML = review['name'];
+      client_name.className = "review-name";
+      review_container.appendChild(client_name);
+      
+      client_text = document.createElement('span');
+      client_text.innerHTML = review['review_text'];
+      client_text.className = "review-text";
+      review_container.appendChild(client_text);
+  
+      date = document.createElement('span');
+      date.innerHTML = review['date'];
+      date.className = "review-date";
+      review_container.appendChild(date);
+  
+      reviews_container_html.appendChild(review_container);
+      }
 }
 
 
@@ -63,6 +88,7 @@ async function create_why_reasons(){
     reason_block_html.appendChild(image);
 
     title = document.createElement('h4');
+    title.className = "centered"
     title.innerHTML = reason["title"];
     reason_block_html.appendChild(title);
 
@@ -123,7 +149,7 @@ async function create_mpp(){
 
     price = document.createElement('span')
     price.className = 'product-price';
-    price.innerHTML = mpp['product-price'];
+    price.innerHTML = mpp['product-price']+" ₽";
     mpp_container.appendChild(price);
 
     mpps_block_html.appendChild(mpp_container);
@@ -143,17 +169,23 @@ async function close_faq(elem){
    elem.children[i].style='display:none';
   }
 }
-async function test(){
-    console.log('efefewfwegewg')
-    data = await createAsyncGETRequest('products?category=летняя&count=10&title=title&min_price=9000&max_price=15000&already_in_page=10')
-
+function add_review_to(side){
+  column_count = getComputedStyle(reviews_container_html).getPropertyValue("grid-template-columns").split(" ").length;
+  reviews_block = document.getElementById("reviews-block");
+  reviews_count = reviews_block.children.length;
+  active_element = reviews_block.children[0];
+  if(side==="left"){
+    reviews_block.children[reviews_count-1].style = "";
+    reviews_block.insertBefore(reviews_block.children[reviews_count-1], active_element);
+    reviews_block.children[column_count].style = "display:none";
+  } else {
+    active_element.style="display:none";
+    reviews_block.insertBefore(active_element, reviews_block.children[reviews_count-1].nextSibling);
+    reviews_block.children[column_count-1].style = "";
   }
-
+}
 
 create_why_reasons();
 create_reviews();
 create_faq();
 create_mpp();
-
-
-test();
