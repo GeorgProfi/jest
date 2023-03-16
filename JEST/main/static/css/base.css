@@ -18,7 +18,7 @@ html[theme="main"]{
     --body-fg: #ff0000;
     --body-border:#707070;
     --body-focus:#E3874F;
-    --body-banner-bg:#37363D;
+    --body-banner-bg:#2A2F3B;
     --body-h:#000000;
     --body-text:#FFFFFF;
     --body-no-image:#C2C1C1;
@@ -56,9 +56,9 @@ html[theme="main"]{
 #focus-banner-inner{
     display: flex;
     padding: 43px 0px;
-    padding-right: 500px;
+    padding-right: 100px;
     padding-left: 100px;
-    row-gap: 43px;
+    column-gap: 43px;
 }
 
 #focus-banner-link{
@@ -217,10 +217,8 @@ header{
 
 .footer-text{
     color:var(--footer-text);
-    font-family: 'Montserrat';
-    margin:0;
+    font-family: 'Montserrat medium';
     font-size: 16px;
-    font-weight: 500;
 }
 
 .footer-header-text{
@@ -246,6 +244,18 @@ footer{
     position: relative;
 }
 
+.footer-block{
+    row-gap: 25px;
+}
+
+.footer-links-block{
+    row-gap: 10px;
+}
+
+.footer-link{
+    column-gap: 15px;
+}
+
 @media screen and (min-width: 768px){
     #menu{
         display: none;
@@ -260,6 +270,7 @@ footer{
     }
     #footer-content{
         column-gap: 300px;
+        row-gap: 50px;
     }
 }
 @media screen and (max-width: 1380px){
@@ -267,7 +278,7 @@ footer{
         display: none;
     }
     #focus-banner-inner{
-        padding-right: 200px;
+        padding-right: 100px;
     }
     #nav-links{
         column-gap: 20px;
@@ -291,7 +302,6 @@ footer{
     #logo{
         display: none;
     }
-
     #menu{
         display:flex;
         text-decoration: none;

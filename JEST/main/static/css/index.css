@@ -49,7 +49,14 @@ h2{
 
 #focus-banner-text{
     text-align: left;
-    width: 100%;
+}
+
+#focus-banner-image{
+    display: inline;
+}
+
+#focus-banner-text-block{
+    row-gap: 43px;
 }
 
 h3{
@@ -258,9 +265,23 @@ h4{
     #popprod{
         grid-template-columns:repeat(3, 1fr);
     }
+    #reviews-block{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    #reviews-control-box{
+        column-gap: 25px;
+    }
     .product-card{
         width: 140px;
         height: 190px;
+    }
+    .review-container{
+        width: 170px;
+        min-height: 207px;
+        height: fit-content;
+    }
+    #focus-banner-image{
+        width: 270px;
     }
     #why-block{
         column-gap: 110px;
@@ -288,9 +309,28 @@ h4{
         grid-template-columns: repeat(2, 1fr);
         column-gap: 55px;
     }
+    .review-container{
+        width: 150px;
+        height: 110px;
+    }
+    .review-name{
+        font-size: 14px;
+    }
+    .review-text{
+        font-size: 12px;
+    }
+    .review-date{
+        font-size: 12px;
+    }
+    #reviews-block{
+        grid-template-columns: repeat(1, 1fr);
+    }
     #why-block{
         justify-content: center;
         flex-wrap: wrap;
+    }
+    #focus-banner-image{
+        display: none;
     }
     .product-card{
         width: 110px;
@@ -318,5 +358,15 @@ h4{
     #focus-banner-text{
         width: fit-content;
     }
+    .faq-container{
+        width: 350px;
+    }
+    .faq-question{
+        font-size: 12px;
+    }
+    .faq-answer{
+        font-size: 10px;
+    }
+
 
 }

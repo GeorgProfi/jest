@@ -1,3 +1,7 @@
+window.onresize = ()=>{
+  reviewsContainerOnResize();
+}
+
 
 async function createAsyncGETRequest(url){
     return new Promise((resolve, reject) => {
@@ -20,6 +24,7 @@ async function create_reviews(){
   reviews_data = JSON.parse(data['data']);
   reviews_container_html = document.getElementById('reviews-block');
   column_count = getComputedStyle(reviews_container_html).getPropertyValue("grid-template-columns").split(" ").length;
+  reviews_container_html.innerHTML = '';
   for(i = 0; i<column_count; i++){
     review = reviews_data[i];
 
@@ -68,6 +73,21 @@ async function create_reviews(){
   
       reviews_container_html.appendChild(review_container);
       }
+}
+
+function reviewsContainerOnResize(){
+  reviews_container_html = document.getElementById('reviews-block');
+  column_count = getComputedStyle(reviews_container_html).getPropertyValue("grid-template-columns").split(" ").length;
+  array = Array.from(reviews_container_html.children).filter(review => getComputedStyle(review).getPropertyValue('display') !== "none")
+  if(array.length < column_count){
+    for(i = array.length; i<column_count; i++){
+      reviews_container_html.children[i].style = ""
+    }
+  } else{
+    for(i = column_count; i<array.length; i++){
+      reviews_container_html.children[i].style = "display:none;"
+    }
+  }
 }
 
 
