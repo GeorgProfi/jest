@@ -1,20 +1,13 @@
 
 @font-face {
     font-family: "Montserrat";
-    src: url("../fonts/Montserrat/static/Montserrat-Medium.ttf");
-  }
- @font-face {
-    font-family: "Montserrat bold";
-    src: url("../fonts/Montserrat/static/Montserrat-Bold.ttf");
-  }
-  @font-face {
-    font-family: "Montserrat medium";
-    src: url("../fonts/Montserrat/static/Montserrat-Medium.ttf");
-  }
+    src: url("../fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+
 
 /*Color const*/
 html[theme="main"]{
-    --body-bg:#ECECEC;
+    --body-bg:#F6F6F6;
     --body-fg: #ff0000;
     --body-border:#707070;
     --body-focus:#E3874F;
@@ -27,6 +20,32 @@ html[theme="main"]{
     --nav-link:#707070;
     --nav-link-active:#000000;
 }
+
+.arrow-btn-u, .arrow-btn-d, .arrow-btn-l, .arrow-btn-r{
+    border: none;
+    background-image: url("../svg/arrow_btn.svg");
+    background-color: rgba(0, 0, 0, 0);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.arrow-btn-d, .arrow-btn-d::before{
+    transform:rotate(180deg);
+}
+.arrow-btn-d::before, .arrow-btn-l::before,  .arrow-btn-r::before{
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+}
+.arrow-btn-l, .arrow-btn-l::before{
+    transform: rotate(270deg);
+}
+.arrow-btn-r, .arrow-btn-r::before{
+    transform: rotate(90deg);
+}
+  
+
 
 .hide{
     display: none;
@@ -102,7 +121,6 @@ header{
 
 #body-content{
     width: 100%;
-    background: var(--body-bg);
     overflow: hidden;
     margin:0;
     position: relative;
@@ -137,7 +155,7 @@ header{
     justify-content: center;
 }
 
-.nav-link{
+.nav-link, .nav-link-active{
     width: fit-content;
     height: fit-content;
     color:var(--nav-link);
@@ -145,6 +163,10 @@ header{
     text-decoration: none;
     font-size: 16px;
     font-family: 'Montserrat';
+    font-weight: 500;
+}
+.nav-link-active{
+    color:var(--nav-link-active);
 }
 
 #nav-icons-links{
@@ -196,6 +218,7 @@ header{
     font-size: 16px;
     padding: 5px 25px;
     font-family: 'Montserrat';
+    font-weight: 500;
     border: 0;
     outline: none;
     box-shadow: none;
@@ -217,7 +240,8 @@ header{
 
 .footer-text{
     color:var(--footer-text);
-    font-family: 'Montserrat medium';
+    font-family: 'Montserrat';
+    font-weight: 500;
     font-size: 16px;
 }
 
@@ -255,6 +279,7 @@ footer{
 .footer-link{
     column-gap: 15px;
 }
+
 
 @media screen and (min-width: 768px){
     #menu{

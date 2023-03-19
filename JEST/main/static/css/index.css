@@ -28,13 +28,19 @@
     width: 20px;
     border: none;
     height: 35px;
+    background:none;
+}
+.arrow-btn:hover{
+    transition: ease-in-out 2s;
+    border-radius: 2px;
+    border-color: var(--body-focus);
 }
 
 h1{
-    font-family: 'Montserrat bold';
+    font-family: 'Montserrat';
     margin: 0 0;
     color:var(--body-text);
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
 }
 
@@ -43,6 +49,7 @@ h2{
     margin: 0 0;
     color:var(--body-text);
     font-size: 20px;
+    font-style: normal;
     font-weight: 500;
     text-align: center;
 }
@@ -60,7 +67,7 @@ h2{
 }
 
 h3{
-    font-family: 'Montserrat bold';
+    font-family: 'Montserrat';
     color: var(--body-h);
     font-weight:700;
     margin: 0 0;
@@ -129,8 +136,11 @@ h4{
     display: block;
     align-items: center;
     color:var(--body-h);
-    font-family: 'Montserrat medium';
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
     font-size: 32px;
+
 }
 .why-us{
     display: flex;
@@ -144,8 +154,8 @@ h4{
 }
 
 .why-image{
-    width: 160px;
-    height: 160px;
+    max-width: 100%;
+    height: fit-content;
 }
 
 .why-text{
@@ -164,6 +174,10 @@ h4{
 #reviews-control-box{
     height: fit-content;
     column-gap: 55px ;
+}
+#reviews-control-box button{
+    width: 20px;
+    height: 35px;
 }
 
 .reviews-block{
@@ -189,12 +203,14 @@ h4{
 }
 
 .review-name{
-    font-family: 'Montserrat bold';
+    font-family: 'Montserrat';
+    font-weight: 700;
     font-size: 20px;
 }
 .review-text, .review-date, .review-more{
-    font-family: 'Montserrat medium';
-    font-size: 18px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
 }
 .review-date, .review-more{  
     color:var(--nav-link);
@@ -237,7 +253,8 @@ h4{
 }
 
 .faq-question{
-    font-family: 'Montserrat bold';
+    font-family: 'Montserrat';
+    font-weight: 700;
     font-size: 20px;
     padding: 0px 20px;
     color: var(--body-h);
@@ -250,7 +267,8 @@ h4{
 }
 
 .faq-answer{
-    font-family: 'Montserrat medium';
+    font-family: 'Montserrat';
+    font-weight: 500;
     display: none;
     font-size: 16px;
     padding: 0px 20px;
@@ -290,7 +308,6 @@ h4{
         width: 170px;
     }
     .why-image{
-        width: 130px;
         height: 130px;
     }
 }
@@ -343,7 +360,6 @@ h4{
         width: 100px;
     }
     .why-image{
-        width: 100px;
         height: 100px;
     }
     h4{

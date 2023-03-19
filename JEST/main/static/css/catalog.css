@@ -1,0 +1,217 @@
+#sides{
+    padding: 65px 0;
+    column-gap: 125px;   
+}
+
+#left-side, #filters{
+    row-gap: 30px;
+}
+#filters{
+    transition: all 0.3s linear 0s;
+}
+.div-line{
+    width: 100%;
+    height: 0px;
+    border: 1px solid var(--body-border);
+    transition: all 0.3s ease-out;
+}
+.filter-inner{
+    width: 360px;
+    height: fit-content;
+    row-gap: 10px;
+}
+
+.title-n-arrow{
+    justify-content: space-between;
+}
+.filter-content{
+    padding: 0 25px;
+    row-gap: 15px;
+    transition: all 0.6s ease-out;
+}
+
+#price-slider{
+    display: grid;
+}
+#slider-background, #slider-foreground{
+    height: 25%;
+    border: none;
+    border-radius: 10px;
+    grid-column: 1;
+    grid-row: 1;
+}
+#slider-background{
+    background-color:rgba(0, 0, 0, 0.2);
+}
+#slider-foreground{
+    background-clip: content-box;
+    background-color:var(--body-focus);
+}
+
+#price-slider input{
+    -webkit-appearance: none;
+    pointer-events: none;
+    background: none;
+    outline: none;
+    grid-column: 1;
+    grid-row: 1;
+}
+input[type=range]::-webkit-slider-runnable-track{
+    background: none;
+    outline: none;
+}
+input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #FFFFFF;
+    border: 3px solid #EB723F;
+    border-radius: 20px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.06), 0px 4px 8px rgba(0, 0, 0, 0.08);
+    pointer-events: auto;
+}
+
+ #price-slider input::-moz-range-track{
+    background: none;
+    outline: none;
+}
+#price-slider input::-moz-range-thumb{
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #FFFFFF;
+    border: 3px solid #EB723F;
+    border-radius: 20px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.06), 0px 4px 8px rgba(0, 0, 0, 0.08);
+    pointer-events: auto;
+}
+
+#price-inputs {
+    justify-content: space-between;
+}
+
+#price-inputs input{
+    width: 140px;
+    height: 30px;
+    font-family: 'Montserrat';
+    background: none;
+    padding: 5px 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    border: 1.5px solid var(--body-border);
+    border-radius: 5px;
+}
+
+h1{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+}
+
+.filter-button{
+    width: 6px;
+    height: 12px;
+}
+
+h2{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0;
+}
+
+.check-container{
+    column-gap: 8px;
+}
+.mark-box{
+    display: grid;
+}
+
+.check-container input{
+    width: 25px;
+    height: 25px;
+    grid-column: 1;
+    grid-row: 1;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+}
+.check-mark{
+    width: 21px;
+    height: 21px;
+    border: 2px solid var(--body-border);
+    border-radius: 2px;
+    grid-column: 1;
+    grid-row: 1;
+}
+.check-text{
+    height: fit-content;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+.product-card{
+    width: 170px;
+    height: 230px;
+}
+.mark-box input:checked ~ .check-mark{
+    background-color: var(--body-focus);
+}
+
+.check-mark:after {
+    content: "";
+    opacity: 0;
+    display: none;
+  }
+  
+.mark-box input:checked ~ .check-mark:after {
+    display: flex;
+    margin: auto auto;
+    opacity: 1;
+}
+
+.mark-box input:checked ~ .check-mark {
+    border-color: var(--body-focus);
+}
+
+.mark-box .check-mark:after {
+    width: 22px;
+    height: 22px;
+    background-image: url('../svg/check_mark.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#filters-control{
+    justify-content: space-between;
+}
+#removeFiltersBtn{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.product-image{
+    width: 100%;
+    height: 74%;
+    background-color: var(--body-no-image);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    object-fit: cover;
+}
+.product-price{
+    width: fit-content;
+    margin: 0 auto;
+    display: block;
+    align-items: center;
+    color:var(--body-h);
+    font-family: 'Montserrat medium';
+    font-size: 32px;
+}

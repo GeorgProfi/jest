@@ -7,10 +7,8 @@ from .models import Category
 import json
 
 
-
-
 def render_catalog(request):
-    return render(request, 'main/index.html') #изменить шаблон
+    return render(request, 'main/catalog.html')
 
 
 def products(request):
@@ -62,14 +60,14 @@ def products(request):
         rows = df.dictfetchall(cursor)
         for row in rows:
             block_data = {
-                'id'       : row['id'],
-                'title'    : row['title'],
-                'price'    : row['price'],
-                'image'    : str(json.loads(row['photos'])['img1']),
-                'material' : row['metals'],
-                'size'     : row['size'],
-                'gems'     : row['gems'],
-                'mass'     : row['weight'],
+                'id': row['id'],
+                'title': row['title'],
+                'price': row['price'],
+                'image': str(json.loads(row['photos'])['img1']),
+                'material': row['metals'],
+                'size': row['size'],
+                'gems': row['gems'],
+                'mass': row['weight'],
             }
             data.append(block_data)
     return JsonResponse(
