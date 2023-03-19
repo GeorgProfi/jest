@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import connection
 from . import dictfetchall as df
+from .models import Category
 
 import json
 
@@ -27,7 +28,6 @@ def products(request):
         for i in range(1, len(category)):
             query += f" or products.category = '{category[i]}'"
         query += ')'
-
     if 'min_price' in url_parameters:
         min_price = request.GET['min_price']
         query += f" and products.price >= {min_price}"
@@ -76,5 +76,38 @@ def products(request):
         {
             'count': f"{len(data)}",
             'data': f"{json.dumps(data)}"
+        }
+    )
+
+
+def categories(request):
+    data = []
+    for el in Category.objects.all():
+        block_data = {'id': el.id,
+                      'title': el.title,
+                      }
+        data.append(block_data)
+    return JsonResponse(
+        {
+            'count': f'{len(data)}',
+            'data': f"{json.dumps(data)}"
+        }
+    )
+
+def filters(request):
+    with connection.cursor() as cursor:
+        cursor.execute('select * from filters;')
+        data = df.dictfetchall(cursor)[0]
+    return JsonResponse(
+        {
+            'count': f'{len(data)}',
+            'data': {
+                'sizes'       : data['sizes'],
+                'collections' : data['collections'],
+                'categories'  : data['categories'],
+                'metals'      : data['metals'],
+                'probes'      : data['probes'],
+                'gems'        : data['gems']
+            }
         }
     )
