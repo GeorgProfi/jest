@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import main_page, history, contacts, catalog
+from . import main_page, history, contacts, catalog, product_page
 
 urlpatterns = [
 
@@ -20,4 +20,6 @@ urlpatterns = [
     path('products', catalog.products),
     path('categories', catalog.categories),
     path('filters', catalog.filters),
+    path('product_page/<int:product_id>/', product_page.render_product_page),
+    path('product_info', product_page.product_info),
 ]
