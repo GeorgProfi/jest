@@ -10,15 +10,21 @@ html[theme="main"]{
     --body-bg:#F6F6F6;
     --body-fg: #ff0000;
     --body-border:#707070;
+    --body-not-focus-text:#707070;
     --body-focus:#E3874F;
     --body-banner-bg:#2A2F3B;
     --body-h:#000000;
     --body-text:#FFFFFF;
+    --body-focus-btn-text:#F6F2F2;
     --body-no-image:#C2C1C1;
     --focus-link:#FFFFFF;
     --footer-text:#FFFFFF;
     --nav-link:#707070;
     --nav-link-active:#000000;
+}
+
+#body-content{
+    padding-bottom: 130px;
 }
 
 .arrow-btn-u, .arrow-btn-d, .arrow-btn-l, .arrow-btn-r{
@@ -44,7 +50,21 @@ html[theme="main"]{
 .arrow-btn-r, .arrow-btn-r::before{
     transform: rotate(90deg);
 }
-  
+
+.focus-btn{
+    color:var(--body-focus-btn-text);
+    text-align: center;
+    align-items: center;
+    border: 1px solid var(--body-focus);
+    border-radius: 5px;
+    font-family: 'Montserrat';
+    padding: 0;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: var(--body-focus);
+}
 
 
 .hide{
