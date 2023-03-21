@@ -92,6 +92,7 @@ def categories(request):
         }
     )
 
+
 def filters(request):
     with connection.cursor() as cursor:
         cursor.execute('select * from filters;')
@@ -100,12 +101,13 @@ def filters(request):
         {
             'count': f'{len(data)}',
             'data': {
-                'sizes'       : data['sizes'],
+                'sizes': data['sizes'],
                 'collections' : data['collections'],
-                'categories'  : data['categories'],
-                'metals'      : data['metals'],
-                'probes'      : data['probes'],
-                'gems'        : data['gems']
+                'categories': data['categories'],
+                'metals': data['metals'],
+                'probes': data['probes'],
+                'gems': data['gems'],
+                'max_price': data['max_price']
             }
         }
     )
