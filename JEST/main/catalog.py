@@ -15,13 +15,20 @@ def products(request):
     url_parameters = list(request.GET.keys())
     count = request.GET['count']
     already_in_page = request.GET['already_in_page']
-    query = f"""
+    query = """
         select distinct on (id)
         id, title, price, photos, size, weight, description, category, collection, gems, metals from products
-        cross join lateral jsonb_array_elements ( to_jsonb(metals) ) as filter1
-        cross join lateral jsonb_array_elements ( to_jsonb(gems) ) as filter2
-        where products.id is not null
-    """
+        cross join lateral jsonb_array_elements (
+            case 
+                when to_jsonb(metals) is null  then '[{}]'
+                else to_jsonb(metals) end
+        ) as filter1
+        cross join lateral jsonb_array_elements (
+            case 
+                when to_jsonb(gems) is null  then '[{}]'
+                else to_jsonb(gems) end
+        ) as filter2
+        where products.id is not null"""
     if 'probes' in url_parameters:
         probe = request.GET['probes'].split()
         query += f" and (filter1->>'probe' = '{probe[0]}'"
