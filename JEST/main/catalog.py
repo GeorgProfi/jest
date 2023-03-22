@@ -101,11 +101,9 @@ def filters(request):
         {
             'count': f'{len(data)}',
             'data': {
-                'sizes': data['sizes'],
+                'sizes_and_categories': data['sizes_and_categories'],
                 'collections' : data['collections'],
-                'categories': data['categories'],
-                'metals': data['metals'],
-                'probes': data['probes'],
+                'probes_and_metals': data['probes_and_metals'],
                 'gems': data['gems'],
                 'max_price': data['max_price']
             }

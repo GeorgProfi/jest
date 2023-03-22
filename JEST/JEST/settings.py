@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from sshtunnel import SSHTunnelForwarder
+#from key import *
+
 from django.core.mail import send_mail
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
