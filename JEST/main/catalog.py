@@ -16,13 +16,37 @@ def products(request):
     count = request.GET['count']
     already_in_page = request.GET['already_in_page']
     query = f"""
-        select * from products
+        select distinct on (id)
+        id, title, price, photos, size, weight, description, category, collection, gems, metals from products
+        cross join lateral jsonb_array_elements ( to_jsonb(metals) ) as filter1
+        cross join lateral jsonb_array_elements ( to_jsonb(gems) ) as filter2
         where products.id is not null
     """
+    if 'probes' in url_parameters:
+        probe = request.GET['probes'].split()
+        query += f" and (filter1->>'probe' = '{probe[0]}'"
+        for i in range(1, len(probe)):
+            query += f" or filter1->>'probe' ='{probe[i]}'"
+        query += ')'
+
+    if 'probes_and_metals' in url_parameters:
+        metals = request.GET['probes_and_metals'].split()
+        query += f" and (filter1->>'title' = '{metals[0]}'"
+        for i in range(1, len(metals)):
+            query += f" or filter1->>'title' ='{metals[i]}'"
+        query += ')'
+
+    if 'gems' in url_parameters:
+        gems = request.GET['gems'].split()
+        query += f" and (filter2->>'title' = '{gems[0]}'"
+        for i in range(1, len(gems)):
+            query += f" or filter2->>'title' ='{gems[i]}'"
+        query += ')'
+
 
     if 'sizes_and_categories' in url_parameters:
         category = request.GET['sizes_and_categories'].split()
-        query += f"and (products.category = '{category[0]}'"
+        query += f" and (products.category = '{category[0]}'"
         for i in range(1, len(category)):
             query += f" or products.category = '{category[i]}'"
         query += ')'
@@ -34,16 +58,20 @@ def products(request):
         query += f" and products.price <= {max_price}"
     if 'collections' in url_parameters:
         collection = request.GET['collections'].split()
-        query += f"and (products.collection = '{collection[0]}'"
+        query += f" and (products.collection = '{collection[0]}'"
         for i in range(1, len(collection)):
             query += f" or products.collection = '{collection[i]}'"
         query += ')'
-    if 'probes' in url_parameters:
-        probe = request.GET['probes'].split()
-        query += f"and (products.probe = '{probe[0]}'"
-        for i in range(1, len(probe)):
-            query += f" or products.probe = '{probe[i]}'"
-        query += ')'
+
+
+
+
+
+
+
+
+
+
     if 'title' in url_parameters:
         title = request.GET['title']
         query += f" and products.title = '{title}'"
@@ -59,6 +87,7 @@ def products(request):
         data = []
         cursor.execute(query)
         rows = df.dictfetchall(cursor)
+        print(rows)
         for row in rows:
             block_data = {
                 'id': row['id'],
