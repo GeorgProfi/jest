@@ -47,10 +47,10 @@
                     <h1>Фильтры</h1>
                     <div id="filters" class="flex-column">
                         <div id="price-box" class="filter-inner flex-column">
-                            <div class="title-n-arrow flex-row">
+                            <a class="title-n-arrow flex-row" onclick="showFilterContent(this)">
                                 <h2>Цена</h2>
-                                <button class="arrow-btn-d filter-button centered-v" onclick="showFilterContent(this)"></button>
-                            </div>
+                                <button class="arrow-btn-d filter-button centered-v"></button>
+                            </a>    
                             <div class="div-line"></div>
                             <div class="filter-content flex-column" style="display: none;">
                                 <div id="price-slider">
@@ -65,62 +65,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="collection-box" class="filter-inner flex-column">
-                            <div class="title-n-arrow flex-row">
-                                <h2>Коллекция</h2>
-                                <button class="arrow-btn-d filter-button centered-v" onclick="showFilterContent(this)"></button>
-                            </div>
-                            <div class="div-line"></div>
-                            <div class="filter-content flex-column" style="display:none;">
-                                <div class="check-container flex-row">
-                                    <div class="mark-box">
-                                        <input type="checkbox" checked="checked"></input>
-                                        <span class="check-mark centered-v"></span>
-                                    </div>
-                                    <span class="check-text centered-v">375</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="metal-box"  class="filter-inner flex-column">
-                            <div class="title-n-arrow flex-row">
-                                <h2>Металл</h2>
-                                <button class="arrow-btn-d filter-button centered-v" onclick="showFilterContent(this)"></button>
-                            </div>
-                            <div class="div-line"></div>
-                            <div class="filter-content flex-column" style="display:none;">
-                            </div>
-                        </div>
-                        <div id="metal-probe-box" class="filter-inner flex-column">
-                            <div class="title-n-arrow flex-row">
-                                <h2>Проба металла</h2>
-                                <button class="arrow-btn-d filter-button centered-v" onclick="showFilterContent(this)"></button>
-                            </div>
-                            <div class="div-line"></div>
-                            <div class="filter-content flex-column" style="display:none;">
-                            </div>
-                        </div>
-                        <div id="category-box"  class="filter-inner flex-column">
-                            <div class="title-n-arrow flex-row">
-                                <h2>Тип изделия</h2>
-                                <button class="arrow-btn-d filter-button centered-v" onclick="showFilterContent(this)"></button>
-                            </div>
-                            <div class="div-line"></div>
-                            <div class="filter-content flex-column" style="display:none;">
-                            </div>
-                        </div>
-                        <div id="size-box"  class="filter-inner flex-column">
-                            <div class="title-n-arrow flex-row">
-                                <h2>Размер</h2>
-                                <button class="arrow-btn-d filter-button centered-v" onclick="showFilterContent(this)"></button>
-                            </div>
-                            <div class="div-line"></div>
-                            <div class="filter-content flex-column" style="display:none;">
-                            </div>
-                        </div>
                     </div>
                     <div id="filters-control" class="flex-row">
-                        <a id="removeFiltersBtn" class="centered-v">X Сбросить всё</a>
-                        <button id="show-filters-btn" class="focus-btn">Показать</button>
+                        <a id="removeFiltersBtn" class="centered-v" onclick="uncheck_filters()">X Сбросить всё</a>
+                        <button id="show-filters-btn" class="focus-btn" onclick="showFiltredProducts()">Показать</button>
                     </div>
                 </div>
                 <div id="right-side" class="flex-column">

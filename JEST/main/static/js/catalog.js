@@ -1,3 +1,7 @@
+filter_headers_value = {'Коллекция':'collections', 'Металл':'probes_and_metals', 'Проба металла':'probes', 'Тип изделия':'sizes_and_categories', 'Размер':'sizes', 'Камни':'gems'};
+hidden_headers = ["probes", "sizes"];
+active_filters = [];
+
 async function createAsyncGETRequest(url){
     return new Promise((resolve, reject) => {
       fetch(url).then(response=>{
@@ -11,10 +15,129 @@ async function createAsyncGETRequest(url){
       )
       });
 }
+function is_visible(e) {return e.offsetWidth > 0 || e.offsetHeight > 0;}
+
+async function uncheck_filters(){
+    filters_container_html = document.getElementById('filters');
+    all_inputs = [];
+    for(i=1; i<filters_container_html.children.length; i++){
+        filter_content = filters_container_html.children[i].children[2];
+        inputs = filter_content.getElementsByTagName('input');
+        
+        for (z=0; z<inputs.length; z++){
+            input = inputs[z];
+            input.checked = false;
+            all_inputs.push(input);
+        }
+    }
+    for(iji = 0; iji<all_inputs.length; iji++){
+        showOnCheck.call(this, all_inputs[iji])
+    }
+    
+}
+
+
+function showOnCheck(elem){
+    checked = elem.checked;
+    checkbox_title = elem.parentNode.nextSibling.innerHTML;
+    if(checked){
+        active_filters.push(checkbox_title);
+        for (iiii = 0; iiii<hidden_headers.length; iiii++){
+            hidden_title = hidden_headers[iiii];
+            hidden_container = document.getElementById(hidden_title);
+            hidden_content = hidden_container.children[2];
+            for (jjjj = 0; jjjj<hidden_content.children.length; jjjj++){
+                check_box = hidden_content.children[jjjj];
+                if(check_box.getAttribute('showOn').split(',').includes(checkbox_title)){
+                    check_box.style = "";
+                    hidden_container.style='';
+                }
+            }
+        }
+    } else {
+        var index = active_filters.indexOf(checkbox_title);
+        if (index != -1){active_filters.splice(index, 1)};
+        for (i = 0; i<hidden_headers.length; i++){
+            hidden_title = hidden_headers[i];
+            hidden_container = document.getElementById(hidden_title);
+            hidden_content = hidden_container.children[2];
+            for (j = 0; j<hidden_content.children.length; j++){
+                check_box = hidden_content.children[j];
+                showOn_arr = check_box.getAttribute('showOn').split(',');
+                is_active = false;
+                for (z = 0; z<showOn_arr.length; z++){
+                    if(active_filters.indexOf(showOn_arr[z])!=-1){
+                        is_active = true;
+                        break;
+                    }
+                }
+                if(!is_active){
+                    check_box.style="display:none;";
+                    check_box.children[0].children[0].checked = false;
+                }
+
+            }
+            is_active = false;
+            for(j = 0; j<hidden_content.children.length; j++){
+                check_box = hidden_content.children[j];
+                if (is_visible(check_box)){
+                    is_active = true;
+                    break;
+                }
+            }
+            if(!is_active){
+                hidden_container.style='display:none;'
+            }
+            
+        }
+    }
+
+}
+
+async function showFiltredProducts(){
+    filters_container_html = document.getElementById('filters');
+
+    inputs_values = {};
+    for(var i in filter_headers_value){
+        inputs_values[filter_headers_value[i]] = [];
+    }
+    for(i=1; i<filters_container_html.children.length; i++){
+        filter_content = filters_container_html.children[i].children[2];
+        filter_title = filters_container_html.children[i].children[0].children[0].innerHTML;
+        check_boxes = filter_content.getElementsByClassName('check-container');
+        for (z = 0; z<check_boxes.length; z++){
+            mark_box = check_boxes[z].children[0];
+            input = mark_box.children[0];
+            title = check_boxes[z].children[1].innerHTML;
+            if(input.checked){
+                inputs_values[filter_headers_value[filter_title]].push(title);
+            }
+        }
+    }
+    price_slider = document.getElementById('price-box').children[2].children[0]
+    max_price = price_slider.children[2].value;
+    min_price = price_slider.children[3].value;
+    already_on_page = 0;
+    count = 10;
+    url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
+    for(var i in filter_headers_value){
+        if(inputs_values[filter_headers_value[i]].length>0){
+            url+=`&${filter_headers_value[i]}=${inputs_values[filter_headers_value[i]][0]}`;
+        for(z=1; z<inputs_values[filter_headers_value[i]].length; z++){
+            url+=`+${inputs_values[filter_headers_value[i]][z]}`;
+            }   
+        }
+    }
+    delete_products();
+    create_products(url);
+    
+
+}
+
 
 function showFilterContent(elem){
-    box = elem.parentNode.parentNode;
-    elem.className="arrow-btn-u"
+    box = elem.parentNode;
+    elem.children[1].className="arrow-btn-u"
     content = box.children[2];
     div_line = box.children[1];
     content.style="opacity:0;";
@@ -24,7 +147,7 @@ function showFilterContent(elem){
 }
 
 function hideFilterContent(elem){
-    box = elem.parentNode.parentNode;
+    box = elem.parentNode;
     content = box.children[2];
     div_line = box.children[1];
     content.style="opacity:0;";
@@ -32,7 +155,7 @@ function hideFilterContent(elem){
     setTimeout(()=>{
         content.style="display:none"
     }, 300);
-    elem.className="arrow-btn-d"
+    elem.children[1].className="arrow-btn-d"
     elem.setAttribute('onclick',"showFilterContent(this);");
 }
 
@@ -94,8 +217,148 @@ function priceInput(){
     setRangeValue(min_price.value, max_price.value);
 }
 
-async function create_products(){
-    data = await createAsyncGETRequest('/products?count=10&already_in_page=0');
+async function create_and_fill_filters(){
+    data = await createAsyncGETRequest('/filters');
+    count = data['count'];
+    data = data['data'];
+    special_ones = {'sizes_and_categories':'sizes', 'probes_and_metals':'probes'}
+    filters_container_html = document.getElementById('filters');
+    max_price = data['max_price'];
+    price_slider = document.getElementById('price-box').children[2].children[0]
+    max_price_input = price_slider.children[2];
+    min_price_input = price_slider.children[3];
+    max_price_input.setAttribute('max', Number(max_price));
+    min_price_input.setAttribute('max', Number(max_price));
+    evt = new Event('change');
+    max_price_input.dispatchEvent(evt);
+    min_price_input.dispatchEvent(evt);
+    for(var i in filter_headers_value){
+        header = i;
+        values = data[filter_headers_value[header]];
+        is_special = false;
+        hide_checkboxes = false;
+
+        filter_box = document.createElement('div');
+        filter_box.className = "filter-inner flex-column";
+        if(hidden_headers.includes(filter_headers_value[header])){
+            filter_box.style='display:none';
+            filter_box.id = filter_headers_value[header];
+            hide_checkboxes = true;
+        }
+        if(Object.keys(special_ones).includes(filter_headers_value[header])){
+            is_special = true;
+        }
+
+        title_n_arrow = document.createElement('a');
+        title_n_arrow.className = 'title-n-arrow flex-row';
+        title_n_arrow.setAttribute('onclick', 'showFilterContent(this)');
+
+        title = document.createElement('h2');
+        title.innerHTML = header;
+        title_n_arrow.appendChild(title);
+
+        arrow = document.createElement('button');
+        arrow.className = 'arrow-btn-d';
+        title_n_arrow.appendChild(arrow);
+
+        filter_box.appendChild(title_n_arrow);
+
+        div_line = document.createElement('div');
+        div_line.className = 'div-line';
+        filter_box.appendChild(div_line);
+
+        filter_content = document.createElement('div');
+        filter_content.className = 'filter-content flex-column';
+        filter_content.style = 'display:none;';
+
+        for(var j in values){
+            checkbox_value = JSON.parse(values[j]);
+
+            check_box = document.createElement('div');
+            check_box.className = 'check-container flex-row';
+
+            mark_box = document.createElement('div');
+            mark_box.className = 'mark-box';
+
+            input = document.createElement('input');
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('onchange', '')
+            if(is_special){
+                input.setAttribute('onchange', 'showOnCheck(this)')
+            }
+            mark_box.appendChild(input);
+
+            span = document.createElement('span');
+            span.className = 'check-mark centered-v';
+            mark_box.appendChild(span);
+
+            check_box.appendChild(mark_box);
+
+            check_text = document.createElement('span');
+            check_text.className = 'check-text centered-v';
+            check_text.innerHTML = checkbox_value['title'];
+            check_box.appendChild(check_text);
+            filter_content.appendChild(check_box)
+        }
+        filter_box.appendChild(filter_content);
+        filters_container_html.appendChild(filter_box);
+    }
+    for(var i in special_ones){
+        header = i;
+        values = data[i];
+        
+        filter_content_html = document.getElementById(special_ones[i]).children[2];
+        already_in = [];
+        for(j = 0; j<values.length; j++){
+            check_boxes = JSON.parse(values[j]);
+            check_show_on_title = check_boxes['title'];
+            for(var z in check_boxes[special_ones[i]]){
+                special_filter_text = check_boxes[special_ones[i]][z];
+                if(!(already_in.includes(special_filter_text))){
+                    already_in.push(special_filter_text);
+
+                    check_box = document.createElement('div');
+                    check_box.className = 'check-container flex-row';
+                    check_box.id = special_filter_text;
+                    check_box.setAttribute('showOn', check_show_on_title);
+                    check_box.style='display:none';
+
+                    mark_box = document.createElement('div');
+                    mark_box.className = 'mark-box';
+
+                    input = document.createElement('input');
+                    input.setAttribute('type', 'checkbox');
+                    mark_box.appendChild(input);
+
+                    span = document.createElement('span');
+                    span.className = 'check-mark centered-v';
+                    mark_box.appendChild(span);
+
+                    check_box.appendChild(mark_box);
+
+                    check_text = document.createElement('span');
+                    check_text.className = 'check-text centered-v';
+                    check_text.innerHTML = special_filter_text;
+                    check_box.appendChild(check_text);
+                    filter_content_html.appendChild(check_box)
+            } else {
+                check_box = document.getElementById(special_filter_text);
+                check_box.setAttribute('showOn', check_box.getAttribute('showOn')+','+check_show_on_title);
+            }
+            }
+        }
+
+    }
+
+}
+
+function delete_products(){
+    html_grid = document.getElementById('products-grid');
+    html_grid.innerHTML = '';
+}
+
+async function create_products(url){
+    data = await createAsyncGETRequest(url);
     count = data['count'];
     products_data = JSON.parse(data['data']);
     html_grid = document.getElementById('products-grid');
@@ -179,4 +442,5 @@ async function create_products(){
     html_count.innerHTML = `Результат: ${html_grid.children.length}`;
 }
 
-create_products();
+create_and_fill_filters();
+create_products('/products?count=10&already_in_page=0');

@@ -29,6 +29,7 @@
 }
 
 .title-n-arrow{
+    cursor:pointer;
     justify-content: space-between;
 }
 .filter-content{

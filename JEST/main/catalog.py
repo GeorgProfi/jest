@@ -20,8 +20,8 @@ def products(request):
         where products.id is not null
     """
 
-    if 'category' in url_parameters:
-        category = request.GET['category'].split()
+    if 'sizes_and_categories' in url_parameters:
+        category = request.GET['sizes_and_categories'].split()
         query += f"and (products.category = '{category[0]}'"
         for i in range(1, len(category)):
             query += f" or products.category = '{category[i]}'"
@@ -32,14 +32,14 @@ def products(request):
     if 'max_price' in url_parameters:
         max_price = request.GET['max_price']
         query += f" and products.price <= {max_price}"
-    if 'collection' in url_parameters:
-        collection = request.GET['collection'].split()
+    if 'collections' in url_parameters:
+        collection = request.GET['collections'].split()
         query += f"and (products.collection = '{collection[0]}'"
         for i in range(1, len(collection)):
             query += f" or products.collection = '{collection[i]}'"
         query += ')'
-    if 'probe' in url_parameters:
-        probe = request.GET['probe'].split()
+    if 'probes' in url_parameters:
+        probe = request.GET['probes'].split()
         query += f"and (products.probe = '{probe[0]}'"
         for i in range(1, len(probe)):
             query += f" or products.probe = '{probe[i]}'"
@@ -53,6 +53,7 @@ def products(request):
         limit {count} 
         offset {already_in_page};
     """
+    print(query)
 
     with connection.cursor() as cursor:
         data = []
@@ -102,7 +103,7 @@ def filters(request):
             'count': f'{len(data)}',
             'data': {
                 'sizes_and_categories': data['sizes_and_categories'],
-                'collections' : data['collections'],
+                'collections': data['collections'],
                 'probes_and_metals': data['probes_and_metals'],
                 'gems': data['gems'],
                 'max_price': data['max_price']

@@ -28,6 +28,7 @@ html[theme="main"]{
 }
 
 .arrow-btn-u, .arrow-btn-d, .arrow-btn-l, .arrow-btn-r{
+    cursor: pointer;
     border: none;
     background-image: url("../svg/arrow_btn.svg");
     background-color: rgba(0, 0, 0, 0);
