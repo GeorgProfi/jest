@@ -1,3 +1,15 @@
+window.onscroll = loadProductsOnScroll;
+
+function loadProductsOnScroll(){
+    if ((document.body.scrollTop/document.body.scrollHeight)>0.3){
+        already_on_page = document.getElementById('products-count').getAttribute('value');
+        showFiltredProducts(Number(already_on_page)+10, already_on_page);
+        window.onscroll = '';
+        setTimeout( ()=>{window.onscroll = loadProductsOnScroll},5000);}
+}
+
+
+
 filter_headers_value = {'Коллекция':'collections', 'Металл':'probes_and_metals', 'Проба металла':'probes', 'Тип изделия':'sizes_and_categories', 'Размер':'sizes', 'Камни':'gems'};
 hidden_headers = ["probes", "sizes"];
 active_filters = [];
@@ -94,7 +106,7 @@ function showOnCheck(elem){
 
 }
 
-async function showFiltredProducts(){
+async function showFiltredProducts(count, already_on_page){
     filters_container_html = document.getElementById('filters');
 
     inputs_values = {};
@@ -117,8 +129,6 @@ async function showFiltredProducts(){
     price_slider = document.getElementById('price-box').children[2].children[0]
     max_price = price_slider.children[2].value;
     min_price = price_slider.children[3].value;
-    already_on_page = 0;
-    count = 10;
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
     for(var i in filter_headers_value){
         if(inputs_values[filter_headers_value[i]].length>0){
@@ -128,10 +138,8 @@ async function showFiltredProducts(){
             }   
         }
     }
-    delete_products();
     create_products(url);
     
-
 }
 
 
@@ -228,6 +236,8 @@ async function create_and_fill_filters(){
     max_price_input = price_slider.children[2];
     min_price_input = price_slider.children[3];
     max_price_input.setAttribute('max', Number(max_price));
+    max_price_input.setAttribute('value', Number(max_price));
+    priceRangeInput(max_price_input);
     min_price_input.setAttribute('max', Number(max_price));
     evt = new Event('change');
     max_price_input.dispatchEvent(evt);
@@ -355,6 +365,8 @@ async function create_and_fill_filters(){
 function delete_products(){
     html_grid = document.getElementById('products-grid');
     html_grid.innerHTML = '';
+    html_count.innerHTML = `Результат: ${html_grid.children.length}`;
+    html_count.setAttribute('value', html_grid.children.length);
 }
 
 async function create_products(url){
@@ -415,31 +427,37 @@ async function create_products(url){
         materials_values = document.createElement('div')
         materials_values.className = 'product-add-info-col flex-column';
         values = ['title', 'probe'];
+        try{
+            materials = product['material'];
+            
+            for(j = 0; j<materials.length; j++){
+                material = JSON.parse(materials[j]);
+                console.log(material);
+                for(z = 0; z<headers_m.length; z++){
+                    header = document.createElement('span');
+                    header.className = 'product-small-text';
+                    header.innerHTML = headers_m[z];
+                    materials_headers.appendChild(header);
+                    header_value = document.createElement('span');
+                    header_value.className = 'product-small-text fg-color';
+                    header_value.innerHTML = material[values[z]];
+                    materials_values.appendChild(header_value);
+                }
 
-        materials = product['material'];
-        
-        for(j = 0; j<materials.length; j++){
-            material = materials[j];
-            for(z = 0; z<headers_m.length; z++){
-                header = document.createElement('span');
-                header.className = 'product-small-text';
-                header.innerHTML = headers_m[z];
-                materials_headers.appendChild(header);
-                header_value = document.createElement('span');
-                header_value.className = 'product-small-text fg-color';
-                header_value.innerHTML = material[values[z]];
-                materials_values.appendChild(header_value);
             }
+            add_info.appendChild(materials_headers);
+            add_info.appendChild(materials_values);
 
+            hover_part.appendChild(add_info);
+            card.append(hover_part);
+            html_grid.appendChild(card);
+        } catch (e){
+            console.log('no material')
+        } finally {
+            html_count.innerHTML = `Результат: ${html_grid.children.length}`;
+            html_count.setAttribute('value', html_grid.children.length);
         }
-        add_info.appendChild(materials_headers);
-        add_info.appendChild(materials_values);
-
-        hover_part.appendChild(add_info);
-        card.append(hover_part);
-        html_grid.appendChild(card);
     }
-    html_count.innerHTML = `Результат: ${html_grid.children.length}`;
 }
 
 create_and_fill_filters();

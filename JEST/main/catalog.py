@@ -18,8 +18,8 @@ def products(request):
     query = f"""
         select distinct on (id)
         id, title, price, photos, size, weight, description, category, collection, gems, metals from products
-        cross join lateral jsonb_array_elements ( to_jsonb(metals) ) as filter1
-        cross join lateral jsonb_array_elements ( to_jsonb(gems) ) as filter2
+        left join lateral jsonb_array_elements ( to_jsonb(metals) ) filter1 ON true
+        left join lateral jsonb_array_elements ( to_jsonb(gems) ) filter2 ON true
         where products.id is not null
     """
     if 'probes' in url_parameters:
@@ -43,7 +43,6 @@ def products(request):
             query += f" or filter2->>'title' ='{gems[i]}'"
         query += ')'
 
-
     if 'sizes_and_categories' in url_parameters:
         category = request.GET['sizes_and_categories'].split()
         query += f" and (products.category = '{category[0]}'"
@@ -63,15 +62,6 @@ def products(request):
             query += f" or products.collection = '{collection[i]}'"
         query += ')'
 
-
-
-
-
-
-
-
-
-
     if 'title' in url_parameters:
         title = request.GET['title']
         query += f" and products.title = '{title}'"
@@ -79,8 +69,9 @@ def products(request):
     query += f"""
         order by products.id
         limit {count} 
-        offset {already_in_page};
     """
+    if int(already_in_page) > 0:
+        query += f"""offset {already_in_page} rows """
     print(query)
 
     with connection.cursor() as cursor:
