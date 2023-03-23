@@ -1,7 +1,7 @@
 window.onscroll = loadProductsOnScroll;
 
 function loadProductsOnScroll(){
-    if ((document.body.scrollTop/document.body.scrollHeight)>0.3){
+    if ((document.body.scrollTop/document.body.scrollHeight)>0.1){
         already_on_page = document.getElementById('products-count').getAttribute('value');
         showFiltredProducts(Number(already_on_page)+10, already_on_page);
         window.onscroll = '';
@@ -45,9 +45,19 @@ async function uncheck_filters(){
     for(iji = 0; iji<all_inputs.length; iji++){
         showOnCheck.call(this, all_inputs[iji])
     }
+    activateShowProductsBtn();
     
 }
 
+async function deactivateShowProductsBtn(){
+    btn = document.getElementById('show-filters-btn');
+    btn.setAttribute('onclick', '');
+}
+
+async function activateShowProductsBtn(){
+    btn = document.getElementById('show-filters-btn');
+    btn.setAttribute('onclick','delete_products();showFiltredProducts(10, 0);deactivateShowProductsBtn();');
+}
 
 function showOnCheck(elem){
     checked = elem.checked;
@@ -108,7 +118,6 @@ function showOnCheck(elem){
 
 async function showFiltredProducts(count, already_on_page){
     filters_container_html = document.getElementById('filters');
-
     inputs_values = {};
     for(var i in filter_headers_value){
         inputs_values[filter_headers_value[i]] = [];
@@ -132,7 +141,7 @@ async function showFiltredProducts(count, already_on_page){
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
     for(var i in filter_headers_value){
         if(inputs_values[filter_headers_value[i]].length>0){
-            url+=`&${filter_headers_value[i]}=${inputs_values[filter_headers_value[i]][0]}`;
+            url+=`&${filter_headers_value[i]}=${inputs_values[filter_headers_value[i]][0].replace(/ /g, "$")}`;
         for(z=1; z<inputs_values[filter_headers_value[i]].length; z++){
             url+=`+${inputs_values[filter_headers_value[i]][z]}`;
             }   
@@ -237,8 +246,8 @@ async function create_and_fill_filters(){
     min_price_input = price_slider.children[3];
     max_price_input.setAttribute('max', Number(max_price));
     max_price_input.setAttribute('value', Number(max_price));
-    priceRangeInput(max_price_input);
     min_price_input.setAttribute('max', Number(max_price));
+    priceRangeInput(max_price_input);
     evt = new Event('change');
     max_price_input.dispatchEvent(evt);
     min_price_input.dispatchEvent(evt);
@@ -292,9 +301,9 @@ async function create_and_fill_filters(){
 
             input = document.createElement('input');
             input.setAttribute('type', 'checkbox');
-            input.setAttribute('onchange', '')
+            input.setAttribute('onchange', 'activateShowProductsBtn()');
             if(is_special){
-                input.setAttribute('onchange', 'showOnCheck(this)')
+                input.setAttribute('onchange', input.getAttribute('onchange')+';showOnCheck(this)')
             }
             mark_box.appendChild(input);
 
@@ -402,7 +411,7 @@ async function create_products(url){
 
         price = document.createElement('span');
         price.className = 'product-big-text';
-        price.innerHTML = product['price'] + '₽';
+        price.innerHTML = Number(product['price']).toLocaleString("ru-RU") + '₽';
         product_visible_info.appendChild(price);
 
         visible_part.appendChild(product_visible_info);

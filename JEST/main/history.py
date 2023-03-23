@@ -5,7 +5,7 @@ from .models import History
 
 
 def render_history(request):
-    return render(request, 'main/index.html') #изменить шаблон
+    return render(request, 'main/history.html')
 
 
 def get_history(request):
@@ -16,6 +16,7 @@ def get_history(request):
                       'image': el.image
                       }
         data.append(block_data)
+
     return JsonResponse(
             {
                 'count': f'{len(data)}',
