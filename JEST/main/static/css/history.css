@@ -1,3 +1,7 @@
+#body-content{
+  padding-bottom: 0;
+}
+
 #banner-index{
   background-image: url("../images/history/history-banner-img.jpg");
   background-size: cover;
