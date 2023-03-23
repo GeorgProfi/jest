@@ -31,23 +31,23 @@ def products(request):
         where products.id is not null"""
     if 'probes' in url_parameters:
         probe = request.GET['probes'].split()
-        query += f" and (filter1-»'probe' = '{probe[0]}'"
+        query += f" and (filter1->>'probe' = '{probe[0]}'"
         for i in range(1, len(probe)):
-            query += f" or filter1-»'probe' ='{probe[i]}'"
+            query += f" or filter1->>'probe' ='{probe[i]}'"
         query += ')'
 
     if 'probes_and_metals' in url_parameters:
         metals = request.GET['probes_and_metals'].split()
-        query += f" and (filter1-»'title' = '{metals[0]}'"
+        query += f" and (filter1->>'title' = '{metals[0]}'"
         for i in range(1, len(metals)):
-            query += f" or filter1-»'title' ='{metals[i]}'"
+            query += f" or filter1->>'title' ='{metals[i]}'"
         query += ')'
 
     if 'gems' in url_parameters:
         gems = request.GET['gems'].split()
-        query += f" and (filter2-»'title' = '{gems[0]}'"
+        query += f" and (filter2->>'title' = '{gems[0]}'"
         for i in range(1, len(gems)):
-            query += f" or filter2-»'title' ='{gems[i]}'"
+            query += f" or filter2->>'title' ='{gems[i]}'"
         query += ')'
 
 
@@ -75,12 +75,12 @@ def products(request):
         title = request.GET['title']
         query += f" and products.title = '{title}'"
 
-        query += f"""
-        order by products.id
-        limit {count}
-        offset {already_in_page};
-        """
-        print(query)
+    query += f"""
+    order by products.id
+    limit {count}
+    offset {already_in_page};
+    """
+    print(query)
 
     with connection.cursor() as cursor:
         data = []
