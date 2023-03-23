@@ -138,6 +138,7 @@ async function showFiltredProducts(count, already_on_page){
             }   
         }
     }
+    console.log(inputs_values);
     create_products(url);
     
 }
@@ -237,8 +238,8 @@ async function create_and_fill_filters(){
     min_price_input = price_slider.children[3];
     max_price_input.setAttribute('max', Number(max_price));
     max_price_input.setAttribute('value', Number(max_price));
-    priceRangeInput(max_price_input);
     min_price_input.setAttribute('max', Number(max_price));
+    priceRangeInput(max_price_input);
     evt = new Event('change');
     max_price_input.dispatchEvent(evt);
     min_price_input.dispatchEvent(evt);
