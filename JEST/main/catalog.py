@@ -38,18 +38,21 @@ def products(request):
 
     if 'probes_and_metals' in url_parameters:
         metals = request.GET['probes_and_metals'].split()
+        metals[0] = metals[0].replace('$', ' ')
         query += f" and (filter1->>'title' = '{metals[0]}'"
         for i in range(1, len(metals)):
+            metals[i] = metals[i].replace('$', ' ')
             query += f" or filter1->>'title' ='{metals[i]}'"
         query += ')'
 
     if 'gems' in url_parameters:
         gems = request.GET['gems'].split()
+        gems[0] = gems[0].replace('$', ' ')
         query += f" and (filter2->>'title' = '{gems[0]}'"
         for i in range(1, len(gems)):
+            gems[i] = gems[i].replace('$', ' ')
             query += f" or filter2->>'title' ='{gems[i]}'"
         query += ')'
-
 
     if 'sizes_and_categories' in url_parameters:
         category = request.GET['sizes_and_categories'].split()
@@ -65,11 +68,12 @@ def products(request):
         query += f" and products.price <= {max_price}"
     if 'collections' in url_parameters:
         collection = request.GET['collections'].split()
+        collection[0] = collection[0].replace('$', ' ')
         query += f" and (products.collection = '{collection[0]}'"
         for i in range(1, len(collection)):
+            collection[i] = collection[i].replace('$', ' ')
             query += f" or products.collection = '{collection[i]}'"
         query += ')'
-
 
     if 'title' in url_parameters:
         title = request.GET['title']
@@ -80,13 +84,11 @@ def products(request):
     limit {count}
     offset {already_in_page};
     """
-    print(query)
 
     with connection.cursor() as cursor:
         data = []
         cursor.execute(query)
         rows = df.dictfetchall(cursor)
-        print(rows)
         for row in rows:
             block_data = {
                 'id': row['id'],

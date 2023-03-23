@@ -45,9 +45,19 @@ async function uncheck_filters(){
     for(iji = 0; iji<all_inputs.length; iji++){
         showOnCheck.call(this, all_inputs[iji])
     }
+    activateShowProductsBtn();
     
 }
 
+async function deactivateShowProductsBtn(){
+    btn = document.getElementById('show-filters-btn');
+    btn.setAttribute('onclick', '');
+}
+
+async function activateShowProductsBtn(){
+    btn = document.getElementById('show-filters-btn');
+    btn.setAttribute('onclick','delete_products();showFiltredProducts(10, 0);deactivateShowProductsBtn();');
+}
 
 function showOnCheck(elem){
     checked = elem.checked;
@@ -108,7 +118,6 @@ function showOnCheck(elem){
 
 async function showFiltredProducts(count, already_on_page){
     filters_container_html = document.getElementById('filters');
-
     inputs_values = {};
     for(var i in filter_headers_value){
         inputs_values[filter_headers_value[i]] = [];
@@ -132,13 +141,12 @@ async function showFiltredProducts(count, already_on_page){
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
     for(var i in filter_headers_value){
         if(inputs_values[filter_headers_value[i]].length>0){
-            url+=`&${filter_headers_value[i]}=${inputs_values[filter_headers_value[i]][0]}`;
+            url+=`&${filter_headers_value[i]}=${inputs_values[filter_headers_value[i]][0].replace(/ /g, "$")}`;
         for(z=1; z<inputs_values[filter_headers_value[i]].length; z++){
             url+=`+${inputs_values[filter_headers_value[i]][z]}`;
             }   
         }
     }
-    console.log(inputs_values);
     create_products(url);
     
 }
@@ -293,9 +301,9 @@ async function create_and_fill_filters(){
 
             input = document.createElement('input');
             input.setAttribute('type', 'checkbox');
-            input.setAttribute('onchange', '')
+            input.setAttribute('onchange', 'activateShowProductsBtn()');
             if(is_special){
-                input.setAttribute('onchange', 'showOnCheck(this)')
+                input.setAttribute('onchange', input.getAttribute('onchange')+';showOnCheck(this)')
             }
             mark_box.appendChild(input);
 

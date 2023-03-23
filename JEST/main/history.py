@@ -16,6 +16,7 @@ def get_history(request):
                       'image': el.image
                       }
         data.append(block_data)
+
     return JsonResponse(
             {
                 'count': f'{len(data)}',

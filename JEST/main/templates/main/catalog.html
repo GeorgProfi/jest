@@ -23,7 +23,7 @@
                 <div id="nav-right-side" class="flex-row">
                     <div id="nav-links" class="flex-row">
                         <a class="nav-link-active" href="/catalog/">Каталог</a>
-                        <a class="nav-link" href="#">История</a>
+                        <a class="nav-link" href="/history">История</a>
                         <a class="nav-link" href="#">Контакты</a>
                     </div>
                     <div id="searchbox" class="flex-row" expanded="y">
@@ -68,7 +68,7 @@
                     </div>
                     <div id="filters-control" class="flex-row">
                         <a id="removeFiltersBtn" class="centered-v" onclick="uncheck_filters()">X Сбросить всё</a>
-                        <button id="show-filters-btn" class="focus-btn" onclick="delete_products();showFiltredProducts(10, 0)">Показать</button>
+                        <button id="show-filters-btn" class="focus-btn" onclick="delete_products();showFiltredProducts(10, 0); deactivateShowProductsBtn();">Показать</button>
                     </div>
                 </div>
                 <div id="right-side" class="flex-column">
