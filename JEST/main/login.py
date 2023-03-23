@@ -22,6 +22,7 @@ def EmailSender(request):
     return render(request, 'index.html')
 
 def login (request):
+
     email = request.GET.get('email')
     verifi_code = request.GET.get('code')
     if EmailCode[email] == verifi_code:
