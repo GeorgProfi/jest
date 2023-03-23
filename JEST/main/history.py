@@ -5,7 +5,7 @@ from .models import History
 
 
 def render_history(request):
-    return render(request, 'main/index.html') #изменить шаблон
+    return render(request, 'main/history.html') #изменить шаблон 
 
 
 def get_history(request):
