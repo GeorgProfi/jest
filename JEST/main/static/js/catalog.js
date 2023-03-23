@@ -1,7 +1,7 @@
 window.onscroll = loadProductsOnScroll;
 
 function loadProductsOnScroll(){
-    if ((document.body.scrollTop/document.body.scrollHeight)>0.3){
+    if ((document.body.scrollTop/document.body.scrollHeight)>0.1){
         already_on_page = document.getElementById('products-count').getAttribute('value');
         showFiltredProducts(Number(already_on_page)+10, already_on_page);
         window.onscroll = '';
@@ -411,7 +411,7 @@ async function create_products(url){
 
         price = document.createElement('span');
         price.className = 'product-big-text';
-        price.innerHTML = product['price'] + '₽';
+        price.innerHTML = Number(product['price']).toLocaleString("ru-RU") + '₽';
         product_visible_info.appendChild(price);
 
         visible_part.appendChild(product_visible_info);
