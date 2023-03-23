@@ -45,24 +45,27 @@ def why_us(request):
 
 
 def reviews(request):
-    count = request.GET.get('count')
-    data = []
-    with connection.cursor() as cursor:
-        cursor.execute("select * from last_reviews;")
-        row = cursor.fetchall()
-        for i in range(int(count)):
-            block_data = {
-                'name': f'{row[i][1]} {row[i][2]}',
-                "review_text": f"{row[i][4]}",
-                "date": f"{row[i][5].date()}"
-            }
-            data.append(block_data)
-        return JsonResponse(
-            {
-                'count': f'{len(data)}',
-                'data': f"{json.dumps(data)}"
-            }
-        )
+    if 'count' in request.GET:
+        count = request.GET.get('count')
+        data = []
+        with connection.cursor() as cursor:
+            cursor.execute("select * from last_reviews;")
+            row = cursor.fetchall()
+            for i in range(int(count)):
+                block_data = {
+                    'name': f'{row[i][1]} {row[i][2]}',
+                    "review_text": f"{row[i][4]}",
+                    "date": f"{row[i][5].date()}"
+                }
+                data.append(block_data)
+    else:
+        data = []
+    return JsonResponse(
+        {
+            'count': f'{len(data)}',
+            'data': f"{json.dumps(data)}"
+        }
+    )
 
 
 
@@ -83,30 +86,33 @@ def faq(request):
 
 
 def most_popular(request):
-    count = request.GET.get('count')
-    data = []
-    with connection.cursor() as cursor:
-        cursor.execute("select * from most_popular_product;")
-        for i in range(int(count)):
-            row = cursor.fetchone()
-            try:
-                img = str(json.loads(row[4])['img1'])
-                block_data = {
-                    'product-id': f'{row[0]}',
-                    'product-name': f'{row[2]}',
-                    'product-price': f'{row[3]}',
-                    'product-image': f"{img}"
-                }
-                data.append(block_data)
-            except TypeError:
-                print('Not enough products!')
-                continue
-        return JsonResponse(
-            {
-                'count': f'{len(data)}',
-                'data': f"{json.dumps(data)}"
-            }
-        )
+    if 'count' in request.GET:
+        count = request.GET.get('count')
+        data = []
+        with connection.cursor() as cursor:
+            cursor.execute("select * from most_popular_product;")
+            for i in range(int(count)):
+                row = cursor.fetchone()
+                try:
+                    img = str(json.loads(row[4])['img1'])
+                    block_data = {
+                        'product-id': f'{row[0]}',
+                        'product-name': f'{row[2]}',
+                        'product-price': f'{row[3]}',
+                        'product-image': f"{img}"
+                    }
+                    data.append(block_data)
+                except TypeError:
+                    print('Not enough products!')
+                    continue
+    else:
+        data = []
+    return JsonResponse(
+        {
+            'count': f'{len(data)}',
+            'data': f"{json.dumps(data)}"
+        }
+    )
 
 # Create your views
 
