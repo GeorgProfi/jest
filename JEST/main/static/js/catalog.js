@@ -432,7 +432,6 @@ async function create_products(url){
             
             for(j = 0; j<materials.length; j++){
                 material = JSON.parse(materials[j]);
-                console.log(material);
                 for(z = 0; z<headers_m.length; z++){
                     header = document.createElement('span');
                     header.className = 'product-small-text';
