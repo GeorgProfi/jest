@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import connection
 from . import dictfetchall as df
-
+from .sessionlogic import gen_session
 import json
 
 
 
 
 def render_catalog(request):
+    gen_session(request)
     return render(request, 'main/index.html') #изменить шаблон
 
 

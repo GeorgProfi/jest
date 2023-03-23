@@ -4,10 +4,11 @@ from django.http import JsonResponse
 import json
 from django.db import connection
 from django.views.decorators.csrf import csrf_protect
-
+from .sessionlogic import gen_session
 
 
 def render_main(request):
+    gen_session(request)
     return render(request, 'main/index.html')
 
 

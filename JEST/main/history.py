@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 from .models import History
-
+from .sessionlogic import gen_session
 
 def render_history(request):
+    gen_session(request)
     return render(request, 'main/index.html') #изменить шаблон
 
 
