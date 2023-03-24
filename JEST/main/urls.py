@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import main_page, history, contacts, catalog, product_page, cart
+from . import main_page, history, contacts, catalog, product_page, cart, search
 
 urlpatterns = [
 
@@ -24,4 +24,5 @@ urlpatterns = [
     path('product_info', product_page.product_info),
     path('cart', cart.render_cart),
     path('add-to-cart', cart.add_to_cart),
+    path('search', search.get_product_with_similarity_titles),
 ]
