@@ -11,11 +11,8 @@ def get_product_with_similarity_titles(request):
     if 'title' in request.GET:
         titles = request.GET['title'].split()
         result = []
-        #data = {}
         for title in titles:
             title = title.lower()
-            #data[f'{title}'] = []
-
             for el in Product.objects.all():
                 title_fragments = el.title.lower().split()
                 percent_for_fragments = []
@@ -25,14 +22,11 @@ def get_product_with_similarity_titles(request):
                 percent = max(percent_for_fragments)
                 if float(percent) >= float(min_percent):
                     result.append(el.title)
-                    #data[f'{title}'].append([percent, el.title, el.id])
         result = set(result)
-        print(result)
-
+        result = list(result)
         data = {}
         for i in range(1, len(result) + 1):
-            data[f'title{i}'] = result[i]
-
+            data[f'title{i}'] = result[i - 1]
     return JsonResponse(
         {
             'count': f'{len(data)}',
