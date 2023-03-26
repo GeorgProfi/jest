@@ -31,8 +31,8 @@
                     <a id="lupa-icon"></a>
                 </div>
                 <div id="nav-icons-links" class="flex-row">
-                    <a id="cart-icon"></a>
-                    <a id="account-icon"></a>
+                    <a id="cart-icon" onclick=""></a>
+                    <a id="account-icon" onclick="showLoginWindow();"></a>
                 </div>
                 <a id="nav-mob-icon" class="centered-v"onclick="showMobileMenu(this)">
                     <span class="centered-v"></span>
@@ -103,7 +103,41 @@
         </div>
         <script type="text/javascript" src="/static/js/base.js"></script>
     </div>
-    
+    <div id="login-window" style="display: none;" class="popup-modal-window" onclick="hideLoginWindow(event, this)">
+        <div id="mail-enter" class="popup-content flex-column centered centered-v">
+            <div class="popup-headers flex-column">
+                <span class="popup-header-text">Войти</span>
+                <span class="popup-subheader-text">Вход в личный кабинет</span>
+            </div>
+            <div class="flex-column">
+                <label class="mail-label" for="mail-input">Электронная почта</label>
+                <input type="email" id="mail-input" placeholder="example@mail.ru" size="30" minlength="3" maxlength="64" required></input>
+            </div>
+            <span style="display:none ;" class="popup-error"></span>
+            <button class="focus-btn" onclick="changeToCodeEnter();">Продолжить</button>
+            <span class="popup-footer-text">Продолжая, вы принимаете наши <a href="#">Условия использования</a> и <a href="#">Заявление о конфиденциальности</a></span>
+        </div>
+        <div id="code-enter" style="display:none;" class="popup-content flex-column centered">
+            <div class="popup-headers flex-column">
+                <span class="popup-header-text">Введите код</span>
+                <span class="popup-subheader-text">Мы отправили вам код для подтверждения вашей электронной почты</span>
+            </div>
+            <div class="flex-column">
+                <label class="mail-label" for="mail-input"></label>
+                <div id="code-inputs" class="flex-row centered">
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                </div>
+            </div>
+            <span style="display:none ;" class="popup-error"></span>
+            <button class="focus-btn">Войти</button>
+            <a class="popup-footer-text" href="#">Запросить код повторно</a>
+        </div>
+    </div>
     <footer>
         <div class="container">
             <div id="footer-content" class="flex-row">

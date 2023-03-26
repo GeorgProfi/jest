@@ -34,12 +34,15 @@ function hideMobileMenu(elem){
 function showLoginWindow(){
     window_html = document.getElementById('login-window');
     window_html.style = 'opacity:0';
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100%';
     setTimeout(()=>window_html.style.opacity = 1, 10);
 }
 
 function hideLoginWindow(event, elem){
     event.preventDefault();
-    if(event.target.id=="login-window"){;
+    if(event.target.id=="login-window"){
+        document.body.style = '';
         elem.style.opacity = 0;
         setTimeout(()=>elem.style.display='none', 300)
     };
