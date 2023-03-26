@@ -13,6 +13,12 @@ function loadProductsOnScroll(){
 filter_headers_value = {'Коллекция':'collections', 'Металл':'probes_and_metals', 'Проба металла':'probes', 'Тип изделия':'sizes_and_categories', 'Размер':'sizes', 'Камни':'gems'};
 hidden_headers = ["probes", "sizes"];
 active_filters = [];
+current_filter = {};
+there_is_empty_cards = true;
+for(var i in filter_headers_value){
+    current_filter[filter_headers_value[i]] = [];
+}
+
 
 async function createAsyncGETRequest(url){
     return new Promise((resolve, reject) => {
@@ -56,7 +62,7 @@ async function deactivateShowProductsBtn(){
 
 async function activateShowProductsBtn(){
     btn = document.getElementById('show-filters-btn');
-    btn.setAttribute('onclick','delete_products();showFiltredProducts(10, 0);deactivateShowProductsBtn();');
+    btn.setAttribute('onclick',"delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0);deactivateShowProductsBtn();");
 }
 
 function showOnCheck(elem){
@@ -116,11 +122,10 @@ function showOnCheck(elem){
 
 }
 
-async function showFiltredProducts(count, already_on_page){
+function writeFiltersToCurrent(){
     filters_container_html = document.getElementById('filters');
-    inputs_values = {};
     for(var i in filter_headers_value){
-        inputs_values[filter_headers_value[i]] = [];
+        current_filter[filter_headers_value[i]] = [];
     }
     for(i=1; i<filters_container_html.children.length; i++){
         filter_content = filters_container_html.children[i].children[2];
@@ -131,19 +136,26 @@ async function showFiltredProducts(count, already_on_page){
             input = mark_box.children[0];
             title = check_boxes[z].children[1].innerHTML;
             if(input.checked){
-                inputs_values[filter_headers_value[filter_title]].push(title);
+                current_filter[filter_headers_value[filter_title]].push(title);
             }
         }
     }
     price_slider = document.getElementById('price-box').children[2].children[0]
     max_price = price_slider.children[2].value;
     min_price = price_slider.children[3].value;
+    current_filter['max_price'] = max_price;
+    current_filter['min_price'] = min_price;
+}
+
+async function showFiltredProducts(count, already_on_page){
+    max_price = current_filter['max_price'];
+    min_price = current_filter['min_price'];
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
     for(var i in filter_headers_value){
-        if(inputs_values[filter_headers_value[i]].length>0){
-            url+=`&${filter_headers_value[i]}=${inputs_values[filter_headers_value[i]][0].replace(/ /g, "$")}`;
-        for(z=1; z<inputs_values[filter_headers_value[i]].length; z++){
-            url+=`+${inputs_values[filter_headers_value[i]][z]}`;
+        if(current_filter[filter_headers_value[i]].length>0){
+            url+=`&${filter_headers_value[i]}=${current_filter[filter_headers_value[i]][0].replace(/ /g, "$")}`;
+        for(z=1; z<current_filter[filter_headers_value[i]].length; z++){
+            url+=`+${current_filter[filter_headers_value[i]][z]}`;
             }   
         }
     }
@@ -242,15 +254,22 @@ async function create_and_fill_filters(){
     filters_container_html = document.getElementById('filters');
     max_price = data['max_price'];
     price_slider = document.getElementById('price-box').children[2].children[0]
-    max_price_input = price_slider.children[2];
-    min_price_input = price_slider.children[3];
+    max_price_slider = price_slider.children[2];
+    min_price_slider = price_slider.children[3];
+    max_price_slider.setAttribute('max', Number(max_price));
+    max_price_slider.setAttribute('value', Number(max_price));
+    min_price_slider.setAttribute('max', Number(max_price));
+    max_price_input = document.getElementById('max-price-i');
+    min_price_input = document.getElementById('max-price-i');
     max_price_input.setAttribute('max', Number(max_price));
     max_price_input.setAttribute('value', Number(max_price));
     min_price_input.setAttribute('max', Number(max_price));
+    current_filter['max_price'] = Number(max_price);
+    current_filter['min_price'] = 0;
     priceRangeInput(max_price_input);
     evt = new Event('change');
-    max_price_input.dispatchEvent(evt);
-    min_price_input.dispatchEvent(evt);
+    max_price_slider.dispatchEvent(evt);
+    min_price_slider.dispatchEvent(evt);
     for(var i in filter_headers_value){
         header = i;
         values = data[filter_headers_value[header]];
@@ -371,23 +390,40 @@ async function create_and_fill_filters(){
 
 }
 
-function delete_products(){
+async function delete_products(){
     html_grid = document.getElementById('products-grid');
     html_grid.innerHTML = '';
     html_count.innerHTML = `Результат: ${html_grid.children.length}`;
     html_count.setAttribute('value', html_grid.children.length);
 }
 
-async function create_products(url){
-    data = await createAsyncGETRequest(url);
+async function create_products(url, empty=false){
+    if(!empty){
+        data = await createAsyncGETRequest(url);
+        products_data = JSON.parse(data['data']);
+        if(there_is_empty_cards){
+            delete_products();
+        }
+        there_is_empty_cards = false;
+    } else {
+        data = {'count':5, 'data':[{'id':'-1', 'title':'', 'image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=', 'price':'', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=', 'price':'', 'gems':'', 'material':''},
+        {'id':'-1', 'title':'','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'', 'gems':'', 'material':''},
+        {'id':'-1','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'title':'', 'price':'', 'gems':'', 'material':''}]}
+        products_data = data['data'];
+        there_is_empty_cards = true
+    }
     count = data['count'];
-    products_data = JSON.parse(data['data']);
     html_grid = document.getElementById('products-grid');
     html_count = document.getElementById('products-count');
-    for(i = 0; i<count; i++){
-        product = products_data[i];
     
-        card = document.createElement('a')
+
+    for(i = 0; i<count; i++){
+        
+        product = products_data[i];
+
+        card = document.createElement('a');
         card.className = 'product-card flex-column';
         card.setAttribute('onMouseOver',"this.children[1].style=''");
         card.setAttribute('onMouseOut',"this.children[1].style='display:none;'");
@@ -438,7 +474,6 @@ async function create_products(url){
         values = ['title', 'probe'];
         try{
             materials = product['material'];
-            
             for(j = 0; j<materials.length; j++){
                 material = JSON.parse(materials[j]);
                 for(z = 0; z<headers_m.length; z++){
@@ -469,4 +504,5 @@ async function create_products(url){
 }
 
 create_and_fill_filters();
-create_products('/products?count=10&already_in_page=0');
+create_products('/products?count=10&already_in_page=0')
+setTimeout(()=>{}, 1000);

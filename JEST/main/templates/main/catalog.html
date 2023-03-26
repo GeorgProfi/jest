@@ -13,32 +13,41 @@
 <body>
 
 </body>
-    <header>
-        <div class="container">
-            <div id="header-content" class="flex-row">
-                <div id="nav-left-side" class="flex-row">
-                    <a id="logo-mini" href="/"></a>
-                    <a id="logo" href="/"></a>
+<header>
+    <div class="container">
+        <div id="header-content" class="flex-row" style="clear:both;">
+            <div id="nav-left-side" class="flex-row">
+                <a id="logo-mini" href="/"></a>
+                <a id="logo" href="/"></a>
+            </div>
+            <div id="nav-right-side" class="flex-row">
+                <div id="nav-links" class="flex-row">
+                    <a class="nav-link" href="/catalog/">Каталог</a>
+                    <a class="nav-link" href="/history">История</a>
+                    <a class="nav-link" href="#">Контакты</a>
                 </div>
-                <div id="nav-right-side" class="flex-row">
-                    <div id="nav-links" class="flex-row">
-                        <a class="nav-link-active" href="/catalog/">Каталог</a>
-                        <a class="nav-link" href="/history">История</a>
-                        <a class="nav-link" href="#">Контакты</a>
-                    </div>
-                    <div id="searchbox" class="flex-row" expanded="y">
-                        <input id="search-input" placeholder="Поиск ...">
-                        <a id="lupa-icon"></a>
-                    </div>
-                    <div id="nav-icons-links" class="flex-row">
-                        <a id="cart-icon"></a>
-                        <a id="account-icon"></a>
-                    </div>
-                    <a href="" id="menu">☰</a>
+                <div id="searchbox" class="flex-row" expanded="y">
+                    <input id="search-input" placeholder="Поиск ...">
+                    <a id="lupa-icon"></a>
+                </div>
+                <div id="nav-icons-links" class="flex-row">
+                    <a id="cart-icon"></a>
+                    <a id="account-icon"></a>
+                </div>
+                <a id="nav-mob-icon" class="centered-v"onclick="showMobileMenu(this)">
+                    <span class="centered-v"></span>
+                </a>
+                <div id="nav-mob-links" class="flex-column" style="display: none;">
+                    <a class="nav-link" href="#">Личный кабинет</a>
+                    <a class="nav-link" href="#">Корзина</a>
+                    <a class="nav-link" href="/catalog/">Каталог</a>
+                    <a class="nav-link" href="/history">История</a>
+                    <a class="nav-link" href="#">Контакты</a>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
     <div id="body-content">
         <div class="container">
             <div id="sides" class="flex-row">
@@ -60,15 +69,15 @@
                                     <input type="range" id="min-price-s" min="0" max="3000" value="0" step="100" onchange="priceRangeInput(this); activateShowProductsBtn()" oninput="priceRangeInput(this)">
                                 </div>
                                 <div id="price-inputs" class="flex-row">
-                                    <input id="min-price-i" class="price-input" value="0" min="0" max="3000" onchange="priceInput(); activateShowProductsBtn()"></input>
-                                    <input id="max-price-i" class="price-input" value="3000" min="0" max="3000" onchange="priceInput(); activateShowProductsBtn()"></input>
+                                    <input id="min-price-i" class="price-input" onchange="priceInput(); activateShowProductsBtn()"></input>
+                                    <input id="max-price-i" class="price-input"  onchange="priceInput(); activateShowProductsBtn()"></input>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id="filters-control" class="flex-row">
                         <a id="removeFiltersBtn" class="centered-v" onclick="uncheck_filters()">X Сбросить всё</a>
-                        <button id="show-filters-btn" class="focus-btn" onclick="delete_products();showFiltredProducts(10, 0); deactivateShowProductsBtn();">Показать</button>
+                        <button id="show-filters-btn" class="focus-btn" onclick="delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0); deactivateShowProductsBtn();">Показать</button>
                     </div>
                 </div>
                 <div id="right-side" class="flex-column">
@@ -83,10 +92,16 @@
                         </a>
                     </div>
                     <div id="products-grid">
+                        <a class="product-card flex-column" onmouseover="this.children[1].style=''" onmouseout="this.children[1].style='display:none;'"><div class="card-visible-part flex-column"><img class="product-image centered" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="><div class="product-info flex-column"><span class="product-big-text"></span><span class="product-big-text">0₽</span></div></div><div class="card-hover-part flex-column" style="display: none;"><button class="focus-btn cart-btn">В корзину</button><div class="product-add-info flex-row"><div class="product-add-info-col flex-column"></div><div class="product-add-info-col flex-column"></div></div></div></a>
+                        <a class="product-card flex-column" onmouseover="this.children[1].style=''" onmouseout="this.children[1].style='display:none;'"><div class="card-visible-part flex-column"><img class="product-image centered" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="><div class="product-info flex-column"><span class="product-big-text"></span><span class="product-big-text">0₽</span></div></div><div class="card-hover-part flex-column" style="display: none;"><button class="focus-btn cart-btn">В корзину</button><div class="product-add-info flex-row"><div class="product-add-info-col flex-column"></div><div class="product-add-info-col flex-column"></div></div></div></a>
+                        <a class="product-card flex-column" onmouseover="this.children[1].style=''" onmouseout="this.children[1].style='display:none;'"><div class="card-visible-part flex-column"><img class="product-image centered" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="><div class="product-info flex-column"><span class="product-big-text"></span><span class="product-big-text">0₽</span></div></div><div class="card-hover-part flex-column" style="display: none;"><button class="focus-btn cart-btn">В корзину</button><div class="product-add-info flex-row"><div class="product-add-info-col flex-column"></div><div class="product-add-info-col flex-column"></div></div></div></a>
+                        <a class="product-card flex-column" onmouseover="this.children[1].style=''" onmouseout="this.children[1].style='display:none;'"><div class="card-visible-part flex-column"><img class="product-image centered" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="><div class="product-info flex-column"><span class="product-big-text"></span><span class="product-big-text">0₽</span></div></div><div class="card-hover-part flex-column" style="display: none;"><button class="focus-btn cart-btn">В корзину</button><div class="product-add-info flex-row"><div class="product-add-info-col flex-column"></div><div class="product-add-info-col flex-column"></div></div></div></a>
+                        <a class="product-card flex-column" onmouseover="this.children[1].style=''" onmouseout="this.children[1].style='display:none;'"><div class="card-visible-part flex-column"><img class="product-image centered" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="><div class="product-info flex-column"><span class="product-big-text"></span><span class="product-big-text">0₽</span></div></div><div class="card-hover-part flex-column" style="display: none;"><button class="focus-btn cart-btn">В корзину</button><div class="product-add-info flex-row"><div class="product-add-info-col flex-column"></div><div class="product-add-info-col flex-column"></div></div></div></a>
                     </div>
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="/static/js/base.js"></script>
     </div>
     
     <footer>

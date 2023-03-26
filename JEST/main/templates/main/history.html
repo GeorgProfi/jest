@@ -10,32 +10,41 @@
         <title>История</title>
     </head>
 <body>
-<header>
-    <div class="container">
-        <div id="header-content" class="flex-row">
-            <div id="nav-left-side" class="flex-row">
-                <a id="logo-mini" href="/"></a>
-                <a id="logo" href="/"></a>
-            </div>
-            <div id="nav-right-side" class="flex-row">
-                <div id="nav-links" class="flex-row">
-                    <a class="nav-link" href="/catalog/">Каталог</a>
-                    <a class="nav-link-active" href="/history">История</a>
-                    <a class="nav-link" href="#">Контакты</a>
+    <header>
+        <div class="container">
+            <div id="header-content" class="flex-row" style="clear:both;">
+                <div id="nav-left-side" class="flex-row">
+                    <a id="logo-mini" href="/"></a>
+                    <a id="logo" href="/"></a>
                 </div>
-                <div id="searchbox" class="flex-row" expanded="y">
-                    <input id="search-input" placeholder="Поиск ...">
-                    <a id="lupa-icon"></a>
+                <div id="nav-right-side" class="flex-row">
+                    <div id="nav-links" class="flex-row">
+                        <a class="nav-link" href="/catalog/">Каталог</a>
+                        <a class="nav-link" href="/history">История</a>
+                        <a class="nav-link" href="#">Контакты</a>
+                    </div>
+                    <div id="searchbox" class="flex-row" expanded="y">
+                        <input id="search-input" placeholder="Поиск ...">
+                        <a id="lupa-icon"></a>
+                    </div>
+                    <div id="nav-icons-links" class="flex-row">
+                        <a id="cart-icon"></a>
+                        <a id="account-icon"></a>
+                    </div>
+                    <a id="nav-mob-icon" class="centered-v"onclick="showMobileMenu(this)">
+                        <span class="centered-v"></span>
+                    </a>
+                    <div id="nav-mob-links" class="flex-column" style="display: none;">
+                        <a class="nav-link" href="#">Личный кабинет</a>
+                        <a class="nav-link" href="#">Корзина</a>
+                        <a class="nav-link" href="/catalog/">Каталог</a>
+                        <a class="nav-link" href="/history">История</a>
+                        <a class="nav-link" href="#">Контакты</a>
+                    </div>
                 </div>
-                <div id="nav-icons-links" class="flex-row">
-                    <a id="cart-icon"></a>
-                    <a id="account-icon"></a>
-                </div>
-                <a href="" id="menu">☰</a>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 <div id="body-content" class="flex-column">
     <div id="banner-index">
         <div class="container">
@@ -122,6 +131,7 @@
                       <span class="footer-text">Пн-Пт 10:00 - 20:00 Сб 11:00 - 19:00</span>
                   </div>
               </div>
+              <script type="text/javascript" src="/static/js/base.js"></script>
           </div>
           <div class="footer-block flex-column">
               <p class="footer-header-text">Политика</p>

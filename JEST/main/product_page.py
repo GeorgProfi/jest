@@ -6,7 +6,7 @@ import json
 
 
 def render_product_page(request, product_id):
-    return render(request, 'main/index.html') #изменить шаблон
+    return render(request, 'main/index.html')  # изменить шаблон
 
 
 def product_info(request):
@@ -17,19 +17,19 @@ def product_info(request):
             row = df.dictfetchall(cursor)[0]
 
             data = {
-                'id'          : row['id'],
-                'title'       : row['title'],
-                'description' : row['description'],
-                'price'       : row['price'],
+                'id': row['id'],
+                'title': row['title'],
+                'description': row['description'],
+                'price': row['price'],
                 'images': {
                     'image_1': str(json.loads(row['photos'])['img1']),
                     'image_2': str(json.loads(row['photos'])['img2']),
                     'image_3': str(json.loads(row['photos'])['img3'])
                 },
-                'material'    : row['metals'],
-                'size'        : row['size'],
-                'gems'        : row['gems'],
-                'mass'        : row['weight']
+                'material': row['metals'],
+                'size': row['size'],
+                'gems': row['gems'],
+                'mass': row['weight']
             }
     else:
         data = {}

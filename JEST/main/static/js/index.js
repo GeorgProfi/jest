@@ -96,6 +96,7 @@ async function create_why_reasons(){
   count = data['count'];
   reasons_data = JSON.parse(data['data']);
   reasons_container_html = document.getElementById('why-block');
+  reasons_container_html.innerHTML = '';
   for(i = 0; i<count; i++){
     reason = reasons_data[i];
 
@@ -156,6 +157,7 @@ async function create_mpp(){
   count = data['count']
   mpps_data = JSON.parse(data['data']);
   mpps_block_html = document.getElementById('popprod');
+  mpps_block_html.innerHTML = '';
   for(i = 0; i<count; i++){
     mpp = mpps_data[i];
 
