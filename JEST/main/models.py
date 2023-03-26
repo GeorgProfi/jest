@@ -127,7 +127,7 @@ class FileOrder(models.Model):
 class History(models.Model):
     title = models.CharField(max_length=50)
     info = models.CharField(max_length=1000)
-    image = models.CharField(max_length=50)
+    image = models.JSONField()
 
 
 class Common(models.Model):
