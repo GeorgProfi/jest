@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import main_page, history, contacts, catalog, product_page, cart, search, login
-from . import main_page, history, contacts, catalog, product_page, cart, search, purchase_history
+
+from . import main_page, history, contacts, catalog, product_page, cart, search, purchase_history,login
 
 urlpatterns = [
 
