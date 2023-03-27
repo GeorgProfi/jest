@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.db import connection
 from . import dictfetchall as df
-
+from .sessionlogic import gen_session
 
 def render_cart(request):
     return render(request, 'main/cart.html')

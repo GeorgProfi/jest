@@ -3,9 +3,10 @@ from django.http import JsonResponse
 from django.db import connection
 from . import dictfetchall as df
 import json
-
+from .sessionlogic import gen_session
 
 def render_product_page(request, product_id):
+    gen_session(request)
     return render(request, 'main/index.html')  # изменить шаблон
 
 
