@@ -1,3 +1,38 @@
+email_g = '';
+
+async function createAsyncPOSTRequest(url, csrftoken, bodyDict){
+    return new Promise((resolve, reject) => {
+        fetch(url, {method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken':csrftoken
+        }, body:JSON.stringify(bodyDict)}).then(response=>{
+          if(response.status==200){
+            data = response.json();
+            return resolve(data);
+          } else {
+            return reject(response.status);
+          }
+        }
+        )
+        });
+    }
+
+async function createAsyncGETRequest(url){
+    return new Promise((resolve, reject) => {
+      fetch(url).then(response=>{
+        if(response.status==200){
+          data = response.json();
+          return resolve(data);
+        } else {
+          return reject(response.status);
+        }
+      }
+      )
+      });
+}
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -11,6 +46,18 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function isValid(email){
+    email_pattern = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return email.match(email_pattern);
+}
+
+function showPopupError(text, parentWindowId){
+    parent = document.getElementById(parentWindowId);
+    error_span = parent.querySelector('.popup-error');
+    error_span.style="";
+    error_span.innerHTML = text;
 }
 
 
@@ -49,15 +96,21 @@ function hideLoginWindow(event, elem){
 }
 
 function changeToCodeEnter(){
-    mail_enter = document.getElementById('mail-enter');
-    mail_enter.style.display = 'none';
-    code_enter = document.getElementById('code-enter')
-    code_enter.style = '';
+    email = document.getElementById('mail-input').value;
+    if(isValid(email)){
+        email_g = email;
+        createAsyncPOSTRequest('sendmail', getCookie('csrftoken'), {'email':email});
+        mail_enter = document.getElementById('mail-enter');
+        mail_enter.style.display = 'none';
+        code_enter = document.getElementById('code-enter')
+        code_enter.style = '';
+    } else {
+        showPopupError('Неверно введен email', 'mail-enter');
+    }
 }
 
 async function activatCodeInput(elem){
     /* АКТИВИРУЙТЕ ПОЛЕТ! */
-    console.log(elem.value);
     if(elem.value.length==1){
         elem.className = 'active';
     } else {
@@ -72,4 +125,15 @@ function accoutEventHandler(){
     } else {
         showLoginWindow();
     }
+}
+
+function try_enter(){
+    email = email_g;
+    codeinputs = document.getElementById('code-inputs');
+    code = '';
+    for(zi = 0; zi<codeinputs.children.length; zi++){
+        code+=codeinputs.children[zi].value;
+    }
+    response = createAsyncPOSTRequest('login', getCookie('csrftoken'), {'email':email, 'code':code});
+    
 }

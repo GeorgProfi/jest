@@ -11,15 +11,15 @@ async function createAsyncGETRequest(url){
           return resolve(data);
         } else {
           return reject(response.status);
+          }
         }
-      }
-      )
+        )
       });
 }
 
 
-async function create_reviews(){
-  data = await createAsyncGETRequest('reviews?count=5')
+async function create_reviews(data){
+  data = await createAsyncGETRequest('/reviews?count=5');
   count = data['count'];
   reviews_data = JSON.parse(data['data']);
   reviews_container_html = document.getElementById('reviews-block');
@@ -206,8 +206,8 @@ function add_review_to(side){
     reviews_block.children[column_count-1].style = "";
   }
 }
+create_why_reasons(),
+create_reviews(),
+create_faq(),
+create_mpp()
 
-create_why_reasons();
-create_reviews();
-create_faq();
-create_mpp();

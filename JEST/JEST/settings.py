@@ -144,3 +144,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FIAS_DATABASE_ALIAS = 'default'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'atrs_and_crafts@mail.ru'
+EMAIL_HOST_PASSWORD = '6yU0YfpTVhUCg1TthjCq'

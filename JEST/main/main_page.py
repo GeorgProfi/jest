@@ -6,10 +6,8 @@ from django.db import connection
 from django.views.decorators.csrf import csrf_protect
 
 
-
 def render_main(request):
     return render(request, 'main/index.html')
-
 
 
 def api_test(request):
@@ -26,7 +24,6 @@ def api_test(request):
     )
 
 
-
 def why_us(request):
     data = []
     for el in AboutUs.objects.all():
@@ -41,7 +38,6 @@ def why_us(request):
             'data': f"{json.dumps(data)}"
         }
     )
-
 
 
 def reviews(request):
@@ -66,7 +62,6 @@ def reviews(request):
             'data': f"{json.dumps(data)}"
         }
     )
-
 
 
 def faq(request):
