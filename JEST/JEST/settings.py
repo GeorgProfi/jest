@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from sshtunnel import SSHTunnelForwarder
-#from key import *
+from key import *
 
 from django.core.mail import send_mail
 
@@ -79,24 +79,24 @@ WSGI_APPLICATION = 'JEST.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-DB_SERVER_IP = '80.243.140.96'
-DB_PORT = 5432
-SSH_PORT = 22
+DB_SERVER_IP = DATABASE_ip
+DB_PORT = DATABASE_port
+SSH_PORT = SSH_port
 db_tunnel = SSHTunnelForwarder(
     (DB_SERVER_IP, SSH_PORT),
-    ssh_username="root",
-    ssh_password="g7EThEFj",
-    remote_bind_address=('127.0.0.1', DB_PORT)
+    ssh_username=SSH_username,
+    ssh_password=SSH_password,
+    remote_bind_address=(DATABASE_host, DB_PORT)
 )
 db_tunnel.start()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'D;B№PFO]sxXMyF$lHDf<8DX8:O0s,!',
-        'HOST': '127.0.0.1',
+        'NAME': DATABASE_name,
+        'USER': DATABASE_user,
+        'PASSWORD': DATABASE_password,
+        'HOST': DATABASE_host,
         'PORT': db_tunnel.local_bind_port
     }
 }

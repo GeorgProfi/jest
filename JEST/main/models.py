@@ -45,6 +45,7 @@ class Client(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
+    uuid = models.UUIDField()
     phone_number = models.CharField(max_length=20)
 
 
@@ -144,6 +145,7 @@ class AboutUs(models.Model):
 class Faqs(models.Model):
     question = models.CharField(max_length=200)
     answer = models.CharField(max_length=200)
+
 
 
 
