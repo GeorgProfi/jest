@@ -27,6 +27,6 @@ def login(request):
     email = data['email']
     code = int(data['code'])
     if EmailCode[email] == code:
-        print('great!')
+        return JsonResponse({'code': 200})
     else:
-        print('bad code')
+        return JsonResponse({'code': 23})
