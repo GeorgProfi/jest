@@ -148,6 +148,8 @@ function writeFiltersToCurrent(){
 }
 
 async function showFiltredProducts(count, already_on_page){
+    const params = new URLSearchParams(window.location.search);
+    title = params.get("title");
     max_price = current_filter['max_price'];
     min_price = current_filter['min_price'];
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
@@ -503,6 +505,27 @@ async function create_products(url, empty=false){
     }
 }
 
+async function try_to_search(){
+    const params = new URLSearchParams(window.location.search);
+    title = params.get("title");
+    if(title != null){
+        url_base = `/products?count=15&already_in_page=0`;
+        possibly_titles = await createAsyncGETRequest(`search?title=${title}`);
+        count = Number(possibly_titles['count']);
+        data = JSON.parse(possibly_titles['data']);
+        if(count>0){
+            url_base+=`&title=${data['title1']}`;
+            for(ziiz = 2; ziiz<=count; ziiz++){
+                url_base+=`+${data[`title${ziiz}`]}`;
+            }
+            create_products(url_base);   
+    } else{
+        create_products(`/products?count=15&already_in_page=0`);
+    }
+    }else{
+        create_products('/products?count=15&already_in_page=0');
+    }
+}
+
 create_and_fill_filters();
-create_products('/products?count=10&already_in_page=0')
-setTimeout(()=>{}, 1000);
+try_to_search();

@@ -5,7 +5,6 @@ from difflib import SequenceMatcher as SM
 import json
 
 
-
 def get_product_with_similarity_titles(request):
     min_percent = '0.7'
     if 'title' in request.GET:
@@ -33,8 +32,3 @@ def get_product_with_similarity_titles(request):
             'data': f"{json.dumps(data)}"
         }
     )
-
-
-
-
-

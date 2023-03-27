@@ -20,12 +20,12 @@
                 </div>
                 <div id="nav-right-side" class="flex-row">
                     <div id="nav-links" class="flex-row">
-                        <a class="nav-link" href="/catalog/">Каталог</a>
+                        <a class="nav-link" href="/catalog">Каталог</a>
                         <a class="nav-link" href="/history">История</a>
                         <a class="nav-link" href="#">Контакты</a>
                     </div>
                     <div id="searchbox" class="flex-row" expanded="y">
-                        <input id="search-input" placeholder="Поиск ...">
+                        <input id="search-input" placeholder="Поиск ..." onchange="search(this.value)">
                         <a id="lupa-icon"></a>
                     </div>
                     <div id="nav-icons-links" class="flex-row">

@@ -16,7 +16,7 @@ urlpatterns = [
     path('history', history.render_history),
     path('masters', contacts.get_masters),
     path('contacts', contacts.render_contacts),
-    path('catalog/', catalog.render_catalog),
+    path('catalog', catalog.render_catalog),
     path('products', catalog.products),
     path('categories', catalog.categories),
     path('filters', catalog.filters),

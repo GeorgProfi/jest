@@ -48,6 +48,13 @@ function getCookie(name) {
     return cookieValue;
 }
 
+async function search(product){
+    product = product.replace(/ /g, '+');
+    console.log(product);
+    window.location.href = `/catalog?title=${product}`
+
+}
+
 function isValid(email){
     email_pattern = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return email.match(email_pattern);
