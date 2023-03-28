@@ -3,7 +3,7 @@ from django.urls import path, re_path
 from django.conf import settings
 
 
-from . import main_page, history, contacts, catalog, product_page, cart, search, purchase_history,login
+from . import main_page, history, contacts, catalog, product_page, cart, search, purchase_history, login
 
 urlpatterns = [
 
@@ -28,5 +28,6 @@ urlpatterns = [
     path('search', search.get_product_with_similarity_titles),
     path('purchases', purchase_history.purchases),
     path('sendmail', login.EmailSender),
-    path('login', login.login)
+    path('login', login.login),
+    path('login', purchase_history.render_purchase_history),
 ]
