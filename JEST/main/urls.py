@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import main_page, history, contacts, catalog, product_page
+
+from . import main_page, history, contacts, catalog, product_page, cart, search, purchase_history, login
 
 urlpatterns = [
 
@@ -16,10 +17,17 @@ urlpatterns = [
     path('history', history.render_history),
     path('masters', contacts.get_masters),
     path('contacts', contacts.render_contacts),
-    path('catalog/', catalog.render_catalog),
+    path('catalog', catalog.render_catalog),
     path('products', catalog.products),
     path('categories', catalog.categories),
     path('filters', catalog.filters),
     path('product_page/<int:product_id>/', product_page.render_product_page),
     path('product_info', product_page.product_info),
+    path('cart', cart.render_cart),
+    path('add-to-cart', cart.add_to_cart),
+    path('search', search.get_product_with_similarity_titles),
+    path('purchases', purchase_history.purchases),
+    path('sendmail', login.EmailSender),
+    path('login', login.login),
+    path('account', login.account_page_renderer),
 ]

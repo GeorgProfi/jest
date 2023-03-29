@@ -45,6 +45,7 @@ class Client(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
+    uuid = models.UUIDField()
     phone_number = models.CharField(max_length=20)
 
 
@@ -127,7 +128,7 @@ class FileOrder(models.Model):
 class History(models.Model):
     title = models.CharField(max_length=50)
     info = models.CharField(max_length=1000)
-    image = models.CharField(max_length=50)
+    image = models.JSONField()
 
 
 class Common(models.Model):
@@ -144,6 +145,7 @@ class AboutUs(models.Model):
 class Faqs(models.Model):
     question = models.CharField(max_length=200)
     answer = models.CharField(max_length=200)
+
 
 
 

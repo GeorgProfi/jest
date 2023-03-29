@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 from .models import History
-
+from .sessionlogic import gen_session
 
 def render_history(request):
-    return render(request, 'main/history.html') #изменить шаблон 
+    gen_session(request)
+    return render(request, 'main/history.html')
 
 
 def get_history(request):
@@ -16,6 +17,7 @@ def get_history(request):
                       'image': el.image
                       }
         data.append(block_data)
+
     return JsonResponse(
             {
                 'count': f'{len(data)}',

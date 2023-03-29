@@ -3,10 +3,11 @@ from django.http import JsonResponse
 import json
 from django.db import connection
 from . import dictfetchall as df
-
+from .sessionlogic import gen_session
 
 
 def render_contacts(request):
+    gen_session(request)
     return render(request, 'main/index.html') #изменить шаблон
 
 
