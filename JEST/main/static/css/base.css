@@ -240,10 +240,12 @@ header{
 }
 
 #searchbox{
+    background-color: var(--body-bg);
     width: fit-content;
     height: auto;
     border: 2px var(--nav-link) solid;
     border-radius: 10px;
+    transition: all 0.3s ease-in-out;
 }
 
 #search-input{
@@ -256,6 +258,7 @@ header{
     box-shadow: none;
     color:var(--nav-link-active);
     background: none;
+    transition: all 0.3s ease-in-out;
 }
 #search-input::placeholder{
     opacity: 1;
@@ -503,6 +506,9 @@ input[type="email"]::placeholder{
     #header-content{
         column-gap: 135px;
     }
+    #nav-right-side{
+        column-gap: 45px;
+    }
     #footer-content{
         column-gap: 300px;
         row-gap: 50px;
@@ -512,11 +518,14 @@ input[type="email"]::placeholder{
     #search-input{
         display: none;
     }
+    #lupa-icon{
+        cursor: pointer;
+    }
     #focus-banner-inner{
         padding-right: 100px;
     }
     #nav-links{
-        column-gap: 20px;
+        column-gap: 10px;
     }
     #header-content{
         column-gap: 20px;
@@ -542,5 +551,10 @@ input[type="email"]::placeholder{
     }
     #nav-mob-icon, #nav-mob-links{
         display: flex;
+    }
+}
+@media screen and (max-width:375px) {
+    #header-content{
+        column-gap: 30vw;
     }
 }

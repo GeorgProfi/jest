@@ -5,21 +5,17 @@ from . import dictfetchall as df
 from datetime import datetime
 from .sessionlogic import gen_session
 import json
-
-
-def render_purchase_history(request):
-    gen_session(request)
-    return render(request, 'main/index.html') # изменить шаблон
+import uuid
 
 
 def purchases(request):
-    uuid = request.session['UUID']
+    UUID = uuid.UUID('00000000-0000-0000-0000-000000000001')
     # uuid_s = uuid_status[uuid][0] добавить после разработки uuid_status
     # uuid_t = uuid_status[uuid][1] добавить после разработки uuid_status
     if True:  # (uuid_t > datetime.now()) and (uuid_s = '0'): добавить после разработки uuid_status
         query = f"""
         select * from purchases
-        where uuid = {uuid};
+        where uuid = '{UUID}';
         """
         with connection.cursor() as cursor:
             data = []
@@ -27,11 +23,10 @@ def purchases(request):
             rows = df.dictfetchall(cursor)
             for row in rows:
                 block_data = {
-                    'uuid': row['uuid'],
                     'email': row['email'],
                     'order_id': row['order_id'],
                     'total_sum': row['total_sum'],
-                    'datetime': row['datetime'],
+                    'datetime': str(row['datetime']),
                     'delivery_type': row['delivery_type'],
                     'payment_method': row['payment_method'],
                     'count_products': row['count_products'],  # в бидешечке изменить способ получения ага да

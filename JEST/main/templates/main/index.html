@@ -26,17 +26,17 @@
                     </div>
                     <div id="searchbox" class="flex-row" expanded="y">
                         <input id="search-input" placeholder="Поиск ..." onchange="search(this.value)">
-                        <a id="lupa-icon"></a>
+                        <a id="lupa-icon" onclick="showSearchInput()"></a>
                     </div>
                     <div id="nav-icons-links" class="flex-row">
                         <a id="cart-icon" onclick=""></a>
-                        <a id="account-icon" onclick="showLoginWindow();"></a>
+                        <a id="account-icon" onclick="accountEventHandler();"></a>
                     </div>
-                    <a id="nav-mob-icon" class="centered-v"onclick="showMobileMenu(this)">
+                    <a id="nav-mob-icon" class="centered-v" onclick="showMobileMenu(this)">
                         <span class="centered-v"></span>
                     </a>
                     <div id="nav-mob-links" class="flex-column" style="display: none;">
-                        <a class="nav-link" href="#">Личный кабинет</a>
+                        <a class="nav-link" onclick="showLoginWindow();">Личный кабинет</a>
                         <a class="nav-link" href="#">Корзина</a>
                         <a class="nav-link" href="/catalog/">Каталог</a>
                         <a class="nav-link" href="/history">История</a>
@@ -86,9 +86,9 @@
                 <div id="why-us-inner" class="flex-column">
                     <h3 class="centered">ПОЧЕМУ ИМЕННО МЫ?</h3>
                     <div id="why-block" class="flex-row">
-                        <div class="why-reason flex-column"><img src="" style = "height: 160px; background-color: #C2C1C1;" class="why-image centered"><h4 class="centered">Красиво</h4><span class="why-text centered">Широкий выбор украшений из каталога, с любыми оправами, вставками из камней.</span></div>
-                        <div class="why-reason flex-column"><img src="" style = "height: 160px; background-color: #C2C1C1;" class="why-image centered"><h4 class="centered">Красиво</h4><span class="why-text centered">Широкий выбор украшений из каталога, с любыми оправами, вставками из камней.</span></div>
-                        <div class="why-reason flex-column"><img src="" style = "height: 160px; background-color: #C2C1C1;" class="why-image centered"><h4 class="centered">Красиво</h4><span class="why-text centered">Широкий выбор украшений из каталога, с любыми оправами, вставками из камней.</span></div>
+                        <div class="why-reason flex-column"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style = "height: 160px; background-color: #C2C1C1;" class="why-image centered"><h4 class="centered">Красиво</h4><span class="why-text centered">Широкий выбор украшений из каталога, с любыми оправами, вставками из камней.</span></div>
+                        <div class="why-reason flex-column"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style = "height: 160px; background-color: #C2C1C1;" class="why-image centered"><h4 class="centered">Красиво</h4><span class="why-text centered">Широкий выбор украшений из каталога, с любыми оправами, вставками из камней.</span></div>
+                        <div class="why-reason flex-column"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style = "height: 160px; background-color: #C2C1C1;" class="why-image centered"><h4 class="centered">Красиво</h4><span class="why-text centered">Широкий выбор украшений из каталога, с любыми оправами, вставками из камней.</span></div>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,6 @@
 email_g = '';
+ 
+addEventListener('resize', ()=>hideSearchInput());
 
 async function createAsyncPOSTRequest(url, csrftoken, bodyDict){
     return new Promise((resolve, reject) => {
@@ -48,6 +50,13 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
 async function search(product){
     product = product.replace(/ /g, '+');
     console.log(product);
@@ -67,6 +76,44 @@ function showPopupError(text, parentWindowId){
     error_span.innerHTML = text;
 }
 
+
+async function showSearchInput(){
+    searchInput = document.getElementById('search-input');
+    searchBox = document.getElementById('searchbox');
+    lupaIcon = document.getElementById('lupa-icon');
+    if(window.innerWidth<=1390){
+        links_width = document.getElementById('nav-links').offsetWidth;
+        if(links_width){
+            gap = parseInt(window.getComputedStyle(document.getElementById('nav-right-side'), null).getPropertyValue('column-gap'));
+        } else {
+            gap = parseInt(window.getComputedStyle(document.getElementById('header-content'), null).getPropertyValue('column-gap')) - 10;
+        }
+        searchInput.style = "display:block; width:0px; padding:0px";
+        lupaIcon.setAttribute('onclick', '');
+        setTimeout(()=>{searchInput.style = `display:block;width:${links_width+gap}px; `; searchBox.style=`margin-left:-${links_width+gap}px`; lupaIcon.setAttribute('onclick', 'hideSearchInput();')}, 10);
+        
+    } else {
+        searchBox.style="";
+        setTimeout(()=>searchInput.style = "opacity:1; display:block;", 10);
+        searchBox.style="";
+    }
+}
+
+async function hideSearchInput(){
+    searchInput = document.getElementById('search-input');
+    lupaIcon = document.getElementById('lupa-icon');
+    searchBox = document.getElementById('searchbox');
+    if(window.innerWidth<=1390){
+        lupaIcon.setAttribute('onclick', '')
+        searchInput.style = "display:block; width:0px; padding:0px";
+        searchBox.style="";
+        setTimeout(()=>{searchInput.style = '';lupaIcon.setAttribute('onclick', 'showSearchInput();')}, 300);
+    } else {
+        searchInput.style = "opacity:1";
+        searchBox.style="";
+        lupaIcon.setAttribute('onclick', 'showSearchInput();')
+    }
+};
 
 function showMobileMenu(elem){
     elem.setAttribute('onclick', 'hideMobileMenu(this)');
@@ -125,22 +172,27 @@ async function activatCodeInput(elem){
     }
 }
 
-function accoutEventHandler(){
-    uuid = getCookie('UUID');
-    if (uuid != null){
-        /*TODO: Редирект в личный кабинет */
+function accountEventHandler(){
+    us = getCookie('us');
+    if (us != null){
+        window.location='/account';
     } else {
         showLoginWindow();
     }
 }
 
-function try_enter(){
+async function try_enter(){
     email = email_g;
     codeinputs = document.getElementById('code-inputs');
     code = '';
     for(zi = 0; zi<codeinputs.children.length; zi++){
         code+=codeinputs.children[zi].value;
     }
-    response = createAsyncPOSTRequest('login', getCookie('csrftoken'), {'email':email, 'code':code});
+    response = await createAsyncPOSTRequest('login', getCookie('csrftoken'), {'email':email, 'code':code});
+    if(response['code']==200){
+        setCookie('us', response['us'], 1490);
+    } else {
+        showPopupError('Неверно введён код', 'code-enter')
+    }
     
 }

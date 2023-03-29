@@ -24,18 +24,18 @@
                         <a class="nav-link" href="#">Контакты</a>
                     </div>
                     <div id="searchbox" class="flex-row" expanded="y">
-                        <input id="search-input" placeholder="Поиск ...">
-                        <a id="lupa-icon"></a>
+                        <input id="search-input" placeholder="Поиск ..." onchange="search(this.value)">
+                        <a id="lupa-icon" onclick="showSearchInput()"></a>
                     </div>
                     <div id="nav-icons-links" class="flex-row">
                         <a id="cart-icon" onclick=""></a>
                         <a id="account-icon" onclick="showLoginWindow();"></a>
                     </div>
-                    <a id="nav-mob-icon" class="centered-v"onclick="showMobileMenu(this)">
+                    <a id="nav-mob-icon" class="centered-v" onclick="showMobileMenu(this)">
                         <span class="centered-v"></span>
                     </a>
                     <div id="nav-mob-links" class="flex-column" style="display: none;">
-                        <a class="nav-link" href="#">Личный кабинет</a>
+                        <a class="nav-link" onclick="showLoginWindow();">Личный кабинет</a>
                         <a class="nav-link" href="#">Корзина</a>
                         <a class="nav-link" href="/catalog/">Каталог</a>
                         <a class="nav-link" href="/history">История</a>
@@ -131,7 +131,7 @@
             </div>
         </div>
         <span style="display:none ;" class="popup-error"></span>
-        <button class="focus-btn">Войти</button>
+        <button class="focus-btn" onclick="try_enter();">Войти</button>
         <a class="popup-footer-text" href="#">Запросить код повторно</a>
     </div>
 </div>

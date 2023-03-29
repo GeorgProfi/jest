@@ -29,5 +29,5 @@ urlpatterns = [
     path('purchases', purchase_history.purchases),
     path('sendmail', login.EmailSender),
     path('login', login.login),
-    path('login', purchase_history.render_purchase_history),
+    path('account', login.account_page_renderer),
 ]
