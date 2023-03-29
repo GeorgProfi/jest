@@ -9,7 +9,7 @@ async function createAsyncGETRequest(url){
       }
     }
     )
-    });
+  });
 }
 
 async function getProductInfo(){

@@ -12,8 +12,6 @@ function slider() {
   console.log(current);
 }
 
-
-
 document.querySelector('.arrow-btn-l').onclick = function() {
   if (current - 1 == -1) {
     current = images.length - 1;
