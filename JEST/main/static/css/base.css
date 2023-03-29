@@ -8,8 +8,8 @@
 /*Color const*/
 html[theme="main"]{
     --body-bg:#F6F6F6;
-    --body-fg: #ff0000;
-    --body-border:#D5D5D5;
+    --body-fg: #E3874F;
+    --body-border:#E4E4E4;
     --body-not-focus-text:#707070;
     --body-focus:#E3874F;
     --body-banner-bg:#2A2F3B;
@@ -220,12 +220,16 @@ header{
     background-image: url("../svg/user_nav_logo.svg");
     width: 30px;
     height: 30px;
+    background-repeat: no-repeat;
+    background-position:center;
 }
 
 #cart-icon{
     background-image: url("../svg/cart_nav_logo.svg");
     width: 30px;
     height: 30px;
+    background-repeat: no-repeat;
+    background-position:center;
 }
 
 #searchbox{
@@ -256,6 +260,8 @@ header{
     height: 25px;
     margin:7px 16px;
     background-image: url("../svg/search.svg");
+    background-repeat: no-repeat;
+    background-position:center;
 }
 
 
@@ -307,6 +313,13 @@ footer{
         display: none;
     }
 }
+
+@media screen and (max-width: 1700px) {
+    #nav-right-side{
+        column-gap: 45px;
+    }
+}
+
 @media screen and (max-width: 1600px){
     #nav-links{
         column-gap: 60px;
@@ -322,6 +335,9 @@ footer{
 @media screen and (max-width: 1380px){
     #search-input{
         display: none;
+    }
+    #nav-right-side{
+        column-gap: 45px;
     }
     #focus-banner-inner{
         padding-right: 100px;
