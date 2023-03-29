@@ -191,6 +191,7 @@ async function try_enter(){
     response = await createAsyncPOSTRequest('login', getCookie('csrftoken'), {'email':email, 'code':code});
     if(response['code']==200){
         setCookie('us', response['us'], 1490);
+        window.location='/account';
     } else {
         showPopupError('Неверно введён код', 'code-enter')
     }
