@@ -34,17 +34,17 @@ async function createOrdersList(){
 
     myOrders = document.getElementById('my-orders');
     for(iz = 0; iz<data.length; iz++){
-        order = data[iz];
+    order = data[iz];
 
-        orderContainer = document.createElement('div');
-        orderContainer.className = "order-block flex-column";
+    orderContainer = document.createElement('div');
+    orderContainer.className = "order-block flex-column";
 
-        orderId = document.createElement('span');
-        orderId.className = "order-id";
-        orderId.innerHTML = order['order_id'];
-        orderContainer.appendChild(orderId);
+    orderId = document.createElement('span');
+    orderId.className = "order-id";
+    orderId.innerHTML = order['order_id'];
+    orderContainer.appendChild(orderId);
 
-        myOrders.appendChild(orderContainer);
+    myOrders.appendChild(orderContainer);
     }
 }
 

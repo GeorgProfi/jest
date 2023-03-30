@@ -46,12 +46,93 @@
             </div>
         </div>
     </header>
-    <div id="body-content" class="flex-column">
+    <div class="body-content flex-column">
         <div class="container">
-            <div id="my-data" class="flex-row">
+            <h2>Мои данные</h2>
+            <div class="user-data flex-column"> 
+                <!-- надпись "МОИ ДАННЫЕ" -->
+                <div class="data-block">
+                    <div class="data-type">
+                        <h4 style="margin: 0 0 10px 0;" >Электронная почта</h4>
+                    </div>
+                    <div class="data-val">
+                        <span style="padding: 10px 0 5px 0;">georgprofi2004@gmail.com</span>
+                    </div>
+                </div>
             </div>
-            <div id="my-orders" class="flex-column">
-                
+             <!-- надпись "МОИ ЗАКАЗЫ" -->
+             <h2>Мои заказы</h2>
+                <div class="orders flex-column">
+                    <div class="order-block flex-column">
+                        <!-- вот бы надпись "заказ от n числа" -->
+                        <div class="order-block-collapsed flex-row">
+                                <div class="order-data flex-column">
+                                    <div class="order-id">
+                                        <h4 style="margin: 0;">Заказ №592359 от 29 ноября 2021</h4>
+                                    </div>
+                                    <div class="order-status">
+                                        <h6 style="margin: 0; color: green;">Получено</h6>
+                                    </div>
+                                </div>
+                                <div class="order-total-sum">
+                                    <p>6 999 ₽</p>
+                                </div>
+                                <div class="btn">
+                                    <button class="arrow-btn-l centered-v"></button>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="order-block flex-column">
+                        <div class="order-block-collapsed flex-row">
+                            <div class="order-data flex-column">
+                                <div class="order-id">
+                                    <h4 style="margin: 0;">Заказ №743874 от 1 апреля 2022</h4>
+                                </div>
+                                <div class="order-status">
+                                    <h6 style="margin: 0; color: green;">Получено</h6>
+                                </div>
+                            </div>
+                            <div class="order-total-sum">
+                                <p>3 499 ₽</p>
+                            </div>
+                            <div class="btn">
+                                <button class="arrow-btn-l centered-v" style="transform: rotate(0deg);"></button>
+                            </div>
+                        </div>
+                        <div class="order-add-info" style="border-radius: 0 0 5px 5px;">
+                                <!-- style="display: none" -->
+                            <div class="order-add-info-text flex-column">
+                                <div class="order-date">
+                                    <span>Дата: 1 апреля 12:01</span>
+                                </div>
+                                <div class="order-adress">
+                                    <span>Адрес: г. Киров, ул. Карла Маркса, д. 86</span>
+                                </div>
+                                <div class="order-delivery-type">
+                                    <span>Доставка в пункт выдачи</span>
+                                </div>
+                                <div class="order-payment">
+                                    <span>Оплата онлайн</span>
+                                </div>
+                            </div>
+                            <div class="order-add-info-prods flex-column">
+                                    <div class="product-block flex-row">
+                                        <div class="order-product-img flex-column"><img src="/static/images/product/earrings/noch/noch_1.jpg" style = "height: 80px; background-color: #C2C1C1; border-radius: 5px;"></div>
+                                        <div class="order-product-title">
+                                            <span>Серебряная ночь</span>
+                                        </div>
+                                        <div class="cnt">
+                                            <span>1 шт</span>
+                                        </div>
+                                        <div class="order-product-price">
+                                            <span>3 499 ₽</span>
+                                        </div>
+                                    </div>
+                                <div class="order-files flex-row ">
+                                    <div class="filename (hypertext) style="display: none"></div>
+                                </div>
+                            </div>
+                    </div>
             </div>
         </div>
     </div>
