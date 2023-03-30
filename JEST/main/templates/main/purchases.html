@@ -77,16 +77,16 @@
             <div class="flex-column">
                 <label class="mail-label" for="mail-input"></label>
                 <div id="code-inputs" class="flex-row centered">
-                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
                     <input maxlength="1" onchange="activatCodeInput(this)" required></input>
                 </div>
             </div>
             <span style="display:none ;" class="popup-error"></span>
-            <button class="focus-btn">Войти</button>
+            <button class="focus-btn" onclick="try_enter();">Войти</button>
             <a class="popup-footer-text" href="#">Запросить код повторно</a>
         </div>
     </div>

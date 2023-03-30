@@ -20,9 +20,9 @@
                 </div>
                 <div id="nav-right-side" class="flex-row">
                     <div id="nav-links" class="flex-row">
-                        <a class="nav-link" href="/catalog">Каталог</a>
+                        <a class="nav-link-active" href="/catalog">Каталог</a>
                         <a class="nav-link" href="/history">История</a>
-                        <a class="nav-link" href="#">Контакты</a>
+                        <a class="nav-link" href="/contacts">Контакты</a>
                     </div>
                     <div id="searchbox" class="flex-row" expanded="y">
                         <input id="search-input" placeholder="Поиск ..." onchange="search(this.value)">
@@ -30,7 +30,7 @@
                     </div>
                     <div id="nav-icons-links" class="flex-row">
                         <a id="cart-icon" onclick=""></a>
-                        <a id="account-icon" onclick="showLoginWindow();"></a>
+                        <a id="account-icon" onclick="accountEventHandler();"></a>
                     </div>
                     <a id="nav-mob-icon" class="centered-v" onclick="showMobileMenu(this)">
                         <span class="centered-v"></span>
@@ -38,9 +38,9 @@
                     <div id="nav-mob-links" class="flex-column" style="display: none;">
                         <a class="nav-link" onclick="accountEventHandler();">Личный кабинет</a>
                         <a class="nav-link" href="#">Корзина</a>
-                        <a class="nav-link" href="/catalog/">Каталог</a>
+                        <a class="nav-link" href="/catalog">Каталог</a>
                         <a class="nav-link" href="/history">История</a>
-                        <a class="nav-link" href="#">Контакты</a>
+                        <a class="nav-link" href="/contacts">Контакты</a>
                     </div>
                 </div>
             </div>
@@ -123,11 +123,11 @@
                 <div class="flex-column">
                     <label class="mail-label" for="mail-input"></label>
                     <div id="code-inputs" class="flex-row centered">
-                        <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                        <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                        <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                        <input maxlength="1" onchange="activatCodeInput(this)" required></input>
-                        <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                        <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                        <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                        <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                        <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
+                        <input maxlength="1" onchange="activatCodeInput(this)" onkeyup="autotab(this, this.nextElementSibling)" onpaste="autopaste(event, this)" required></input>
                         <input maxlength="1" onchange="activatCodeInput(this)" required></input>
                     </div>
                 </div>

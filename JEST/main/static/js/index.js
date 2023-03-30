@@ -161,8 +161,6 @@ async function create_mpp(){
   for(i = 0; i<count; i++){
     mpp = mpps_data[i];
 
-    console.log(mpp)
-
     mpp_container = document.createElement('a');
     mpp_container.className = "product-card";
     mpp_container.href=`/product_page/${mpp['product-id']}`;

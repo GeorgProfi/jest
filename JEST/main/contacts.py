@@ -8,7 +8,7 @@ from .sessionlogic import gen_session
 
 def render_contacts(request):
     gen_session(request)
-    return render(request, 'main/index.html') #изменить шаблон
+    return render(request, 'main/contact.html')
 
 
 def get_masters(request):

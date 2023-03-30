@@ -447,6 +447,10 @@ footer{
     border-color: var(--popup-code-input);
     color: var(--popup-code-input);
 }
+#code-inputs>input.error{
+    border-color: var(--popup-error);
+    color: var(--popup-error);
+}
 
 input[type="email"]{
     height: 50px;

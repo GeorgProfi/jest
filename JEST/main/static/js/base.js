@@ -1,4 +1,6 @@
 email_g = '';
+numerics = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,0];
+there_is_error = false;
  
 addEventListener('resize', ()=>hideSearchInput());
 
@@ -164,11 +166,15 @@ function changeToCodeEnter(){
 }
 
 async function activatCodeInput(elem){
-    /* АКТИВИРУЙТЕ ПОЛЕТ! */
-    if(elem.value.length==1){
+    if(numerics.includes(Number(elem.value))&&elem.value.length>0){
         elem.className = 'active';
     } else {
-        elem.className = '';
+        if(elem.value.length<=0){
+            elem.className = '';
+        } else{
+        elem.className = 'error';
+        showPopupError('Ошибка в поле для ввода','code-enter');
+    }
     }
 }
 
@@ -178,6 +184,26 @@ function accountEventHandler(){
         window.location='/account';
     } else {
         showLoginWindow();
+    }
+}
+
+function autotab(original,destination){
+    if (original.getAttribute&&original.value.length==original.getAttribute("maxlength"))
+    destination.focus()
+}
+
+function autopaste(event, elem){
+    evt = new Event('change');
+    siblings_count = 1;
+    pasteValue = (event.clipboardData || window.clipboardData).getData("text");
+    elem.value = pasteValue[0];
+    current_elem = elem.nextElementSibling;
+    elem.dispatchEvent(evt);
+    while(current_elem){
+        current_elem.value = pasteValue[siblings_count];
+        siblings_count+=1;
+        current_elem.dispatchEvent(evt);
+        current_elem = current_elem.nextElementSibling;
     }
 }
 
