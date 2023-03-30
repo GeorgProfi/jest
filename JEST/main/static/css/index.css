@@ -110,6 +110,7 @@ h4{
 }
 
 .product-card{
+    text-decoration: none;
     width: 170px;
     height: 230px;
 }

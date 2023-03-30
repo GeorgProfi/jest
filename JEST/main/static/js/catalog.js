@@ -394,6 +394,7 @@ async function create_and_fill_filters(){
 
 async function delete_products(){
     html_grid = document.getElementById('products-grid');
+    html_count = document.getElementById('products-count');
     html_grid.innerHTML = '';
     html_count.innerHTML = `Результат: ${html_grid.children.length}`;
     html_count.setAttribute('value', html_grid.children.length);
@@ -420,17 +421,17 @@ async function create_products(url, empty=false){
     html_grid = document.getElementById('products-grid');
     html_count = document.getElementById('products-count');
     
-
     for(i = 0; i<count; i++){
         
         product = products_data[i];
 
-        card = document.createElement('a');
+        card = document.createElement('div');
         card.className = 'product-card flex-column';
         card.setAttribute('onMouseOver',"this.children[1].style=''");
         card.setAttribute('onMouseOut',"this.children[1].style='display:none;'");
 
-        visible_part = document.createElement('div');
+        visible_part = document.createElement('a');
+        visible_part.href=`/product_page/${product['id']}`;
         visible_part.className = 'card-visible-part flex-column';
         card.appendChild(visible_part);
 

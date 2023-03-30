@@ -219,6 +219,7 @@ h2{
     row-gap: 40px;
 }
 .card-visible-part{
+    text-decoration: none;
     row-gap: 10px;
 }
 

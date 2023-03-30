@@ -25,12 +25,15 @@ html[theme="main"]{
     --arrow-color:rgba(0, 0, 0, 0);
     --body-no-image:#C2C1C1;
     --focus-link:#FFFFFF;
+    --empty-color:#707070;
     --footer-text:#FFFFFF;
     --nav-link:#707070;
     --nav-link-active:#000000;
 }
 
-
+.empty{
+    background-color: var(--empty-color);
+}
 #body-content{
     padding-bottom: 130px;
 }
@@ -500,10 +503,12 @@ input[type="email"]::placeholder{
         display: none;
     }
 }
-@media screen and (max-width: 1700px){
+@media  screen and (max-width:1940px) {
     footer{
         height: fit-content;
     }
+}
+@media screen and (max-width: 1700px){
     #nav-links{
         column-gap: 60px;
     }

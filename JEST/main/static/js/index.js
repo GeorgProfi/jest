@@ -161,8 +161,11 @@ async function create_mpp(){
   for(i = 0; i<count; i++){
     mpp = mpps_data[i];
 
+    console.log(mpp)
+
     mpp_container = document.createElement('a');
     mpp_container.className = "product-card";
+    mpp_container.href=`/product_page/${mpp['product-id']}`;
 
     image = document.createElement('img');
     image.className = 'product-image';
@@ -171,7 +174,7 @@ async function create_mpp(){
 
     price = document.createElement('span')
     price.className = 'product-price';
-    price.innerHTML = mpp['product-price']+" ₽";
+    price.innerHTML = Number(mpp['product-price']).toLocaleString('ru-RU')+"₽";
     mpp_container.appendChild(price);
 
     mpps_block_html.appendChild(mpp_container);

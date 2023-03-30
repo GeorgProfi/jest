@@ -10,101 +10,72 @@
         <title>Товар</title> 
     </head>
 <body>
-  <header>
-    <div class="container">
-        <div id="header-content" class="flex-row">
-            <div id="nav-left-side" class="flex-row">
-                <a id="logo-mini" href="/"></a>
-                <a id="logo" href="/"></a>
-            </div>
-            <div id="nav-right-side" class="flex-row">
-                <div id="nav-links" class="flex-row">
-                    <a class="nav-link" href="/catalog/">Каталог</a>
-                    <a class="nav-link-active" href="/history">История</a>
-                    <a class="nav-link" href="#">Контакты</a>
+    <header>
+        <div class="container">
+            <div id="header-content" class="flex-row" style="clear:both;">
+                <div id="nav-left-side" class="flex-row">
+                    <a id="logo-mini" href="/"></a>
+                    <a id="logo" href="/"></a>
                 </div>
-                <div id="searchbox" class="flex-row" expanded="y">
-                    <input id="search-input" placeholder="Поиск ...">
-                    <a id="lupa-icon"></a>
+                <div id="nav-right-side" class="flex-row">
+                    <div id="nav-links" class="flex-row">
+                        <a class="nav-link" href="/catalog">Каталог</a>
+                        <a class="nav-link" href="/history">История</a>
+                        <a class="nav-link" href="#">Контакты</a>
+                    </div>
+                    <div id="searchbox" class="flex-row" expanded="y">
+                        <input id="search-input" placeholder="Поиск ..." onchange="search(this.value)">
+                        <a id="lupa-icon" onclick="showSearchInput()"></a>
+                    </div>
+                    <div id="nav-icons-links" class="flex-row">
+                        <a id="cart-icon" onclick=""></a>
+                        <a id="account-icon" onclick="accountEventHandler();"></a>
+                    </div>
+                    <a id="nav-mob-icon" class="centered-v" onclick="showMobileMenu(this)">
+                        <span class="centered-v"></span>
+                    </a>
+                    <div id="nav-mob-links" class="flex-column" style="display: none;">
+                        <a class="nav-link" onclick="showLoginWindow();">Личный кабинет</a>
+                        <a class="nav-link" href="#">Корзина</a>
+                        <a class="nav-link" href="/catalog/">Каталог</a>
+                        <a class="nav-link" href="/history">История</a>
+                        <a class="nav-link" href="#">Контакты</a>
+                    </div>
                 </div>
-                <div id="nav-icons-links" class="flex-row">
-                    <a id="cart-icon"></a>
-                    <a id="account-icon"></a>
-                </div>
-                <a href="" id="menu">☰</a>
             </div>
         </div>
-    </div>
-  </header>
+    </header>
 
-    <div id="body-content" class="flex-column">
+    <div id="body-content">
         <div class="product-details">
-            <div class="product-page-left">
+            <div id="product-page-left">
                 <div id="swiper-slide-wrap" class="flex-row">
                     <button class="arrow-btn-l centered-v"></button>
-                    <div class="swiper-slide">
-                        <img src="/static/images/product-page/img1.png" alt="">
-                        <img src="/static/images/product-page/img2.png" alt="">
-                        <img src="/static/images/product-page/img3.png" alt="">
+                    <div id="swiper-slide">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
                     </div>
                     <button class="arrow-btn-r centered-v"></button>  
                 </div>
                 <div class="container">
-                    <div class="focus-slide">
-                        <a><img src="/static/images/product-page/img1.png" onclick="OnClickSlide(event, current = 0)"/></a>
-                        <a><img src="/static/images/product-page/img2.png" onclick="OnClickSlide(event, current = 1)"/></a>
-                        <a><img src="/static/images/product-page/img3.png" onclick="OnClickSlide(event, current = 2)"/></a>
+                    <div id="focus-slide">
+                        <a onclick="sliderSetActive(0)"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 100px;height: 100px;" class="empty"/></a>
+                        <a onclick="sliderSetActive(1)"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 100px;height: 100px;" class="empty"/></a>
+                        <a onclick="sliderSetActive(2)"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 100px;height: 100px;" class="empty"/></a>
                     </div>
                 </div>
             </div>
-            <div class="product-page-center">
-                <h1 class="product-page-title">Лесное око</h1>
-                <span class="product-description">Лесное серебряное кольцо с натуральным аметистом. Металл оксидирован и отполирован, что придало графичности изделию.
-                </span>
-                <div class="product-characteristics">
-                    <div class="product-characteristics-row">
-                        <div class="product-characteristics-row-name"><span>Материал</span></div>
-                        <div class="product-characteristics-row-vals">
-                            <span class="product-characteristics-row-vals-material">Серебро</span>
-                        </div>
-                    </div>
-
-                    <div class="product-characteristics-row">
-                        <div class="product-characteristics-row-name"><span>Проба</span></div>
-                        <div class="product-characteristics-row-vals">
-                                <span class="product-characteristics-row-vals-proba">925</span>
-                        </div>
-                    </div>
-
-                    <div class="product-characteristics-row">
-                        <div class="product-characteristics-row-name"><span>Вес</span></div>
-                        <div class="product-characteristics-row-vals">
-                            <span class="product-characteristics-row-vals-weight">7.5 г</span>
-                        </div>
-                    </div>
-
-                    <div class="product-characteristics-row">
-                        <div class="product-characteristics-row-name"><span>Вставка</span></div>
-                        <div class="product-characteristics-row-vals">
-                            <span class="product-characteristics-row-vals-gems">Аметист</span>
-                        </div>
-                    </div>
-                </div>
+            <div id="product-page-center">
+                <h1 id="product-page-title" class="empty" style="width:300px; height:40px"></h1>
+                <span id="product-description" class="empty" style="display:block;width:320px; height:220px"></span>
+                <div id="product-characteristics" class="flex-column"></div>
             </div>
-            <div class="product-page-right">
-                <h1 class="product-price">6999 ₽</h1>
-                <section class="product-sizes">
+            <div id="product-page-right">
+                <h1 id="product-price" class="empty" style="display:block;width:120px; height:40px"></h1>
+                <section id="product-sizes" style="display: none"> 
                     <h3 class="product-sizes-title">Размер, мм</h3>
-                    <div class="product-sizes-wrapper">
-                        <button class="size" data-size="15.5">15.5</button>
-                        <button class="size" data-size="16">16</button>
-                        <button class="size" data-size="16.5">16.5</button>
-                        <button class="size" data-size="17">17</button>
-                        <button class="size" data-size="17.5">17.5</button>
-                        <button class="size" data-size="18">18</button>
-                        <button class="size" data-size="18.5">18.5</button>
-                        <button class="size" data-size="19">19</button>
-                        <button class="size" data-size="19.5">19.5</button>
+                    <div id="product-sizes-wrapper">
                     </div>
                 </section>
                 <section class="product-page-actions">
@@ -114,9 +85,44 @@
                 </section>
             </div>
         </div>
-        <script type="text/javascript" src="/static/js/product-slide.js"></script>
+        <script type="text/javascript" src="/static/js/product-page.js"></script>
+        <script type="text/javascript" src="/static/js/base.js"></script>
     </div>        
-
+    <div id="login-window" style="display: none;" class="popup-modal-window" onclick="hideLoginWindow(event, this)">
+        <div id="mail-enter" class="popup-content flex-column centered centered-v">
+            <div class="popup-headers flex-column">
+                <span class="popup-header-text">Войти</span>
+                <span class="popup-subheader-text">Вход в личный кабинет</span>
+            </div>
+            <div class="flex-column">
+                <label class="mail-label" for="mail-input">Электронная почта</label>
+                <input type="email" id="mail-input" placeholder="example@mail.ru" size="30" minlength="3" maxlength="64" required></input>
+            </div>
+            <span style="display:none ;" class="popup-error"></span>
+            <button class="focus-btn" onclick="changeToCodeEnter();">Продолжить</button>
+            <span class="popup-footer-text">Продолжая, вы принимаете наши <a href="#">Условия использования</a> и <a href="#">Заявление о конфиденциальности</a></span>
+        </div>
+        <div id="code-enter" style="display:none;" class="popup-content flex-column centered">
+            <div class="popup-headers flex-column">
+                <span class="popup-header-text">Введите код</span>
+                <span class="popup-subheader-text">Мы отправили вам код для подтверждения вашей электронной почты</span>
+            </div>
+            <div class="flex-column">
+                <label class="mail-label" for="mail-input"></label>
+                <div id="code-inputs" class="flex-row centered">
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                    <input maxlength="1" onchange="activatCodeInput(this)" required></input>
+                </div>
+            </div>
+            <span style="display:none ;" class="popup-error"></span>
+            <button class="focus-btn" onclick="try_enter();">Войти</button>
+            <a class="popup-footer-text" href="#">Запросить код повторно</a>
+        </div>
+    </div>
   <footer>
     <div class="container">
         <div id="footer-content" class="flex-row">
