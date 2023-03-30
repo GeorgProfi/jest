@@ -1,0 +1,175 @@
+#body-content{
+    padding-bottom: 0;
+    align-items: center;
+}
+
+h2{
+    margin: 0 0;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;            
+}
+
+.emploee-card {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 1320px;
+    padding: 40px;
+    margin: auto;
+
+}
+
+.card  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 200px;
+    background-color: #E7E7E7E7;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    padding-right: 12px;
+}
+.profile-img img {
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+}
+
+.portfolio {
+    width: 400px;
+    height: auto;
+    flex-direction: column;
+    font-family: 'Montserrat';
+}
+
+.portfolio h4 {
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.contact-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+}
+
+.contact-us h2{
+    color: var(--body-h);
+    font-weight: bold;
+
+}
+
+.contact-us-card{
+    display: flex;
+    flex-direction: row;
+    width: 1000px;
+    justify-content: space-between;
+}
+
+.card-info{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 15px;
+    width: 300px;
+    align-items: center;
+}
+
+.card-info-icon{
+    max-height:100px;
+    max-width: 100px;  
+}
+
+.card-info-icon img{
+    height: 100px;
+    width: auto;
+}
+
+.card-info h4 {
+    margin: 0;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100px;
+}
+
+@media screen and (max-width: 1600px){
+    .emploee-card {
+      max-width: 1000px;
+      display:flexbox;
+      box-sizing: border-box;
+      flex-direction: row;
+    }
+    .profile-img img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+      }
+    
+      .portfolio{
+        width: 100%;
+        height: auto;
+        font-weight: 300px;
+      }
+      .portfolio{
+        width: 100%;
+        height: auto;
+        font-weight: 300px;
+      }
+      .contact-us-card{
+            width: 100%;
+            height: auto;
+            font-weight: 300px;
+            justify-content: center;
+            flex-wrap: wrap;
+        
+      }
+      
+}
+@media screen and (max-width: 1380px){
+    .emploee-card {
+      max-width: 750px;
+    }
+  
+    .card  {
+      max-width: 750px;
+    }
+
+  }
+  
+  @media screen and (max-width:768px) {
+  
+    .emploee-card {
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      grid-gap: 0;
+      padding: 1rem;
+    }
+  
+    .card {
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+    }
+  
+    .portfolio {
+      width: 100%;
+      height: auto;
+      opacity: 1;
+      font-weight: 300px;
+    }
+  }
+
