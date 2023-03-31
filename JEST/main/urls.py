@@ -30,4 +30,5 @@ urlpatterns = [
     path('sendmail', login.EmailSender),
     path('login', login.login),
     path('account', login.account_page_renderer),
+    path('add_files', cart.add_files)
 ]
