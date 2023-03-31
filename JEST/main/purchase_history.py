@@ -25,6 +25,8 @@ def purchases(request):
                 block_data = {
                     'email': row['email'],
                     'order_id': row['order_id'],
+                    'status_id': row['status_id'],
+                    'order_status': row['order_status'],
                     'total_sum': row['total_sum'],
                     'datetime': str(row['datetime']),
                     'delivery_type': row['delivery_type'],

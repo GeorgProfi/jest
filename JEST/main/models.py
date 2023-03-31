@@ -8,6 +8,10 @@ class PaymentMethod(models.Model):
     payment_method = models.CharField(max_length=50)
 
 
+class Status(models.Model):
+    status = models.CharField(max_length=50, null=True)
+
+
 class Order(models.Model):
     sum = models.IntegerField()
     datetime = models.DateTimeField()
@@ -15,6 +19,11 @@ class Order(models.Model):
     delivery_type = models.ForeignKey(DeliveryType, on_delete=models.CASCADE)
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
     comment = models.CharField(max_length=500, null=True)
+
+
+class StatusOrder(models.Model):
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
 class Post(models.Model):
