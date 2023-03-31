@@ -148,11 +148,20 @@ function writeFiltersToCurrent(){
 }
 
 async function showFiltredProducts(count, already_on_page){
-    const params = new URLSearchParams(window.location.search);
-    title = params.get("title");
     max_price = current_filter['max_price'];
     min_price = current_filter['min_price'];
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
+    const params = new URLSearchParams(window.location.search);
+    title = params.get("title");
+    possibly_titles = await createAsyncGETRequest(`search?title=${title}`);
+        count = Number(possibly_titles['count']);
+        data = JSON.parse(possibly_titles['data']);
+        if(count>0){
+            url+=`&title=${data['title1']}`;
+            for(ziiz = 2; ziiz<=count; ziiz++){
+                url_base+=`+${data[`title${ziiz}`]}`;
+            }
+        }
     for(var i in filter_headers_value){
         if(current_filter[filter_headers_value[i]].length>0){
             url+=`&${filter_headers_value[i]}=${current_filter[filter_headers_value[i]][0].replace(/ /g, "$")}`;

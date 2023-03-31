@@ -52,6 +52,8 @@ async function createHistory(){
     if(i%2==1){
       background_wrapper = document.createElement('div');
       background_wrapper.appendChild(history_block);
+      history_block.className = 'odd-about-block';
+      history_block.insertBefore(history_block.children[1], history_block.children[0]);
       background_wrapper.className = classes[1];
       history_container.appendChild(background_wrapper);
     } else{
