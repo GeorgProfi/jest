@@ -1,76 +1,113 @@
 .body-content{
-  padding-bottom: 0;
+  padding-bottom: 100px;
+  overflow-x: hidden;
 }
-h5{
+
+
+h5, h4{
   margin: 0;
 }
 span {
   font-size: 14px;
 }
-.body-content .container {
-  flex-direction: column;
-  height: 100%;
-  width: auto;
-  margin: 0 150px 50px 150px;
+
+.arrow-btn-d, .arrow-btn-u{
+  width: 50px;
+  height: 50px;
 }
-.user-data {
+
+.order-id{
+  font-size: 16px;
+  font-weight: 700;
+
+}
+#user-data {
   column-gap: 200px;
 }
-.data-block {
-  flex-direction:column;
+.data-type{
+  font-weight: 700;
+  font-size: 16px;
+  width: fit-content;
+  height: fit-content;
 }
-.orders {
+.data-block {
+  width: fit-content;
+  row-gap: 10px;
+}
+#orders {
   row-gap: 1vw;
 }
 .order-block {
   justify-content: space-between;
-  width: auto;
+  width: 860px;
   border-radius: 5px;
   background-color: #dddddd;
 }
-.order-block-collapsed {
+.order-main-info {
+  padding: 10px;
   justify-content: space-between;
   flex-wrap: nowrap;
-  margin: 5px
 }
 .order-data {
+  width: fit-content;
+  height: fit-content;
   row-gap: 5px;
   width: 300px;
-  padding: 10px;
 }
-.order-total-sum {
-  padding: 10px;
+.order-total-sum{
+  width: fit-content;
+  height: fit-content;
+  font-size: 16px;
 }
 .arrow-btn-l{
-  transform: rotate(180deg);
   width: 50px;
   height: 50px;
 }
+.order-product-img{
+  height: 80px;
+  background-color: var(--body-no-image);
+  border-radius: 5px;
+}
+
+.order-add-info-prodFiles{
+  row-gap: 10px;
+}
+
 .order-add-info {
+  padding: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-radius: 0 0 5px 5px;
   flex-wrap: nowrap;
   background-color: #ebeaea;
   column-gap: 100px;
+  row-gap: 30px;
 }
 .order-add-info-prods {
-  padding: 10px;
-  margin: 5px 15px 5px 15px;
+  row-gap: 15px;
 }
 .order-add-info-text {
   row-gap: 5px;
-  padding: 10px;
-  margin: 5px;
 }
+
+.order-file-link{
+  color:var(--body-h);
+}
+
 .product-block {
-  width: 30vw;
+  text-decoration: none;
+  color:var(--body-h);
+  width: 400px;
   justify-content: space-between;
   flex-wrap: nowrap;
 }
 @media screen and (max-width: 1380px){
   span {
     font-size: 10px;
+  }
+  .order-block{
+    width: 600px;
   }
   .order-add-info {
     flex-direction: column;
@@ -90,13 +127,13 @@ span {
   span, h6{
     font-size: 10px;
   }
-  .body-content .container {
-    margin: 0 30px 50px 30px;
+  .order-block{
+    width: 300px;
   }
   .order-data {
     width: 200px;
   }
-  .arrow-btn-l{
+  .arrow-btn-d{
     width: 30px;
     height: 30px;
   }

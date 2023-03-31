@@ -36,6 +36,7 @@ async function createAsyncGETRequest(url){
 function is_visible(e) {return e.offsetWidth > 0 || e.offsetHeight > 0;}
 
 async function uncheck_filters(){
+    window.history.replaceState(null, document.title, "/catalog")
     filters_container_html = document.getElementById('filters');
     all_inputs = [];
     for(i=1; i<filters_container_html.children.length; i++){
@@ -174,6 +175,10 @@ async function showFiltredProducts(count, already_on_page){
     
 }
 
+async function fixGrid(){
+    grid = document.getElementById('products-grid');
+    grid.className = "fixed";
+}
 
 function showFilterContent(elem){
     box = elem.parentNode;
@@ -410,8 +415,10 @@ async function delete_products(){
 }
 
 async function create_products(url, empty=false){
+    count = 0;
     if(!empty){
         data = await createAsyncGETRequest(url);
+        count = data['count'];
         products_data = JSON.parse(data['data']);
         if(there_is_empty_cards){
             delete_products();
@@ -426,7 +433,6 @@ async function create_products(url, empty=false){
         products_data = data['data'];
         there_is_empty_cards = true
     }
-    count = data['count'];
     html_grid = document.getElementById('products-grid');
     html_count = document.getElementById('products-count');
     
@@ -513,6 +519,9 @@ async function create_products(url, empty=false){
             html_count.setAttribute('value', html_grid.children.length);
         }
     }
+    if(count==0){
+        fixGrid();
+    }
 }
 
 async function try_to_search(){
@@ -530,7 +539,7 @@ async function try_to_search(){
             }
             create_products(url_base);   
     } else{
-        create_products(`/products?count=15&already_in_page=0`);
+        fixGrid();
     }
     }else{
         create_products('/products?count=15&already_in_page=0');

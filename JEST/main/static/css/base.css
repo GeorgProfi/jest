@@ -52,8 +52,6 @@ html[theme="main"]{
 .arrow-btn-d::before, .arrow-btn-l::before,  .arrow-btn-r::before{
     content: "";
     position: absolute;
-    width: 200%;
-    height: 200%;
     z-index: -1;
 }
 .arrow-btn-l, .arrow-btn-l::before{
