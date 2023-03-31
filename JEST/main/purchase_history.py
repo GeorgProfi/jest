@@ -29,6 +29,7 @@ def purchases(request):
                     'order_status': row['order_status'],
                     'total_sum': row['total_sum'],
                     'datetime': str(row['datetime']),
+                    'order_address': row['order_address'],
                     'delivery_type': row['delivery_type'],
                     'payment_method': row['payment_method'],
                     'count_products': row['count_products'],  # в бидешечке изменить способ получения ага да
