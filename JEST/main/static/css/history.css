@@ -56,7 +56,7 @@
   padding: 1.5rem;
 }
 
-.img-block img{
+.img-block{
   height: 380px;
   grid-gap: 100px;
   border-radius: 5px;
@@ -64,11 +64,10 @@
 }
 
 
-.description-block text {
-  width: 300px;
-  height: 100%;
+span.description-block{
   line-height: 1.5;
   display: block;
+  white-space: pre-line;
   flex-direction: column;
   justify-content: space-between;
   padding: 34px auto 34px auto; 
@@ -76,9 +75,7 @@
   font-weight: 500;
 }
 
-p{
-  margin-top: 1em ;
-  margin-bottom: 1em ;
+span.description-block{
   color:var(--body-h);
   font-size: 16px;
   font-style: normal;
@@ -109,7 +106,7 @@ h2{
   border-radius: 5px;
 }
 
-#carousel figure {
+#carousel figure{
   display: flex;
   border-radius: 5px;
   position:relative;
@@ -168,19 +165,19 @@ h2{
     flex-direction: row;
   }
 
-  .img-block img {
+  .img-block{
     width: 100%;
     height: auto;
     border-radius: 5px;
   }
 
-  .description-block text{
+  .description-block{
     width: 100%;
     height: auto;
     font-weight: 300px;
   }
 
-  p{
+  .description-block{
     font-size: 16px;
   }
 
@@ -198,7 +195,7 @@ h2{
     max-width: 750px;
   }
 
-  p{
+  span.description-block{
     font-size: 12px;
   }
 
@@ -216,8 +213,8 @@ h2{
     max-width: 450px;
     display: flex;
     flex-direction: column;
+    row-gap: 10px;
     box-sizing: border-box;
-    grid-gap: 0;
     padding: 1rem;
   }
 
@@ -236,7 +233,7 @@ h2{
     border-radius: 2px;
   }
 
-  .description-block text {
+  span.description-block{
     width: 100%;
     height: auto;
     opacity: 1;
