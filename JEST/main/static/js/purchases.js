@@ -31,7 +31,6 @@ async function createOrdersList(){
     count = data['count'];
     data = JSON.parse(data['data']);
 
-    console.log(data);
     email = data[0]['email'];
     myData = document.getElementById('user-data');
     emailContainer = document.createElement('div');
@@ -46,9 +45,11 @@ async function createOrdersList(){
     emailContainer.appendChild(emailValue);
     myData.appendChild(emailContainer);
 
+    orderColor = ['yellow', 'orange', 'green', 'green']
     myOrders = document.getElementById('orders');
     for(iz = 0; iz<data.length; iz++){
       order = data[iz];
+      console.log(order);
 
       orderContainer = document.createElement('div');
       orderContainer.className = "order-block flex-column";
@@ -66,7 +67,8 @@ async function createOrdersList(){
       orderIDDateStatus.appendChild(orderIDDate);
 
       orderStatus = document.createElement('span');
-      /* TODO STATUS CLASS + INNER HTML */
+      orderStatus.innerHTML = order['order_status'];
+      orderStatus.className += orderColor[Number(order['status_id'])-1];
       orderIDDateStatus.appendChild(orderStatus);
       orderMainInfoContainer.appendChild(orderIDDateStatus);
 
