@@ -49,8 +49,7 @@ async function createOrdersList(){
     myOrders = document.getElementById('orders');
     for(iz = 0; iz<data.length; iz++){
       order = data[iz];
-      console.log(order);
-
+      
       orderContainer = document.createElement('div');
       orderContainer.className = "order-block flex-column";
 
