@@ -478,6 +478,7 @@ async function create_products(url, empty=false){
         cart_button = document.createElement('button');
         cart_button.className = 'focus-btn cart-btn';
         cart_button.innerHTML = 'В корзину';
+        cart_button.setAttribute('onclick', `addToCart(${product['id']}, 0, 1)`)
         hover_part.appendChild(cart_button);
 
         add_info = document.createElement('div');

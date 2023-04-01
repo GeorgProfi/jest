@@ -49,7 +49,7 @@ async function createOrdersList(){
     myOrders = document.getElementById('orders');
     for(iz = 0; iz<data.length; iz++){
       order = data[iz];
-      
+
       orderContainer = document.createElement('div');
       orderContainer.className = "order-block flex-column";
 
@@ -67,6 +67,7 @@ async function createOrdersList(){
 
       orderStatus = document.createElement('span');
       orderStatus.innerHTML = order['order_status'];
+      orderStatus.className = 'order-status '
       orderStatus.className += orderColor[Number(order['status_id'])-1];
       orderIDDateStatus.appendChild(orderStatus);
       orderMainInfoContainer.appendChild(orderIDDateStatus);

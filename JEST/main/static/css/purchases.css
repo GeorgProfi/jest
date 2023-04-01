@@ -21,6 +21,10 @@ span {
   font-weight: 700;
 
 }
+.order-status{
+  font-weight: 700;
+}
+
 #user-data {
   column-gap: 200px;
 }
@@ -96,6 +100,7 @@ span {
 }
 
 .product-block {
+  align-items: center;
   text-decoration: none;
   color:var(--body-h);
   width: 400px;
@@ -127,13 +132,16 @@ span {
   span, h6{
     font-size: 10px;
   }
+  .data-type, .order-id, .order-total-sum{
+    font-size: 12px;
+  }
   .order-block{
     width: 300px;
   }
   .order-data {
     width: 200px;
   }
-  .arrow-btn-d{
+  .arrow-btn-d, .arrow-btn-u{
     width: 30px;
     height: 30px;
   }

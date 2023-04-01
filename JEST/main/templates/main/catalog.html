@@ -29,7 +29,7 @@
                         <a id="lupa-icon" onclick="showSearchInput()"></a>
                     </div>
                     <div id="nav-icons-links" class="flex-row">
-                        <a id="cart-icon" onclick=""></a>
+                        <a id="cart-icon" href="/cart"></a>
                         <a id="account-icon" onclick="accountEventHandler();"></a>
                     </div>
                     <a id="nav-mob-icon" class="centered-v" onclick="showMobileMenu(this)">
@@ -37,7 +37,7 @@
                     </a>
                     <div id="nav-mob-links" class="flex-column" style="display: none;">
                         <a class="nav-link" onclick="accountEventHandler();">Личный кабинет</a>
-                        <a class="nav-link" href="#">Корзина</a>
+                        <a class="nav-link" href="/cart">Корзина</a>
                         <a class="nav-link" href="/catalog">Каталог</a>
                         <a class="nav-link" href="/history">История</a>
                         <a class="nav-link" href="/contacts">Контакты</a>
@@ -100,6 +100,7 @@
                 </div>
             </div>
             <script type="text/javascript" src="/static/js/base.js"></script>
+            <script type="text/javascript" src="/static/js/cart_logic.js"></script>
         </div>
         <div id="login-window" style="display: none;" class="popup-modal-window" onclick="hideLoginWindow(event, this)">
             <div id="mail-enter" class="popup-content flex-column centered centered-v">

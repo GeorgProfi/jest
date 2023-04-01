@@ -1,0 +1,131 @@
+.space-between{
+    justify-content: space-between;
+}
+
+#body-content{
+    background-color: #EDEDED;
+}
+
+h1{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+    color: var(--body-h);
+}
+
+#sides{
+    column-gap: 40px;
+}
+
+#left-side{
+    row-gap: 60px;
+}
+#right-side{
+    padding: 20px;
+    width: 360px;
+    height: fit-content;
+    background-color: var(--cart-product-card);
+    border-radius: 10px;
+    row-gap: 20px;
+}
+.add-info{
+    font-weight: 500;
+    font-size: 16px;
+    color:var(--body-h);
+}
+
+#products{
+    row-gap: 25px;
+}
+.product-card{
+    width: calc(1150px - 60px);
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    background-color: var(--cart-product-card);
+    border-radius: 10px;
+}
+
+.product-linkable{
+    width: 400px;
+    text-decoration: none;
+    cursor: pointer;
+    column-gap: 15px;
+    align-items: center;
+}
+
+.prodcut-image{
+    width: 100px;
+    height: 100px;
+    color: var(--body-no-image);
+    background-color: var(--body-no-image);
+    border-radius: 10px;
+}
+
+.product-titleId{
+    row-gap: 5px;
+}
+
+.product-title{
+    font-weight: 600;
+    font-size: 18px;
+    color:var(--body-h);
+}
+.product-title:link, .product-title:visited, .product-title:hover{
+    color:var(--body-h);
+}
+
+.product-id{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    color:var(--nav-link);
+}
+
+.product-price{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    align-items: center;
+    text-align: center;
+}
+
+.count-controls{
+    column-gap: 10px;
+    align-items: center;
+}
+
+.counter, .product-control, .product-delete{
+    display: flex;
+    justify-content: center;
+    width: 35px;
+    padding: 0;
+    height: 35px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 500;
+}
+.product-control, .product-delete{
+    cursor: pointer;
+}
+.product-delete{
+    background-image: url('../svg/xmark.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#confirm-order{
+    height: 50px;
+}
+
+#return-link{
+    align-items: center;
+    text-align: center;
+    color:var(--body-h);
+    font-weight: 700;
+    font-size: 16px;
+}

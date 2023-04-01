@@ -1,8 +1,11 @@
 let big_slider_images = document.querySelectorAll('#swiper-slide img');
 let current = 0;
 let slide = document.querySelectorAll('#focus-slide a img');
-sizes_btns = [];
+sizes_btns = [0];
 previous_active = 0;
+
+parts = `${window.location.href}`.split('/')
+id = parts[parts.length - 2];
 
 async function createAsyncGETRequest(url){
   return new Promise((resolve, reject) => {
@@ -17,6 +20,12 @@ async function createAsyncGETRequest(url){
     )
   });
 }
+
+document.querySelector('#add-to-cart-btn').addEventListener('click', ()=>{
+  previous_active = (previous_active>0)?previous_active:0;
+  addToCart(id, sizes_btns[previous_active].innerHTML, 1);
+})
+
 
 async function setNotActiveSizeBtn(btn_idx){
   sizes_btns[btn_idx].className = "size";
@@ -139,6 +148,7 @@ async function fillProductInfo(){
   sizes = JSON.parse(data['size']);
   sizes_length = Object.keys(sizes).length;
   if(sizes_length !== 0){
+    sizes_btns = [];
     sizes_html = document.getElementById('product-sizes');
     sizes_html.style="";
     sizes_container = document.getElementById('product-sizes-wrapper');

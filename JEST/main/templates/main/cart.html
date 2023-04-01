@@ -5,12 +5,11 @@
         <meta name="viewport" content="width=device-width; initial-scale=1.0">
         <!--links-->
         <link rel="stylesheet" href="/static/css/base.css">
-        <link rel="stylesheet" href="/static/css/purchases.css">
+        <link rel="stylesheet" href="/static/css/cart.css">
 
-        <script type="text/javascript" src="/static/js/purchases.js"></script>
-        <script type="text/javascript" src="/static/js/base.js"></script>
-        <title>Мои заказы</title>
+        <title>Корзина</title>
     </head>
+
 <body>
     <header>
         <div class="container">
@@ -47,17 +46,46 @@
             </div>
         </div>
     </header>
-    <div class="body-content">
-        <div class="container flex-column">
-            <h2>Мои данные</h2>
-            <div id="user-data" class="flex-row"> 
+    <div id="body-content" class="flex-column">
+         <div class="container flex-column">
+            <h1 style="margin:40px 0">Корзина</h1>
+            <div id="sides" class="flex-row">
+                <div id="left-side" class="flex-column">
+                    <div id="products" class="flex-column">
+                    </div> 
+                    <div id="own-order" class="flex-column" style="display: none;">
+                        <h1>ИНДИВИДУАЛЬНЫЙ ЗАКАЗ</h1>
+                        <div id="owns" class="flex-column">
+                            <div class="product-card flex-row">
+                                 <div class="files"></div>
+                                 <button class="product-control">X</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="right-side" class="flex-column">
+                    <h1>Ваша корзина</h1>
+                     <div id="productsPrice" class="space-between flex-row">
+                        <span class= "add-info" id="count-of-prods">Товары</span>
+                        <span id="sum-of-prods" class= "add-info"></span>
+                     </div>
+                     <div id="skidka" class="space-between flex-row">
+                        <span class= "add-info">Скидка</span>
+                        <span class= "add-info">-</span>
+                     </div>
+                     <div></div>
+                     <div id="total-sum" class="space-between flex-row">
+                        <h1>Общая стоимость</h1>
+                        <h1 id="sum-itself"></h1>
+                     </div>
+                     <button id="confirm-order" class="focus-btn">Оформить заказ</button>
+                     <a id="return-link" href="/catalog">Продолжить покупки</a>
+                </div>
             </div>
-             <!-- надпись "МОИ ЗАКАЗЫ" -->
-             <h2>Мои заказы</h2>
-                <div id="orders" class="flex-column"></div>
-            </div>
-        </div>
-    </div>
+         </div>
+        <script type="text/javascript" src="/static/js/cart.js"></script>
+        <script type="text/javascript" src="/static/js/cart_logic.js"></script>
+        <script type="text/javascript" src="/static/js/base.js"></script>
     </div>
     <div id="login-window" style="display: none;" class="popup-modal-window" onclick="hideLoginWindow(event, this)">
         <div id="mail-enter" class="popup-content flex-column centered centered-v">
@@ -132,5 +160,6 @@
             </div>
         </div>
     </footer>
-</body>
-</html>
+
+
+</body></html>
