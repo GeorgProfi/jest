@@ -18,7 +18,7 @@ def get_masters(request):
         rows = df.dictfetchall(cursor)
         for row in rows:
             block_data = {
-                'id': row['id']
+                'id': row['id'],
                 'name': row['name'],
                 "surname": row['surname'],
                 "email": row['email'],
