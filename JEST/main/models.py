@@ -44,7 +44,7 @@ class Emploee(models.Model):
     post = models.ForeignKey(Post, on_delete=models.RESTRICT)
 
 
-class MasterInfo(models.Model):
+class EmploeeInfo(models.Model):
     emploee = models.OneToOneField(Emploee, primary_key=True, on_delete=models.RESTRICT)
     info = models.CharField(max_length=500)
     image = models.CharField(max_length=50)

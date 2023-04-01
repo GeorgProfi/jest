@@ -18,11 +18,14 @@ def get_masters(request):
         rows = df.dictfetchall(cursor)
         for row in rows:
             block_data = {
-                'name': f"{row['name']}",
-                "surname": f"{row['surname']}",
-                "email": f"{row['email']}",
-                "text": f"{row['info']}",
-                "image": f"{row['image']}"
+                'id': row['id']
+                'name': row['name'],
+                "surname": row['surname'],
+                "email": row['email'],
+                "phone_number": row['phone_number'],
+                "text": row['info'],
+                "image": row['image'],
+                "post": row['post'],
             }
             data.append(block_data)
         print(data)

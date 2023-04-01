@@ -15,33 +15,6 @@ def render_cart(request):
     return render(request, 'main/cart.html')
 
 
-def add_to_cart(request):
-    response = HttpResponse('{}')
-    if ('id' in request.GET) and ('count' in request.GET):
-        product_id = request.GET['id']
-        count_product = request.GET['count']
-
-        if 'cart' not in request.COOKIES:
-            cart = {product_id: count_product}
-            response.set_cookie('cart', cart)
-        else:
-            print(request.COOKIES.get('cart'))
-            print(type(request.COOKIES.get('cart')))
-            cart = json.loads(request.COOKIES['cart'].replace("'", '"'))
-
-            if f'{product_id}' in cart:
-                cart[product_id] = int(cart[product_id]) + int(count_product)
-            else:
-                cart[product_id] = count_product
-            response.set_cookie('cart', cart)
-
-        if int(cart[product_id]) <= 0:
-            cart.pop(product_id)
-            response.set_cookie('cart', cart)
-
-    return response
-
-
 def add_files(request):
     files = request.FILES.getlist('files')
     countFiles = len(files)
@@ -58,29 +31,30 @@ def add_files(request):
     return JsonResponse({'code': 200})
 
 
-def delete_from_cart(request):
-    response = JsonResponse({'code': 200})
-    if 'id' in request.GET:
-        product_id = request.GET['id']
-        if 'cart' in request.COOKIES:
-            cart = json.loads(request.COOKIES['cart'].replace("'", '"'))
-            cart.pop(product_id)
-            response.set_cookie('cart', cart)
-    return response
-
-
 def cart_product_info(request):
     data = []
     cart = json.loads(request.COOKIES['cart'].replace("'", '"'))
-    product_id_list = set(cart.keys())
+    cart_keys_set = set(cart.keys())
+    product_id_set = []
+    product_count_set = []
+    for key in cart_keys_set:
+        product_id_set.append(key.split('$')[0])
+        product_count_set.append(cart[key])
 
-    for el in Product.objects.raw('SELECT id, title, photos, price FROM main_product'):
-        block_data = {'id': el.id,
-                      'title': el.title,
-                      'price': el.price,
-                      'image': str(json.loads(el.photos)['img1'])
-                      }
+    queryResult = Product.objects.raw(f"""
+            SELECT id, title, photos, price
+            FROM main_product
+            WHERE id in ({','.join(product_id_set)})""")
+
+    for el in queryResult:
+        block_data = {
+            'id': el.id,
+            'title': el.title,
+            'price': el.price,
+            'image': str(el.photos['img1']),
+        }
         data.append(block_data)
+
     return JsonResponse(
         {
             'count': f'{len(data)}',

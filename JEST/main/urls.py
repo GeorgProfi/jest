@@ -24,11 +24,11 @@ urlpatterns = [
     path('product_page/<int:product_id>/', product_page.render_product_page),
     path('product_info', product_page.product_info),
     path('cart', cart.render_cart),
-    path('add-to-cart', cart.add_to_cart),
     path('search', search.get_product_with_similarity_titles),
     path('purchases', purchase_history.purchases),
     path('sendmail', login.EmailSender),
     path('login', login.login),
     path('account', login.account_page_renderer),
-    path('add_files', cart.add_files)
+    path('add_files', cart.add_files),
+    path('cart-product-info', cart.cart_product_info),
 ]
