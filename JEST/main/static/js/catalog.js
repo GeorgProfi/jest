@@ -1,3 +1,4 @@
+
 window.onscroll = loadProductsOnScroll;
 
 function loadProductsOnScroll(){
@@ -149,9 +150,11 @@ function writeFiltersToCurrent(){
 }
 
 async function showFiltredProducts(count, already_on_page){
+    window.onscroll = 0;
     max_price = current_filter['max_price'];
     min_price = current_filter['min_price'];
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
+    console.log(url);
     const params = new URLSearchParams(window.location.search);
     title = params.get("title");
     possibly_titles = await createAsyncGETRequest(`search?title=${title}`);
@@ -432,10 +435,11 @@ async function create_products(url, empty=false){
         {'id':'-1','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'title':'', 'price':'', 'gems':'', 'material':''}]}
         products_data = data['data'];
         there_is_empty_cards = true
+        html_count.setAttribute('value', 15);
     }
     html_grid = document.getElementById('products-grid');
     html_count = document.getElementById('products-count');
-    
+    setTimeout(()=>{window.onscroll = loadProductsOnScroll}, 300);
     for(i = 0; i<count; i++){
         
         product = products_data[i];
@@ -523,6 +527,7 @@ async function create_products(url, empty=false){
     if(count==0){
         fixGrid();
     }
+    activateShowProductsBtn();
 }
 
 async function try_to_search(){
@@ -543,7 +548,13 @@ async function try_to_search(){
         fixGrid();
     }
     }else{
-        create_products('/products?count=15&already_in_page=0');
+        setTimeout(()=>{
+        price_slider = document.getElementById('price-box').children[2].children[0]
+        max_price = price_slider.children[2].value;
+        min_price = price_slider.children[3].value;
+        current_filter['max_price'] = 30000;
+        current_filter['min_price'] = min_price;
+        showFiltredProducts(15, 0)}, 300);
     }
 }
 

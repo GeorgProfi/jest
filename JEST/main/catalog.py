@@ -39,9 +39,9 @@ def products(request):
 
     if 'probes_and_metals' in url_parameters:
         metals = request.GET['probes_and_metals'].split()
-        query += f" and (filter1->>'title' = '{metals[0]}'"
+        query += f" and (filter1->>'title' = '{metals[0].replace('$', ' ')}'"
         for i in range(1, len(metals)):
-            query += f" or filter1->>'title' ='{metals[i]}'"
+            query += f" or filter1->>'title' ='{metals[i].replace('$', ' ')}'"
         query += ')'
 
     if 'gems' in url_parameters:
@@ -50,7 +50,6 @@ def products(request):
         for i in range(1, len(gems)):
             query += f" or filter2->>'title' ='{gems[i]}'"
         query += ')'
-
 
     if 'sizes_and_categories' in url_parameters:
         category = request.GET['sizes_and_categories'].split()
@@ -70,7 +69,6 @@ def products(request):
         for i in range(1, len(collection)):
             query += f" or products.collection = '{collection[i]}'"
         query += ')'
-
 
     if 'title' in url_parameters:
         title = request.GET['title']

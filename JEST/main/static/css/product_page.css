@@ -56,6 +56,10 @@ a .border0 {
   justify-content: center;
 }
 
+#add-to-cart-btn{
+  cursor: pointer;
+}
+
 #focus-slide {
   display: flex;
   flex-direction: row;
