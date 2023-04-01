@@ -32,11 +32,9 @@ async function recalculateAndSetSumm(){
     total_summ = 0;
     summ_skidka = 0;
     total_count = 0;
-    console.log(products);
     for(zzzi = 0; zzzi<products.length; zzzi++){
         price = Number(products[zzzi].children[1].innerHTML.replace('₽', '').replaceAll('&nbsp;', ''));
         count = Number(products[zzzi].children[3].children[1].innerHTML);
-        console.log(count);
         total_summ +=  price*count;
         total_count += count;
     }
