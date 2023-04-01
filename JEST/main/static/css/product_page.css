@@ -48,7 +48,7 @@
 }
 
 a .border0 {
-  border: solid var(--body-fg);
+  border: solid var(--body-focus);
 }
 
 .container {
@@ -112,7 +112,7 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--body-border);
+  background-color: var(--empty-color);
   border-radius: 8px;
   font-size: 16px;
   font-weight: 500;

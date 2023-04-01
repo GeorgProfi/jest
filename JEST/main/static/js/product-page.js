@@ -25,7 +25,11 @@ async function setNotActiveSizeBtn(btn_idx){
 }
 
 async function setActiveSizeBtn(btn_idx){
-  if(previous_active!=-1)sizes_btns[previous_active].className='size';
+  if(previous_active!=-1){
+    sizes_btns[previous_active].className='size';
+    sizes_btns[previous_active].setAttribute('onclick', `setActiveSizeBtn(${previous_active})`);
+
+  }
   sizes_btns[btn_idx].className = "size-active";
   sizes_btns[btn_idx].setAttribute('onclick', `setNotActiveSizeBtn(${btn_idx})`);
   previous_active = btn_idx;
