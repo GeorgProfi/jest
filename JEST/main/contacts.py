@@ -21,11 +21,9 @@ def get_masters(request):
                 'id': row['id'],
                 'name': row['name'],
                 "surname": row['surname'],
-                "email": row['email'],
-                "phone_number": row['phone_number'],
+                "post": row['post'],
                 "text": row['info'],
                 "image": row['image'],
-                "post": row['post'],
             }
             data.append(block_data)
         print(data)

@@ -2,174 +2,180 @@
     padding-bottom: 0;
     align-items: center;
 }
-
-h2{
-    margin: 0 0;
-    color: #FFFFFF;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;            
+#banner-index{
+  width: 100%;
+  background-color: var(--body-banner-bg);
 }
-
-.emploee-card {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 1320px;
-    padding: 40px;
-    margin: auto;
-
+.banner-text h1{
+  margin: 0 0 15 0;
+  font-size: 24px;
+  color: var(--body-focus);
 }
-
+.banner-text h2{
+  margin: 0 0;
+  color:var(--body-text);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+}
+.banner-text{
+  margin: 50px;
+} 
+.emploee-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 1360px;
+  padding: 40px;
+  margin: auto;
+}
 .card  {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 200px;
-    background-color: #E7E7E7E7;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 630px;
+  background-color: #E7E7E7E7;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px
 }
-
-.profile-img {
-    width: 200px;
-    height: 200px;
-    padding-right: 12px;
+.emploee-info {
+  width: 400px;
 }
-.profile-img img {
-    border-radius: 5px;
-    width: 200px;
-    height: 200px;
+.emploee-info h4 {
+  margin: 0;
+  padding-bottom: 5px;
 }
-
-.portfolio {
-    width: 400px;
-    height: auto;
-    flex-direction: column;
-    font-family: 'Montserrat';
-}
-
-.portfolio h4 {
-    margin: 0;
-    padding-bottom: 5px;
-}
-
 .contact-us {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+  margin: auto;
 }
-
-.contact-us h2{
-    color: var(--body-h);
-    font-weight: bold;
-
+.contact-us h1{
+  font-size: 24px;
+  margin: 0;
 }
-
+h3 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 500;
+}
 .contact-us-card{
-    display: flex;
-    flex-direction: row;
-    width: 1000px;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  width: 1000px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 20px;
 }
-
 .card-info{
-    display: flex;
-    flex-direction: row;
-    grid-gap: 15px;
-    width: 300px;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  grid-gap: 15px;
+  width: 300px;
+  align-items: center;
 }
-
 .card-info-icon{
-    max-height:100px;
-    max-width: 100px;  
+  max-height:100px;
+  max-width: 100px;  
 }
 
 .card-info-icon img{
-    height: 100px;
-    width: auto;
+  height: 100px;
+  width: auto;
 }
 
 .card-info h4 {
-    margin: 0;
+  margin: 0;
 }
 .info {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    height: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100px;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1600px){
-    .emploee-card {
-      max-width: 1000px;
-      display:flexbox;
-      box-sizing: border-box;
-      flex-direction: row;
-    }
-    .profile-img img {
-        width: 100%;
-        height: auto;
-        border-radius: 5px;
-      }
-    
-      .portfolio{
-        width: 100%;
-        height: auto;
-        font-weight: 300px;
-      }
-      .portfolio{
-        width: 100%;
-        height: auto;
-        font-weight: 300px;
-      }
-      .contact-us-card{
-            width: 100%;
-            height: auto;
-            font-weight: 300px;
-            justify-content: center;
-            flex-wrap: wrap;
-        
-      }
-      
+.emploee-cards {
+  width: 1300px;
+  }
+.card{
+  max-width: 600px;
+  }
+.contact-us-card{
+  width: 100%;
+  height: auto;
+  font-weight: 300px;
+  justify-content: center;
+  flex-wrap: wrap;
+  }     
 }
 @media screen and (max-width: 1380px){
-    .emploee-card {
-      max-width: 750px;
-    }
-  
-    .card  {
-      max-width: 750px;
-    }
+  h4 {
+    font-size: 14px;
+  }
+  span {
+    font-size: 14px;
+  }
+  .emploee-cards {
+  width: 1200px;
+  padding: 10px;
+  margin: auto;
+  }
+  .card {
+    width: 550px;
+  }
+  .emploee-info{
+    width: 350px;
+  }
+}
 
+@media screen and (max-width: 1280px){
+  .emploee-cards {
+    flex-direction: row;
+    width: 480px;
+    margin: 20px;
   }
-  
-  @media screen and (max-width:768px) {
-  
-    .emploee-card {
-      max-width: 450px;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      grid-gap: 0;
-      padding: 1rem;
-    }
-  
-    .card {
-      width: 100%;
-      height: auto;
-      border-radius: 2px;
-    }
-  
-    .portfolio {
-      width: 100%;
-      height: auto;
-      opacity: 1;
-      font-weight: 300px;
-    }
+  .card {
+    flex-direction: column;
+    justify-content: start;
+    width: 190px;
+    row-gap: 5px;
   }
+  .emploee-info{
+    width: 190px;
+  }
+}
+  
+@media screen and (max-width:768px) {
+  .banner-text{
+    align-content: center;
+    margin-inline: 70px;
+  } 
+  .emploee-cards{
+    width: 220px;
+  }
+  .card {
+    flex-direction: column;
+    width: 190px;
+    height: auto;
+    row-gap: 10px;
+  }
+  .emploee-info{
+    width: 190px;
+  }
+  .contact-us{
+    text-align: center;
+    margin-inline: 20px;
+  }
+  .contact-us-card{
+    width: fit-content;
+    flex-direction: column;
+    row-gap: 15px;
+  }
+}
 
