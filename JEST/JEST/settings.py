@@ -16,7 +16,6 @@ from django.core.mail import send_mail
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -28,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# file requirements
+
+MEDIA_URL = '/files-orders/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files-orders')
+ALLOWED_FILE_FORMATS = ['doc', 'docx', 'txt', 'pdf', 'odt', 'wps', 'jpg', 'bmp', 'png', 'svg', 'jpeg']
+ALLOWED_FILE_SIZE = 20971520
+ALLOWED_NUMBER_OF_FILES = 5
 
 # Application definition
 
@@ -71,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'JEST.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -98,7 +103,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -117,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -128,7 +131,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -141,7 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FIAS_DATABASE_ALIAS = 'default'
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'
