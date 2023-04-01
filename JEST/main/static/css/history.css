@@ -124,28 +124,24 @@ h2{
 }
 
 @keyframes carousel {
-  0% {
-    left: 0; }
   15% {
+    left: 0; }
+  25% {
     left: -100%; }
   30% {
     left: -100%; }
-  35% {
-    left: -200%; }
   55% {
     left: -200%; }
-  60% {
-    left: -300%; }
   65% {
-    left: -300%; } 
-  70% {
-    left: -400%; }
+    left: -200%; }
+  75% {
+    left: -300%; }
   85% {
-    left: -400%; }
+    left: -300%; } 
   90% {
-    left: -500%; }
+    left: -400%; }
   100% {
-    left: -500%}
+    right: 0%; }
 }
 
 @media screen and (max-width: 1600px){
