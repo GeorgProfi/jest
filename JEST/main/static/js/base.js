@@ -52,6 +52,31 @@ function getCookie(name) {
     return cookieValue;
 }
 
+async function closeVisibleEvent(elem){
+    elem.style="opacity:0";
+    setTimeout(()=>{elem.remove()}, 300);
+}
+
+async function addVisibleEvent(successful, text){
+    event_pool = document.getElementById('event-pool');
+    var eventItSelf = document.createElement('div');
+    eventItSelf.style="opacity:0";
+    eventItSelf.className = 'visible-event flex-row ';
+    eventItSelf.className += (successful==true)?'successful':'unsuccessful';
+    eventText = document.createElement('span');
+    eventText.innerHTML = text;
+    eventText.className = 'visible-event-text';
+    eventItSelf.appendChild(eventText);
+    closeButton = document.createElement('button');
+    closeButton.className = 'close-button';
+    closeButton.addEventListener('click', ()=>{closeVisibleEvent(eventItSelf)});
+    eventItSelf.appendChild(closeButton);
+
+    event_pool.appendChild(eventItSelf);
+    eventItSelf.style="opacity:1";
+    setTimeout(()=>{closeVisibleEvent(eventItSelf)}, 5000);
+}
+
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
