@@ -21,7 +21,6 @@ async function createAsyncGETRequest(url){
     for(i = 0; i<count; i++){
       master = masters_data[i];
   
-      console.log(master);
       card_container_html = document.createElement('div');
       card_container_html.className = "card flex-row";
   
@@ -30,7 +29,7 @@ async function createAsyncGETRequest(url){
   
       image = document.createElement('img');
       image.src = master["image"];
-      image.className = "profile-image centered";
+      image.className = "profile-image";
       card_container_html.appendChild(image);
   
       emploee_name = document.createElement('h4');

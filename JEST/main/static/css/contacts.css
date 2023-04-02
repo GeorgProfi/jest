@@ -31,24 +31,30 @@ h1{
   width: 1360px;
   padding: 40px;
   margin: auto;
+  row-gap: 30px;
 }
 .card  {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  row-gap: 10px;
   justify-content: space-between;
   width: 630px;
   background-color: #E7E7E7E7;
   border-radius: 5px;
   padding: 15px;
-  margin-bottom: 15px
+}
+.profile-image {
+  max-width: 210px;
+  max-height: 210px;
+  border-radius: 5px;
 }
 .emploee-info {
   width: 400px;
+  row-gap: 3px;
 }
-.emploee-info h4 {
+.emploee-info h4{
   margin: 0;
-  padding-bottom: 5px;
 }
 .contact-us {
   display: flex;
@@ -105,10 +111,16 @@ h3 {
 @media screen and (max-width: 1600px){
 .emploee-cards {
   width: 1300px;
+  row-gap: 18px;
+  padding: 20px;
   }
 .card{
-  max-width: 600px;
+  max-width: 610px;
   }
+.profile-image {
+  max-width: 190px;
+  max-height: 190px;
+}
 .contact-us-card{
   width: 100%;
   height: auto;
@@ -160,16 +172,20 @@ h3 {
     margin-inline: 70px;
   } 
   .emploee-cards{
-    width: 220px;
+    width: 280px;
   }
   .card {
     flex-direction: column;
-    width: 190px;
+    width: 280px;
     height: auto;
     row-gap: 10px;
   }
+  .profile-image {
+    max-width: 280px;
+    max-height: 280px;
+  }
   .emploee-info{
-    width: 190px;
+    width: 280px;
   }
   .contact-us{
     text-align: center;
