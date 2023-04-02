@@ -57,6 +57,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+SESSION_COOKIE_AGE = 1_209_600
+NUMBER_OF_LOGIN_ATTEMPTS = 5
+BAN_DURATION = 600
+
+
 ROOT_URLCONF = 'JEST.urls'
 
 TEMPLATES = [

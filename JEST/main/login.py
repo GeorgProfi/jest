@@ -3,7 +3,13 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core.mail import send_mail
 import random
+from .sessionlogic import gen_session
 from django.contrib.auth.models import User
+from datetime import datetime
+from django.contrib.sessions.backends.file import SessionStore
+from django.conf import settings
+from .models import Client
+
 
 ### STATUS GUIDE ###
 ### USER - ce73628f-b89c-47e3-8949-5d68301f277f ####
@@ -19,11 +25,31 @@ ADMIN = 2
 EmailCode = {}
 
 
+def checkBan(request):
+    if request.session.session_key is None:
+        return False
+    if request.session['uuid-ban'] is not None:
+        interval = datetime.now() - datetime.strptime(request.session['uuid-ban'], '%Y-%m-%d %H:%M:%S.%f')
+        if interval.total_seconds() > settings.BAN_DURATION:
+            request.session['uuid-ban'] = None
+            request.session.save()
+            return True
+        else:
+            return False
+    else:
+        return True
+
+
 def СodeGen():
     return random.randint(100000, 999999)
 
 
 def EmailSender(request):
+    if request.session.session_key is None:
+        gen_session(request)
+        return JsonResponse({'code': 23})
+    if not checkBan(request):
+        return JsonResponse({'code': 23})
     data = json.loads(request.body)
     email = data['email']
     code = СodeGen()
@@ -35,6 +61,18 @@ def EmailSender(request):
 
 
 def login(request):
+    if request.session.session_key is None:
+        gen_session(request)
+        return JsonResponse({'code': 23})
+    if request.session.get('count') >= settings.NUMBER_OF_LOGIN_ATTEMPTS:
+        request.session['uuid-ban'] = str(datetime.now())
+        request.session['count'] = 0
+        request.session.save()
+
+    if not checkBan(request):
+        print('До окончания бана осталось: ', datetime.now() - datetime.strptime(request.session['uuid-ban'], '%Y-%m-%d %H:%M:%S.%f'))
+        return JsonResponse({'code': 23})
+
     data = json.loads(request.body)
     email = data['email']
     code = int(data['code'])
@@ -42,12 +80,23 @@ def login(request):
         for i in superusers_emails:
             if email == i[0]:
                 return JsonResponse({'code': 200, 'us': user_roles[ADMIN]})
+        Client.objects.filter(email=email).update(uuid=request.session.session_key)
         return JsonResponse({'code': 200, 'us': user_roles[USER]})
     else:
+        request.session['count'] += 1
+        request.session.save()
+
+        print(request.session['count'])
         return JsonResponse({'code': 23})
 
 
 def account_page_renderer(request):
+    if request.session.session_key is None:
+        gen_session(request)
+        response = JsonResponse({'code': 23})
+        if request.COOKIES.get('us'):
+            response.delete_cookie("us")
+        return response
     user_role = request.COOKIES['us']
     role_index = -1
     for zi in range(len(user_roles)):

@@ -1,12 +1,16 @@
-import uuid
-
+from datetime import datetime
+from django.conf import settings
 import django
+from datetime import datetime
+from django.contrib.sessions.backends.file import SessionStore
 
 
 def gen_session(request):
-    session = request.session
-    UUID = session.get('UUID')
     django.middleware.csrf.get_token(request)
-    if UUID is None:
-        session['UUID'] = str(uuid.uuid4())
+    if request.session.session_key is None:
+        request.session['uuid-ban'] = None
+        request.session['count'] = 0
+
+
+
 

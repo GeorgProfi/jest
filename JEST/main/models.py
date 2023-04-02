@@ -54,7 +54,7 @@ class Client(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
-    uuid = models.UUIDField()
+    uuid = uuid = models.CharField(max_length=32)
     phone_number = models.CharField(max_length=20)
 
 

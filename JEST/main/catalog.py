@@ -80,13 +80,11 @@ def products(request):
     limit {count}
     offset {already_in_page};
     """
-    print(query)
 
     with connection.cursor() as cursor:
         data = []
         cursor.execute(query)
         rows = df.dictfetchall(cursor)
-        print(rows)
         for row in rows:
             block_data = {
                 'id': row['id'],
