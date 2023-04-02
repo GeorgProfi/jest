@@ -53,7 +53,7 @@ async function addToCart(id, size, count){
       cart[idsize] = count;
     }
   setCookie('cart', JSON.stringify(cart), 4);
-  addVisibleEvent(true, 'Товар успешно добавлен в коризну!');
+  addVisibleEvent(true, 'Товар успешно добавлен в корзину!');
 }
 
 async function deleteFromCart(id, size){

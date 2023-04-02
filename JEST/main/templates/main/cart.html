@@ -57,8 +57,12 @@
                         <h1>ИНДИВИДУАЛЬНЫЙ ЗАКАЗ</h1>
                         <div id="owns" class="flex-column">
                             <div class="product-card flex-row">
-                                 <div class="files"></div>
-                                 <button class="product-control">X</button>
+                                 <div class="flex-row">
+                                    <button class="add-files-btn" onclick="showAddFilesWindow(); ">Добавить описание заказа</button>
+                                    <input type="file" id="files" style="display:none;" multiple></input>
+                                    <div id='filenames' class="flex-row"></div>
+                                 </div>
+                                 <button class="product-delete" onclick="hideIndProd();deleteFromCart(0, 0)"></button>
                             </div>
                         </div>
                     </div>
@@ -83,9 +87,6 @@
                 </div>
             </div>
          </div>
-        <script type="text/javascript" src="/static/js/cart.js"></script>
-        <script type="text/javascript" src="/static/js/cart_logic.js"></script>
-        <script type="text/javascript" src="/static/js/base.js"></script>
     </div>
     <div id="login-window" style="display: none;" class="popup-modal-window" onclick="hideLoginWindow(event, this)">
         <div id="mail-enter" class="popup-content flex-column centered centered-v">
@@ -122,6 +123,30 @@
             <a class="popup-footer-text" href="#">Запросить код повторно</a>
         </div>
     </div>
+    <div id="add-files-window" style="display: none;" class="popup-modal-window" onclick="hideAddFilesWindow(event, this)">
+        <div id="add-files-inner" class="popup-content flex-column centered centered-v">
+            <div id="commentary-container" class="flex-column">
+                <span class="popup-header-text">Комментарий</span>
+                <textarea id="commentary" placeholder="Введите текст.." maxlength="500"></textarea>
+            </div>
+            <div id="files-container" class="flex-column">
+                <span class="popup-header-text">Файлы</span>
+                <div id="drop-files" onclick="document.getElementById('files').click()"  ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                    <div id="files-inner-container" class="flex-column">
+                        <span class="subheader-text">Перетащите файлы сюда</span>
+                    </div>
+                </div>
+                <button class="add-files-btn" onclick="document.getElementById('files').click()">Выбрать файлы</button>
+            </div>
+            <div id="files-controls" class="flex-row">
+                <button  id="cancel" class="focus-btn" onclick="hideAddFilesWindowA(); cancelChanges();">Отменить</button>
+                <button id="save" class="focus-btn" onclick="hideAddFilesWindowA();commitChanges()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/js/cart.js"></script>
+    <script type="text/javascript" src="/static/js/cart_logic.js"></script>
+    <script type="text/javascript" src="/static/js/base.js"></script>
     <footer>
         <div class="container">
             <div id="footer-content" class="flex-row">
