@@ -5,6 +5,8 @@ import json
 from django.db import connection
 from django.views.decorators.csrf import csrf_protect
 from .sessionlogic import gen_session
+from django.contrib.sessions.backends.file import SessionStore
+
 
 def render_main(request):
     gen_session(request)

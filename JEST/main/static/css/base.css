@@ -389,7 +389,7 @@ footer{
 .popup-modal-window{
     padding-top: 200px;
     position: fixed;
-    z-index: 1; 
+    z-index: 999; 
     overflow: hidden;
     left: 0;
     top: 0;
@@ -507,6 +507,56 @@ input[type="email"]::placeholder{
     color:var(--popup-subheader);
 }
 
+#event-pool{
+    overflow: hidden;
+    top: 10%;
+    left: 50%;
+    position: fixed;
+    row-gap: 20px;
+    z-index: 1; 
+    transform: translate(-50%, 0%);
+}
+
+.visible-event{
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    height: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.visible-event-text{
+    font-size: 16px;
+    font-weight: 500;
+    color:var(--popup-window-foreground)
+}
+
+.successful{
+    background-color: var(--body-done);
+}
+
+.unsuccessful{
+    background-color: var(--popup-error);
+}
+
+
+.close-button{
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    width: 15px;
+    padding: 0;
+    height: 15px;
+    background: none;
+    border: none;
+    background-image: url('../svg/xmark.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.close-button:hover{
+    background-image: url('../svg/whitexmark.svg');
+}
 
 @media screen and (min-width: 768px){
     #nav-mob-icon{

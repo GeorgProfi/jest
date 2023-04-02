@@ -91,6 +91,7 @@ async function setCount(id, size, elem){
 
 async function createCartInfo(){
     cart = JSON.parse(getCookie('cart'));
+    cart = (cart==undefined)?{}:cart;
     if(Object.keys(cart).length>0){
         product_html = document.getElementById('products');
         productCard = document.createElement('div');
@@ -141,7 +142,7 @@ async function createCartInfo(){
                 productCard.appendChild(productPrice);
 
                 productSize = document.createElement('span');
-                productSize.className = 'product-price';
+                productSize.className = 'product-size';
                 productSize.innerHTML = (size>0)?size:' ';
                 productCard.appendChild(productSize);
 
