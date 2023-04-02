@@ -39,6 +39,7 @@ def products(request):
 
     if 'probes_and_metals' in url_parameters:
         metals = request.GET['probes_and_metals'].split()
+        print(request.GET['probes_and_metals'])
         query += f" and (filter1->>'title' = '{metals[0].replace('$', ' ')}'"
         for i in range(1, len(metals)):
             query += f" or filter1->>'title' ='{metals[i].replace('$', ' ')}'"

@@ -1,13 +1,14 @@
 
 window.onscroll = loadProductsOnScroll;
+already_sent = false;
+
 
 function loadProductsOnScroll(){
     if ((document.body.scrollTop/document.body.scrollHeight)>0.1){
         already_on_page = document.getElementById('products-count').getAttribute('value');
         showFiltredProducts(Number(already_on_page)+10, already_on_page);
         window.onscroll = '';
-        setTimeout( ()=>{window.onscroll = loadProductsOnScroll},5000);}
-}
+}}
 
 
 
@@ -53,6 +54,15 @@ async function uncheck_filters(){
     for(iji = 0; iji<all_inputs.length; iji++){
         showOnCheck.call(this, all_inputs[iji])
     }
+    price_slider = document.getElementById('price-box').children[2].children[0]
+    max_price = price_slider.children[2]
+    min_price = price_slider.children[3]
+    max_price.value = max_price.max;
+    min_price.value = 0;
+    evt = new Event('change');
+    max_price.dispatchEvent(evt);
+    min_price.dispatchEvent(evt);
+    priceInput();
     activateShowProductsBtn();
     
 }
@@ -150,11 +160,11 @@ function writeFiltersToCurrent(){
 }
 
 async function showFiltredProducts(count, already_on_page){
-    window.onscroll = 0;
+    if(!already_sent){
+    already_sent = true;
     max_price = current_filter['max_price'];
     min_price = current_filter['min_price'];
     url = `/products?count=${count}&already_in_page=${already_on_page}&max_price=${max_price}&min_price=${min_price}`;
-    console.log(url);
     const params = new URLSearchParams(window.location.search);
     title = params.get("title");
     possibly_titles = await createAsyncGETRequest(`search?title=${title}`);
@@ -170,12 +180,12 @@ async function showFiltredProducts(count, already_on_page){
         if(current_filter[filter_headers_value[i]].length>0){
             url+=`&${filter_headers_value[i]}=${current_filter[filter_headers_value[i]][0].replace(/ /g, "$")}`;
         for(z=1; z<current_filter[filter_headers_value[i]].length; z++){
-            url+=`+${current_filter[filter_headers_value[i]][z]}`;
+            url+=`+${current_filter[filter_headers_value[i]][z].replace(/ /g, "$")}`;
             }   
         }
     }
     create_products(url);
-    
+    }
 }
 
 async function fixGrid(){
@@ -528,6 +538,8 @@ async function create_products(url, empty=false){
         fixGrid();
     }
     activateShowProductsBtn();
+    already_sent = false;
+    window.onscroll = loadProductsOnScroll;
 }
 
 async function try_to_search(){
