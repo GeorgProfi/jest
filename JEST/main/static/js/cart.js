@@ -166,7 +166,8 @@ async function createCartEmptyCard(){
 
 async function checkIfEmpty(){
     products_html = document.getElementById('products');
-    if(products_html.children.length==0){
+    ind_order = document.getElementById('owns')
+    if(products_html.children.length==0&&ind_order.children.length==0){
         createCartEmptyCard();
     }
 }
@@ -194,8 +195,11 @@ async function setCount(id, size, elem){
 }
 
 async function hideIndProd(){
-    own_order = document.getElementById('own-order');
-    own_order.remove();
+    own_order = document.getElementById('owns');
+    own_order.innerHTML = '';
+    owns_html = document.getElementById('own-order');
+    owns_html.style="display:none;"
+    checkIfEmpty();
 }
 
 async function showAddFilesWindow(){
