@@ -5,10 +5,9 @@ from . import dictfetchall as df
 import json
 from .sessionlogic import gen_session
 
-
 def render_product_page(request, product_id):
     gen_session(request)
-    return render(request, 'main/product_page.html')
+    return render(request, 'main/product_page.html')  # изменить шаблон
 
 
 def product_info(request):
