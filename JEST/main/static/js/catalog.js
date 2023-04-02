@@ -524,12 +524,12 @@ async function create_products(url, empty=false){
             add_info.appendChild(materials_headers);
             add_info.appendChild(materials_values);
 
-            hover_part.appendChild(add_info);
-            card.append(hover_part);
-            html_grid.appendChild(card);
         } catch (e){
             console.log('no material')
         } finally {
+            hover_part.appendChild(add_info);
+            card.append(hover_part);
+            html_grid.appendChild(card);
             html_count.innerHTML = `Результат: ${html_grid.children.length}`;
             html_count.setAttribute('value', html_grid.children.length);
         }

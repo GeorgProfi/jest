@@ -2,7 +2,7 @@ email_g = '';
 numerics = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,0];
 there_is_error = false;
  
-addEventListener('resize', ()=>hideSearchInput());
+addEventListener('resize', ()=>{if(document.activeElement['type']!='text'){hideSearchInput(); console.log(document.activeElement['type'])}});
 
 async function createAsyncPOSTRequest(url, csrftoken, bodyDict){
     return new Promise((resolve, reject) => {

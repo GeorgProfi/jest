@@ -47,42 +47,42 @@
     </header>
 
     <div id="body-content">
-        <div class="product-details">
-            <div id="product-page-left">
-                <div id="swiper-slide-wrap" class="flex-row">
-                    <button class="arrow-btn-l centered-v"></button>
-                    <div id="swiper-slide">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
+        <div class="container">
+            <div class="product-details">
+                <div id="product-page-left" class="flex-column">
+                    <div id="swiper-slide-wrap" class="flex-row">
+                        <button class="arrow-btn-l centered-v"></button>
+                        <div id="swiper-slide">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="empty" alt="">
+                        </div>
+                        <button class="arrow-btn-r centered-v"></button>  
                     </div>
-                    <button class="arrow-btn-r centered-v"></button>  
-                </div>
-                <div class="container">
                     <div id="focus-slide">
                         <a onclick="sliderSetActive(0)"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 100px;height: 100px;" class="empty"/></a>
                         <a onclick="sliderSetActive(1)"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 100px;height: 100px;" class="empty"/></a>
                         <a onclick="sliderSetActive(2)"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 100px;height: 100px;" class="empty"/></a>
                     </div>
                 </div>
-            </div>
-            <div id="product-page-center">
-                <h1 id="product-page-title" class="empty" style="width:300px; height:40px"></h1>
-                <span id="product-description" class="empty" style="display:block;width:320px; height:220px"></span>
-                <div id="product-characteristics" class="flex-column"></div>
-            </div>
-            <div id="product-page-right">
-                <h1 id="product-price" class="empty" style="display:block;width:120px; height:40px"></h1>
-                <section id="product-sizes" style="display: none"> 
-                    <h3 class="product-sizes-title">Размер, мм</h3>
-                    <div id="product-sizes-wrapper">
-                    </div>
-                </section>
-                <section class="product-page-actions">
-                    <div class="product-add-cart">
-                        <button id="add-to-cart-btn" class="button-cart">Добавить в корзину</button>
-                    </div>
-                </section>
+                <div id="product-page-center">
+                    <h1 id="product-page-title" class="empty" style="width:300px; height:40px"></h1>
+                    <span id="product-description" class="empty" style="display:block;width:320px; height:220px"></span>
+                    <div id="product-characteristics" class="flex-column"></div>
+                </div>
+                <div id="product-page-right">
+                    <h1 id="product-price" class="empty" style="display:block;width:120px; height:40px"></h1>
+                    <section id="product-sizes" style="display: none"> 
+                        <h3 class="product-sizes-title">Размер, мм</h3>
+                        <div id="product-sizes-wrapper">
+                        </div>
+                    </section>
+                    <section class="product-page-actions">
+                        <div class="product-add-cart">
+                            <button id="add-to-cart-btn" class="button-cart">Добавить в корзину</button>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
         <script type="text/javascript" src="/static/js/product-page.js"></script>

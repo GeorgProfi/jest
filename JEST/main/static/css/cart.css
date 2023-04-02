@@ -139,3 +139,65 @@ h1{
     font-size: 24px;
     width: 25px;
 }
+
+.add-files-btn{
+    max-width: 165px;
+    width: fit-content;
+    padding: 10px;
+    background-color: #434040;
+    font-weight: 700;
+    font-size: 16px;
+    color:var(--body-text);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#add-files-window{
+    padding-top: 20px;
+}
+#add-files-inner{
+    width: 800px;
+}
+#commentary-container, #files-container{
+    row-gap: 15px;
+}
+#commentary{
+    outline: none;
+    border: 2px solid var(--body-border);
+    height:216px;
+    font-weight: 500;
+    font-size: 16px;
+    resize: none;
+}
+#files{
+    max-width: fit-content;
+}
+#files-controls{
+    column-gap: 10px;
+    justify-content: end;
+}
+
+#cancel{
+    background-color: var(--body-border);
+    border-color: transparent;
+}
+
+#drop-files{
+    border: 1px dotted var(--body-border);
+    height: 120px;
+}
+
+#filenames{
+    margin-left: 10px;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+#cancel, #save{
+    width: 160px;
+    height: 40px;
+}
+#files-inner-container{
+    height: inherit;
+    overflow-y: scroll;
+}
