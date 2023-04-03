@@ -54,11 +54,11 @@ def confirm_order(request):
             f"""
                 insert into main_order(sum, datetime, address, comment, delivery_type_id, payment_method_id)
                 values(
-                    {orderData['sum']},
-                    {orderData['datetime']},
-                    {orderData['address']},
-                    {orderData['delivery_type_id']},
-                    {orderData['payment_method_id']}
+                    '{orderData['sum']}',
+                    '{datetime.now().timestamp()}',
+                    '{orderData['address']}',
+                    '{orderData['delivery_type_id']}',
+                    '{orderData['payment_method_id']}'
                 )
             """
         )
@@ -66,25 +66,21 @@ def confirm_order(request):
         # ищем в бд клиента с нужным uuid
         cursor.execute(
             f"""
-                select id from main_client
+                select id, email from main_client
                 where uuid = '{request.session.session_key}'
             """
         )
-        # если клиент не найден создаем его
-        if len(cursor) > 0:
-            client_id = df.dictfetchall(cursor)[0]['id']
-        else:
-            cursor.execute(
-                f"""
-                    insert into main_clientorder(name, surname, email, phone_number, uuid)
-                    values(
-                        {orderData['name']},
-                        {orderData['surname']},
-                        {orderData['email']},
-                        {orderData['phone_number']},
-                        {request.session.session_key}
-                    );
-                """
+        client_id = df.dictfetchall(cursor)[0]['id']
+        client_email = df.dictfetchall(cursor)[0]['email']
+        cursor.execute(
+            f"""
+                update main_client 
+                set 
+                    name = '{orderData['name']}',
+                    surname = '{orderData['surname']}',
+                    phone_number = '{orderData['phone_number']}',
+                where id = {client_id};
+            """
             )
         client_id = connection.insert_id()
         # заполнение таблицы, которая связывает клиента и заказ
