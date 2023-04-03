@@ -20,12 +20,12 @@ def add_files(request):
     countFiles = len(files)
     if countFiles > settings.ALLOWED_NUMBER_OF_FILES:
         return HttpResponse({'code': 23})
-    email = request.GET['email']
+    uuid = request.GET['uuid']
     for i in range(countFiles):
         if files[i].name.split('.')[-1] not in settings.ALLOWED_FILE_FORMATS:
             if files[i].size > settings.ALLOWED_FILE_SIZE:
                 return HttpResponse({'code': 23})
-    fileSS = FileSystemStorage(location=f'{settings.MEDIA_ROOT}/{email}/')
+    fileSS = FileSystemStorage(location=f'{settings.MEDIA_ROOT}/{uuid}/')
     for i in range(countFiles):
         fileSS.save(files[i].name, files[i])
     return JsonResponse({'code': 200})

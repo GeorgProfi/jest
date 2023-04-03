@@ -4,16 +4,15 @@ from django.db import connection
 from . import dictfetchall as df
 from datetime import datetime
 from .sessionlogic import gen_session
-from django.contrib.sessions.backends.file import SessionStore
 from django.conf import settings
 import json
 
 
 def purchases(request):
-    request.session.session_key
+
     query = f"""
     select * from purchases
-    where uuid = '{'00000000000000000000000000000000'}';
+    where uuid = '{request.session.session_key}';
     """
     with connection.cursor() as cursor:
         data = []
@@ -30,9 +29,9 @@ def purchases(request):
                 'order_address': row['order_address'],
                 'delivery_type': row['delivery_type'],
                 'payment_method': row['payment_method'],
-                'count_products': row['count_products'],  # в бидешечке изменить способ получения ага да
+                'count_products': row['count_products'],
                 'products': row['products'],
-                'count_files': row['count_files'],  # в бидешечке изменить способ получения ага да
+                'count_files': row['count_files'],
                 'files': row['files'],
             }
             data.append(block_data)
