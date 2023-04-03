@@ -159,6 +159,8 @@ class History(models.Model):
     title = models.CharField(max_length=50)
     info = models.CharField(max_length=1000)
     image = models.JSONField()
+    def __str__(self):
+        return f"{self.title} (id={self.id}) "
 
 
 class Common(models.Model):
@@ -166,15 +168,20 @@ class Common(models.Model):
     path = models.CharField(max_length=50)
 
 
+
 class AboutUs(models.Model):
     title = models.CharField(max_length=50)
     text = models.CharField(max_length=1000)
     image = models.CharField(max_length=50)
+    def __str__(self):
+        return f"{self.title} (id={self.id}) "
 
 
 class Faqs(models.Model):
     question = models.CharField(max_length=200)
     answer = models.CharField(max_length=200)
+    def __str__(self):
+        return f"{self.question} (id={self.id}) "
 
 
 
