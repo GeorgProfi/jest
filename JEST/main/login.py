@@ -22,7 +22,6 @@ user_roles = ['ce73628f-b89c-47e3-8949-5d68301f277f', '5b612290-d5bc-4632-8e21-b
 superusers_emails = User.objects.filter(is_superuser=True).values_list('email')
 
 staff_email = User.objects.filter(is_staff = True).values_list('email')
-print(staff_email)
 USER = 0
 MANAGER = 1
 ADMIN = 2

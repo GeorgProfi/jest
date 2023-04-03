@@ -26,7 +26,6 @@ def get_masters(request):
                 "image": row['image'],
             }
             data.append(block_data)
-        print(data)
         return JsonResponse(
             {
                 'count': f"{len(data)}",

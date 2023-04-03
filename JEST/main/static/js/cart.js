@@ -36,7 +36,6 @@ fileInput.addEventListener('change', ()=>{
     refreshListOfFiles();
 })
 
-
 async function createAsyncGETRequest(url){
     return new Promise((resolve, reject) => {
       fetch(url).then(response=>{
@@ -50,6 +49,25 @@ async function createAsyncGETRequest(url){
       )
       });
 }
+
+async function createAsyncPOSTRequest(url, csrftoken, bodyDict){
+    return new Promise((resolve, reject) => {
+        fetch(url, {method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken':csrftoken
+        }, body:JSON.stringify(bodyDict)}).then(response=>{
+          if(response.status==200){
+            data = response.json();
+            return resolve(data);
+          } else {
+            return reject(response.status);
+          }
+        }
+        )
+        });
+    }
 
 function getCookie(name) {
     let cookieValue = null;
@@ -65,6 +83,40 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+const isModifierKey = (event) => {
+    const key = event.keyCode;
+    return (event.shiftKey === true || key === 35 || key === 36) ||
+        (key === 8 || key === 9 || key === 13 || key === 46) ||
+        (key > 36 && key < 41) || 
+        (
+            (event.ctrlKey === true || event.metaKey === true) &&
+            (key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
+        )
+};
+
+const enforceFormat = (event) => {
+    if(!isNumericInput(event) && !isModifierKey(event)){
+        event.preventDefault();
+    }
+};
+
+const formatToPhone = (event) => {
+    if(isModifierKey(event)) {return;}
+
+    const input = event.target.value.replace(/\D/g,'').substring(0,12);
+    const countryCode = input.substring(0, 1);
+    const areaCode = input.substring(1, 4);
+    const firstPart = input.substring(4, 7);
+    const secondPart = input.substring(7, 9);
+    const thirdPart = input.substring(9, 11);
+    console.log(input.length);
+    if(input.length >8){event.target.value = `${countryCode}(${areaCode})${firstPart}-${secondPart}-${thirdPart}`;}
+    else if(input.length>6){event.target.value = `${countryCode}(${areaCode})${firstPart}-${secondPart}`;}
+    else if(input.length>4){event.target.value = `${countryCode}(${areaCode})${firstPart}`;}
+    else if(input.length>0){event.target.value = `${countryCode}(${areaCode}`;}
+};
+
 
 async function cancelChanges(){
     fileInput = document.getElementById('files');
@@ -150,6 +202,7 @@ async function recalculateAndSetSumm(){
     sum_itself.innerHTML = (total_summ - summ_skidka).toLocaleString('ru-RU')+'₽';
 }
 
+function is_visible(e) {return e.offsetWidth > 0 || e.offsetHeight > 0;}
 
 async function createCartEmptyCard(){
     product_html = document.getElementById('products');
@@ -167,19 +220,22 @@ async function createCartEmptyCard(){
 async function checkIfEmpty(){
     products_html = document.getElementById('products');
     ind_order = document.getElementById('owns')
-    if(products_html.children.length==0&&ind_order.children.length==0){
+    console.log(products_html.children.length,  !is_visible(ind_order))
+    if(products_html.children.length==0&& !is_visible(ind_order)){
         createCartEmptyCard();
     }
 }
 
 async function deleteCard(called_elem){
+    if(called_elem!=null){
     while(called_elem.parentNode != null){
         if (called_elem.className == 'product-card flex-row'){
             called_elem.remove();
+            break;
         }
         called_elem = called_elem.parentNode;
     }
-    
+}
 }
 
 async function setCount(id, size, elem){
@@ -202,17 +258,17 @@ async function hideIndProd(){
     checkIfEmpty();
 }
 
-async function showAddFilesWindow(){
-    window_html = document.getElementById('add-files-window');
+async function showPopUpWindow(elem_id){
+    window_html = document.getElementById(elem_id);
     window_html.style = 'opacity:0';
     document.body.style.overflow = 'hidden';
     document.body.style.height = '100%';
     setTimeout(()=>window_html.style.opacity = 1, 10);
 }
 
-function hideAddFilesWindow(event, elem){
+function hidePopUpWindow(event, elem){
     event.preventDefault();
-    if(event.target.id=="add-files-window"){
+    if(event.target.id==elem.id){
         document.body.style = '';
         elem.style.opacity = 0;
         setTimeout(()=>elem.style.display='none', 300)
@@ -242,7 +298,7 @@ async function createCartInfo(){
         for(jji = 0; jji<count; jji++){
             product = data[jji];
             regexp = new RegExp(`${product['id']}`)
-            sizes = Object.keys(cart).filter(key=>key.match(regexp));
+            sizes = Object.keys(cart).filter(key=>key.split('$')[0]==product['id']);
             if(product['id']!=0){
                 for(zzi = 0; zzi<sizes.length; zzi++){
                     size = sizes[zzi].split('$')[1];
@@ -323,4 +379,57 @@ async function createCartInfo(){
     }
 }
 
+async function createDeliveryTypesOptions(){
+    data = await createAsyncGETRequest('/get-delivery-types');
+    count = data['count'];
+    data = JSON.parse(data['data']);
+    types_container = document.getElementById('delivery-type');
+    for(var i = 0; i<count; i++){
+        option = data[i];
+        var option_html = document.createElement('option');
+        option_html.className = 'popup-personal-data';
+        option_html.innerHTML = option['delivery_type'];
+        option_html.setAttribute('value', option['id']);
+        types_container.appendChild(option_html);
+    }
+}
+
+async function createPaymentTypesOptions(){
+    data = await createAsyncGETRequest('/get-payment-methods');
+    count = data['count'];
+    data = JSON.parse(data['data']);
+    types_container = document.getElementById('payment-type');
+    for(var i = 0; i<count; i++){
+        option = data[i];
+
+        var option_html = document.createElement('option');
+        option_html.className = 'popup-personal-data';
+        option_html.innerHTML = option['payment_method'];
+        option_html.setAttribute('value', option['id']);
+        types_container.appendChild(option_html);
+    }
+}
+
+async function confirmOrder(){
+    bodyDict = {}
+    bodyDict['sum'] = Number(document.getElementById('sum-itself').innerHTML.replace('₽', '').replaceAll('&nbsp;', ''));
+    bodyDict['name'] = document.getElementById('name').innerHTML;
+    bodyDict['surname'] = document.getElementById('surname').innerHTML;
+    bodyDict['address'] = document.getElementById('address').innerHTML;
+    bodyDict['phone_number'] = document.getElementById('phone-number').innerHTML;
+    bodyDict['delivery_type_id'] = document.getElementById('delivery-type').value;
+    bodyDict['payment_method_id'] = document.getElementById('payment-type').value;
+    bodyDict['comment'] = commentary;
+    response = await createAsyncPOSTRequest('/confirm_order', getCookie('csrftoken'), bodyDict);
+    if(response['code']==200){
+        hidePopUpWindow()
+    };
+}
+
+
 createCartInfo();
+createDeliveryTypesOptions();
+createPaymentTypesOptions();
+phoneInput = document.getElementById('phone-number');
+phoneInput.addEventListener('keydown',enforceFormat);
+phoneInput.addEventListener('keyup',formatToPhone);

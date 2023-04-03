@@ -54,15 +54,16 @@ def confirm_order(request):
             f"""
                 insert into main_order(sum, datetime, address, comment, delivery_type_id, payment_method_id)
                 values(
-                    '{orderData['sum']}',
-                    '{datetime.now().timestamp()}',
+                    {orderData['sum']},
+                    '{datetime.now()}',
                     '{orderData['address']}',
-                    '{orderData['delivery_type_id']}',
-                    '{orderData['payment_method_id']}'
+                    '{orderData['comment']}',
+                    {orderData['delivery_type_id']},
+                    {orderData['payment_method_id']}
                 )
             """
         )
-        order_id = connection.insert_id()
+        order_id = cursor.lastrowid
         # ищем в бд клиента с нужным uuid
         cursor.execute(
             f"""
@@ -82,7 +83,6 @@ def confirm_order(request):
                 where id = {client_id};
             """
             )
-        client_id = connection.insert_id()
         # заполнение таблицы, которая связывает клиента и заказ
         cursor.execute(
             f"""

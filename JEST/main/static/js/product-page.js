@@ -95,6 +95,7 @@ async function fillProductInfo(){
 
   charcs = document.getElementById('product-characteristics');
   materials = data['material'];
+  materials = (materials == null || materials == undefined)?{}:materials;
   for(izi = 0; izi<materials.length; izi++){
     material = JSON.parse(materials[izi]);
     material_type_container = document.createElement('div');

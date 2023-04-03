@@ -82,7 +82,7 @@
                         <h1>Общая стоимость</h1>
                         <h1 id="sum-itself"></h1>
                      </div>
-                     <button id="confirm-order" class="focus-btn">Оформить заказ</button>
+                     <button id="confirm-order" class="focus-btn" onclick="showPopUpWindow('confirm-order-window')">Оформить заказ</button>
                      <a id="return-link" href="/catalog">Продолжить покупки</a>
                 </div>
             </div>
@@ -142,6 +142,36 @@
                 <button  id="cancel" class="focus-btn" onclick="hideAddFilesWindowA(); cancelChanges();">Отменить</button>
                 <button id="save" class="focus-btn" onclick="hideAddFilesWindowA();commitChanges()">Сохранить</button>
             </div>
+        </div>
+    </div>
+    <div id="confirm-order-window" style="display: none;" class="popup-modal-window" onclick="hidePopUpWindow(event, this)">
+        <div id="confirm-order-inner" class="popup-content flex-column centered centered-v">
+            <span class="popup-header-text">Введите данные</span>
+            <div class="flex-column">
+                <label for="surname" class="popup-subheader-text">Фамилия</label>
+                <input id="surname" maxlength="50" class="popup-personal-data" required></input>
+            </div>
+            <div class="flex-column">
+                <label for="name" class="popup-subheader-text">Имя</label>
+                <input id="name" maxlength="50" class="popup-personal-data" required></input>
+            </div>
+            <div class="flex-column">
+                <label for="phone-number" class="popup-subheader-text">Номер телефона</label>
+                <input id="phone-number" maxlength="16" class="popup-personal-data" required></input>
+            </div>
+            <div class="flex-column">
+                <label for="address" class="popup-subheader-text">Адрес</label>
+                <input id="address" maxlength="250" class="popup-personal-data" required></input>
+            </div>
+            <div class="flex-column">
+                <label for="delivery-type" class="popup-subheader-text">Тип доставки</label>
+                <select id="delivery-type" class="popup-personal-data" required></select>
+            </div>
+            <div class="flex-column">
+                <label for="payment-type" class="popup-subheader-text">Тип оплаты</label>
+                <select id="payment-type" class="popup-personal-data" required></select>
+            </div>
+            <button id="confirm-pizza-cola" onclick="confirmOrder()" class="focus-btn">Подтвердить</button>
         </div>
     </div>
     <script type="text/javascript" src="/static/js/cart.js"></script>

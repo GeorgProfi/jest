@@ -2,10 +2,9 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
 
-from . import main_page, history, contacts, catalog, login, cart,product_page, search,purchase_history, confirm_order
+from . import main_page, history, contacts, catalog, login, cart, product_page, search, purchase_history, confirm_order
 
 admin.site.site_header = f'Arts & Crafts\nПанель Управления'
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +32,6 @@ urlpatterns = [
     path('add_files', cart.add_files),
     path('cart-product-info', cart.cart_product_info),
     path('confirm_order', confirm_order.confirm_order),
-    path('get-payment-methods', confirm_order.PaymentMethod),
-    path('get-delivery-types', confirm_order.DeliveryType)
+    path('get-payment-methods', confirm_order.getPaymentMethods),
+    path('get-delivery-types', confirm_order.getDeliveryTypes)
 ]

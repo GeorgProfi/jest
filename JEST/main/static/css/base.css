@@ -575,6 +575,9 @@ input[type="email"]::placeholder{
     #nav-links{
         column-gap: 60px;
     }
+    .popup-modal-window{
+        padding-top: 100px;
+    }
     #header-content{
         column-gap: 135px;
     }
@@ -592,6 +595,12 @@ input[type="email"]::placeholder{
     }
     #lupa-icon{
         cursor: pointer;
+    }
+    .popup-modal-window{
+        padding-top: 50px;
+    }
+    .popup-content{
+        row-gap: 15px;
     }
     #focus-banner-inner{
         padding-right: 100px;

@@ -201,3 +201,12 @@ h1{
     height: inherit;
     overflow-y: scroll;
 }
+
+.popup-personal-data{
+    padding: 5px;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    outline: none;
+    font-weight: 400;
+    transition: 0.3s all ease-in-out;
+}
