@@ -280,8 +280,15 @@ header{
 #lupa-icon{
     width: 25px;
     height: 25px;
-    margin:7px 16px;
+    margin: 7px 16px;
     background-image: url("../svg/search.svg");
+}
+
+#filter-mob-icon{
+    width: 30px;
+    height: 30px;
+    margin: 7px 16px;
+    background-image: url("../svg/filter.svg");
 }
 
 #nav-mob-links{

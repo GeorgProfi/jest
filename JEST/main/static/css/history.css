@@ -191,12 +191,12 @@ h2{
     max-width: 750px;
   }
 
-  span.description-block{
-    font-size: 12px;
+  .description-block span{
+    font-size: 14px;
   }
 
   h2{
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -233,6 +233,5 @@ h2{
     width: 100%;
     height: auto;
     opacity: 1;
-    font-weight: 300px;
   }
 }

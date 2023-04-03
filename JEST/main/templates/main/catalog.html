@@ -48,34 +48,38 @@
     </header>
         <div id="body-content">
             <div class="container">
-                <div id="sides" class="flex-row">
+                <div id="sides">
                     <div id="left-side" class="flex-column">
-                        <h1>ЮВЕЛИРНЫЕ ИЗДЕЛИЯ</h1>
-                        <h1>Фильтры</h1>
-                        <div id="filters" class="flex-column">
-                            <div id="price-box" class="filter-inner flex-column">
-                                <a class="title-n-arrow flex-row" onclick="showFilterContent(this)">
-                                    <h2>Цена</h2>
-                                    <button class="arrow-btn-d filter-button centered-v"></button>
-                                </a>    
-                                <div class="div-line"></div>
-                                <div class="filter-content flex-column" style="display: none;">
-                                    <div id="price-slider">
-                                        <span id="slider-background" class="centered-v"></span>
-                                        <span id="slider-foreground" class="centered-v"></span>
-                                        <input type="range" id="max-price-s" min="0" max="3000" value="3000" step="100" oninput="priceRangeInput(this); activateShowProductsBtn()" onchange="priceRangeInput(this)">
-                                        <input type="range" id="min-price-s" min="0" max="3000" value="0" step="100" onchange="priceRangeInput(this); activateShowProductsBtn()" oninput="priceRangeInput(this)">
-                                    </div>
-                                    <div id="price-inputs" class="flex-row">
-                                        <input id="min-price-i" class="price-input" onchange="priceInput(); activateShowProductsBtn()"></input>
-                                        <input id="max-price-i" class="price-input"  onchange="priceInput(); activateShowProductsBtn()"></input>
+                        <div id="head-catalog" class="flex-row">
+                            <h1 class="centered-v">ЮВЕЛИРНЫЕ ИЗДЕЛИЯ</h1>
+                            <a id="filter-mob-icon" onclick="showMobileFilters(this) "></a>
+                        </div>
+                        <div id="full-filters" class="flex-column">
+                            <div id="filters" class="flex-column">
+                                <div id="price-box" class="filter-inner flex-column">
+                                    <a class="title-n-arrow flex-row" onclick="showFilterContent(this)">
+                                        <h2>Цена</h2>
+                                        <button class="arrow-btn-d filter-button centered-v"></button>
+                                    </a>    
+                                    <div class="div-line"></div>
+                                    <div class="filter-content flex-column" style="display: none;">
+                                        <div id="price-slider">
+                                            <span id="slider-background" class="centered-v"></span>
+                                            <span id="slider-foreground" class="centered-v"></span>
+                                            <input type="range" id="max-price-s" min="0" max="3000" value="3000" step="100" oninput="priceRangeInput(this); activateShowProductsBtn()" onchange="priceRangeInput(this)">
+                                            <input type="range" id="min-price-s" min="0" max="3000" value="0" step="100" onchange="priceRangeInput(this); activateShowProductsBtn()" oninput="priceRangeInput(this)">
+                                        </div>
+                                        <div id="price-inputs" class="flex-row">
+                                            <input id="min-price-i" class="price-input" onchange="priceInput(); activateShowProductsBtn()"></input>
+                                            <input id="max-price-i" class="price-input"  onchange="priceInput(); activateShowProductsBtn()"></input>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="filters-control" class="flex-row">
-                            <a id="removeFiltersBtn" class="centered-v" onclick="uncheck_filters()">X Сбросить всё</a>
-                            <button id="show-filters-btn" class="focus-btn" onclick="delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0); deactivateShowProductsBtn();">Показать</button>
+                            <div id="filter-control" class="flex-row">
+                                <a id="removeFiltersBtn" class="centered-v" onclick="uncheck_filters()">X Сбросить всё</a>
+                                <button id="show-filters-btn" class="focus-btn" onclick="delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0); deactivateShowProductsBtn();">Показать</button>
+                            </div>
                         </div>
                     </div>
                     <div id="right-side" class="flex-column">

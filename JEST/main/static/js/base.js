@@ -167,6 +167,26 @@ function hideMobileMenu(elem){
     setTimeout(()=>{mob_menu.style = "display:none";}, 300);
 }
 
+function showMobileFilters(elem){
+    elem.setAttribute('onclick', 'hideMobileFilters(this)');
+    elem.className = "filter-mob-icon is-clicked";
+    mob_filter = document.getElementById('full-filters');
+    mob_filter.style.display ="flex";
+    mob_filter.style.
+    mob_filter.style.transform = "translateX(0%)";
+    setTimeout(()=>{mob_filter.style.opacity = 1;}, 10);
+}
+
+function hideMobileFilters(elem){
+    elem.className = "filter-mob-icon";
+    elem.setAttribute('onclick', 'showMobileFilters(this)');
+    mob_filter = document.getElementById('full-filters');
+    mob_filter.style.transform = "translateX(-100%)";
+    mob_filter.style = "opacity:0";
+    setTimeout(()=>{mob_filter.style = "display:none";}, 300);
+}
+
+
 function showLoginWindow(){
     window_html = document.getElementById('login-window');
     window_html.style = 'opacity:0';
