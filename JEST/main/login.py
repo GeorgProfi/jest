@@ -9,6 +9,8 @@ from datetime import datetime
 from django.contrib.sessions.backends.file import SessionStore
 from django.conf import settings
 from .models import Client
+from django.db import connection
+from . import dictfetchall as df
 
 
 ### STATUS GUIDE ###
@@ -83,7 +85,28 @@ def login(request):
         for i in superusers_emails:
             if email == i[0]:
                 return JsonResponse({'code': 200, 'us': user_roles[ADMIN]})
-        Client.objects.filter(email=email).update(uuid=request.session.session_key)
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f"""
+                    select id from main_client
+                    where email = '{email}';
+                """
+            )
+            if len(cursor.fetchall()) <= 0:
+                cursor.execute(
+                    f"""
+                        INSERT INTO main_client(email, uuid)
+                        VALUES('{email}', '{request.session.session_key}');
+                    """
+                )
+            else:
+                cursor.execute(
+                    f"""
+                        UPDATE main_client
+                        set uuid = '{request.session.session_key}'
+                        where email = '{email}';
+                    """
+                )
         return JsonResponse({'code': 200, 'us': user_roles[USER]})
     else:
         request.session['count'] += 1

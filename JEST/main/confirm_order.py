@@ -49,7 +49,6 @@ def confirm_order(request):
     print(cart)
 
     with connection.cursor() as cursor:
-        # запись в бд данных о заказе
         cursor.execute(
             f"""
                 insert into main_order(sum, datetime, address, comment, delivery_type_id, payment_method_id)
@@ -60,30 +59,28 @@ def confirm_order(request):
                     '{orderData['comment']}',
                     {orderData['delivery_type_id']},
                     {orderData['payment_method_id']}
-                )
+                );
+                SELECT currval(pg_get_serial_sequence('main_order','id')) as lid;
             """
         )
-        order_id = cursor.lastrowid
-        # ищем в бд клиента с нужным uuid
+        order_id = df.dictfetchall(cursor)[0]['lid']
         cursor.execute(
             f"""
                 select id, email from main_client
-                where uuid = '{request.session.session_key}'
+                where uuid = '{request.session.session_key}';
             """
         )
         client_id = df.dictfetchall(cursor)[0]['id']
-        client_email = df.dictfetchall(cursor)[0]['email']
         cursor.execute(
             f"""
                 update main_client 
                 set 
                     name = '{orderData['name']}',
                     surname = '{orderData['surname']}',
-                    phone_number = '{orderData['phone_number']}',
+                    phone_number = '{orderData['phone_number']}'
                 where id = {client_id};
             """
             )
-        # заполнение таблицы, которая связывает клиента и заказ
         cursor.execute(
             f"""
                 insert into main_clientorder(client_id, order_id)
@@ -100,7 +97,16 @@ def confirm_order(request):
                 insert into main_productorder(count, order_id, product_id, size) 
                 values({cart[key]}, {order_id}, {key.split('$')[0]}, {key.split('$')[1]});
             """
-
+        cursor.execute(query)
+        cursor.execute(
+            f"""
+                insert into main_statusorder(order_id, status_id)
+                values(
+                    {order_id},
+                    3
+                );
+            """
+        )
     return JsonResponse({'code': 200})
 
 

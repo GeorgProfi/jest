@@ -26,8 +26,15 @@ def add_files(request):
             if files[i].size > settings.ALLOWED_FILE_SIZE:
                 return HttpResponse({'code': 23})
     fileSS = FileSystemStorage(location=f'{settings.MEDIA_ROOT}/{email}/')
-    for i in range(countFiles):
-        fileSS.save(files[i].name, files[i])
+    with connection.cursor() as cursor:
+        for i in range(countFiles):
+            fileSS.save(files[i].name, files[i])
+            cursor.execute(
+                f"""
+                    insert into main_fileforindividualorder(file)
+                    values('\{settings.MEDIA_ROOT}\{email}\{files[i].name}\');
+                """
+            )
     return JsonResponse({'code': 200})
 
 
