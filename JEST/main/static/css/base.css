@@ -394,10 +394,9 @@ footer{
 }
 
 .popup-modal-window{
-    padding-top: 200px;
     position: fixed;
     z-index: 999; 
-    overflow: hidden;
+    overflow: auto;
     left: 0;
     top: 0;
     width: 100%; 
@@ -407,10 +406,12 @@ footer{
 }
 
 .popup-content{
+    margin-top: 200px;
     width: 340px;
     height: fit-content;
     padding: 30px;
     row-gap: 30px;
+    overflow: auto;
     border-radius: 10px;
     background-color: var(--popup-window-foreground);
 }
@@ -582,8 +583,8 @@ input[type="email"]::placeholder{
     #nav-links{
         column-gap: 60px;
     }
-    .popup-modal-window{
-        padding-top: 100px;
+    .popup-content{
+        margin-top: 100px;
     }
     #header-content{
         column-gap: 135px;
@@ -603,10 +604,8 @@ input[type="email"]::placeholder{
     #lupa-icon{
         cursor: pointer;
     }
-    .popup-modal-window{
-        padding-top: 50px;
-    }
     .popup-content{
+        margin-top: 50px;
         row-gap: 15px;
     }
     #focus-banner-inner{
@@ -630,7 +629,9 @@ input[type="email"]::placeholder{
     #header-content{
         column-gap: 50vw;
     }
-
+    .popup-content{
+        max-width: fit-content;
+    }
     #logo{
         display: none;
     }

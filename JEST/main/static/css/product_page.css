@@ -150,7 +150,7 @@ span {
   font-weight: 600;
   font-size: 18px;
   line-height: 36px;
-  height: 40px;
+  min-height: 40px;
   width: 100%;
   transition: .2s;
 }

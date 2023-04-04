@@ -262,7 +262,6 @@ async function showPopUpWindow(elem_id){
     window_html = document.getElementById(elem_id);
     window_html.style = 'opacity:0';
     document.body.style.overflow = 'hidden';
-    document.body.style.height = '100%';
     setTimeout(()=>window_html.style.opacity = 1, 10);
 }
 
@@ -337,7 +336,7 @@ async function createCartInfo(){
 
                     productSize = document.createElement('span');
                     productSize.className = 'product-size';
-                    productSize.innerHTML = (size>0)?size:' ';
+                    productSize.innerHTML = (size>0)?size:'';
                     productCard.appendChild(productSize);
 
                     productQuantityControls = document.createElement('div');
@@ -346,7 +345,7 @@ async function createCartInfo(){
                     productMinusBtn = document.createElement('buttton');
                     productMinusBtn.className = 'product-control';
                     productMinusBtn.innerHTML = '-';
-                    productMinusBtn.setAttribute('onclick', `addToCart(${product['id']}, ${size}, -1);setCount(${product['id']}, ${size}, this.parentNode.children[1])`);
+                    productMinusBtn.setAttribute('onclick', `addToCart(${product['id']}, ${size}, -1);setCount(${product['id']}, ${size}, this.parentNode.children[1]), false`);
                     productQuantityControls.appendChild(productMinusBtn);
 
                     productQuantity = document.createElement('span');

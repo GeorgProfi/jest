@@ -172,7 +172,6 @@ function showMobileFilters(elem){
     elem.className = "filter-mob-icon is-clicked";
     mob_filter = document.getElementById('full-filters');
     mob_filter.style.display ="flex";
-    mob_filter.style.
     mob_filter.style.transform = "translateX(0%)";
     setTimeout(()=>{mob_filter.style.opacity = 1;}, 10);
 }

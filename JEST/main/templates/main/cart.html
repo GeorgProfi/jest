@@ -48,17 +48,17 @@
     </header>
     <div id="body-content" class="flex-column">
          <div class="container flex-column">
-            <h1 style="margin:40px 0">Корзина</h1>
             <div id="sides" class="flex-row">
                 <div id="left-side" class="flex-column">
+                    <h1>Корзина</h1>
                     <div id="products" class="flex-column">
                     </div> 
                     <div id="own-order" class="flex-column" style="display: none;">
                         <h1>ИНДИВИДУАЛЬНЫЙ ЗАКАЗ</h1>
                         <div id="owns" class="flex-column">
                             <div class="product-card flex-row">
-                                 <div class="flex-row">
-                                    <button class="add-files-btn" onclick="showAddFilesWindow(); ">Добавить описание заказа</button>
+                                 <div id="own-inner" class="flex-row">
+                                    <button class="add-files-btn" onclick="showPopUpWindow('add-files-window'); ">Добавить описание заказа</button>
                                     <input type="file" id="files" style="display:none;" multiple></input>
                                     <div id='filenames' class="flex-row"></div>
                                  </div>
@@ -123,7 +123,7 @@
             <a class="popup-footer-text" href="#">Запросить код повторно</a>
         </div>
     </div>
-    <div id="add-files-window" style="display: none;" class="popup-modal-window" onclick="hideAddFilesWindow(event, this)">
+    <div id="add-files-window" style="display: none;" class="popup-modal-window" onclick="hidePopUpWindow(event, this)">
         <div id="add-files-inner" class="popup-content flex-column centered centered-v">
             <div id="commentary-container" class="flex-column">
                 <span class="popup-header-text">Комментарий</span>

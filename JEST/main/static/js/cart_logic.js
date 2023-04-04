@@ -34,7 +34,7 @@ async function createAsyncGETRequest(url){
       });
 }
 
-async function addToCart(id, size, count){
+async function addToCart(id, size, count, showEvent=true){
     cart = JSON.parse(getCookie('cart'));
     idsize = String(id)+ '$' +String(size);
     if(cart!=null){
@@ -53,7 +53,7 @@ async function addToCart(id, size, count){
       cart[idsize] = count;
     }
   setCookie('cart', JSON.stringify(cart), 4);
-  addVisibleEvent(true, 'Товар успешно добавлен в корзину!');
+  if(showEvent)addVisibleEvent(true, 'Товар успешно добавлен в корзину!');
 }
 
 async function deleteFromCart(id, size){

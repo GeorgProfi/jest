@@ -4,6 +4,7 @@
 
 #body-content{
     background-color: #EDEDED;
+    padding: 50px 0;
 }
 
 h1{
@@ -20,7 +21,7 @@ h1{
 }
 
 #left-side{
-    row-gap: 60px;
+    row-gap: 30px;
 }
 #right-side{
     padding: 20px;
@@ -65,12 +66,16 @@ h1{
 }
 
 .product-titleId{
+    max-width: 250px;
     row-gap: 5px;
 }
 
 .product-title{
     font-weight: 600;
     font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     color:var(--body-h);
 }
 .product-title:link, .product-title:visited, .product-title:hover{
@@ -99,6 +104,7 @@ h1{
 }
 
 .counter, .product-control, .product-delete{
+    align-items: center;
     display: flex;
     justify-content: center;
     width: 35px;
@@ -135,6 +141,7 @@ h1{
     font-size: 16px;
 }
 .product-size{
+    min-width: 25px;
     font-weight: 600;
     font-size: 24px;
     width: 25px;
@@ -157,6 +164,9 @@ h1{
 }
 #add-files-inner{
     width: 800px;
+}
+#own-order{
+    row-gap: 30px;
 }
 #commentary-container, #files-container{
     row-gap: 15px;
@@ -209,4 +219,88 @@ h1{
     outline: none;
     font-weight: 400;
     transition: 0.3s all ease-in-out;
+}
+
+@media screen and (max-width: 1700px){
+    .product-card{
+        width: 700px;
+    }
+}
+
+@media screen and (max-width: 1380px){
+    .product-linkable{
+        width: 300px;
+    }
+    .product-titleId{
+        max-width: 150px;
+    }
+}
+@media screen and (max-width: 1210px){
+    #sides{
+        padding: 10px;
+        flex-direction: column;
+        row-gap: 30px;
+    }
+    #right-side{
+        width: calc(100% - 40px);
+        align-self: center;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .product-card, .product-linkable{
+        flex-direction: column;
+        width: fit-content;
+        row-gap: 10px;
+    }
+    .product-card{
+        min-width: 200px;
+    }
+    span.product-size:empty{
+        display: none;
+    }
+    .product-titleId, #products, #owns{
+        align-items: center;
+    }
+    .product-price, .product-title, .counter, .product-size{ 
+        font-size: 14px;
+    }
+    .product-size{
+        width: fit-content;
+        min-width: fit-content;
+    }
+    .product-control, .product-delete, .counter{
+        width: 15px;
+        height: 15px;
+    }
+    #files-container{
+        max-width: 100%;
+        
+    }
+    #add-files-inner{
+        width: 280px;
+    }
+    #own-inner{
+        flex-direction: column;
+        max-width: 200px;
+        align-items: center;
+    }
+    #filenames{
+        margin: 0;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+    #own-inner{
+        row-gap: 10px;
+    }
+    span.subheader-text{
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #total-sum{
+        flex-direction: column;
+    }
+    h1{
+        font-size: 18px;
+    }
 }
