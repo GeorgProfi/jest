@@ -16,7 +16,7 @@ async function createAsyncGETRequest(url){
     data = await createAsyncGETRequest('/masters');
     count = data['count'];
     masters_data = JSON.parse(data['data']);
-    masters_container_html = document.querySelector('.emploee-cards centered');
+    masters_container_html = document.querySelector('.emploee-cards');
     masters_container_html.innerHTML = '';
     for(i = 0; i<count; i++){
       master = masters_data[i];
