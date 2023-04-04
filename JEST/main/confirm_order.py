@@ -7,6 +7,8 @@ from django.db import connection
 from django.conf import settings
 from .models import DeliveryType, PaymentMethod
 import json
+from django.http import JsonResponse, HttpResponse
+from django.core.files.storage import FileSystemStorage
 
 
 def getDeliveryTypes(request):
@@ -70,7 +72,9 @@ def confirm_order(request):
                 where uuid = '{request.session.session_key}';
             """
         )
-        client_id = df.dictfetchall(cursor)[0]['id']
+        id_and_email = df.dictfetchall(cursor)[0]
+        client_id = id_and_email['id']
+        client_email = id_and_email['email']
         cursor.execute(
             f"""
                 update main_client 
@@ -107,7 +111,28 @@ def confirm_order(request):
                 );
             """
         )
+        files = request.FILES.getlist('files')
+        countFiles = len(files)
+        if countFiles > settings.ALLOWED_NUMBER_OF_FILES:
+            return HttpResponse({'code': 23})
+        for i in range(countFiles):
+            if files[i].name.split('.')[-1] not in settings.ALLOWED_FILE_FORMATS:
+                if files[i].size > settings.ALLOWED_FILE_SIZE:
+                    return HttpResponse({'code': 23})
+        fileSS = FileSystemStorage(location=f'{settings.MEDIA_ROOT}/{client_email}/')
+        for i in range(countFiles):
+            fileSS.save(files[i].name, files[i])
+            cursor.execute(
+                f"""
+                        insert into main_fileforindividualorder(file)
+                        values('\{settings.MEDIA_ROOT}\{client_email}\{files[i].name}\');
+                        SELECT currval(pg_get_serial_sequence('main_fileforindividualorder','id')) as lid;
+                        insert into main_fileorder(order_id, file_id)
+                        values(lid, {order_id});
+                    """
+            )
     return JsonResponse({'code': 200})
+
 
 
 

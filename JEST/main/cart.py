@@ -15,29 +15,6 @@ def render_cart(request):
     return render(request, 'main/cart.html')
 
 
-def add_files(request):
-    files = request.FILES.getlist('files')
-    countFiles = len(files)
-    if countFiles > settings.ALLOWED_NUMBER_OF_FILES:
-        return HttpResponse({'code': 23})
-    email = request.GET['email']
-    for i in range(countFiles):
-        if files[i].name.split('.')[-1] not in settings.ALLOWED_FILE_FORMATS:
-            if files[i].size > settings.ALLOWED_FILE_SIZE:
-                return HttpResponse({'code': 23})
-    fileSS = FileSystemStorage(location=f'{settings.MEDIA_ROOT}/{email}/')
-    with connection.cursor() as cursor:
-        for i in range(countFiles):
-            fileSS.save(files[i].name, files[i])
-            cursor.execute(
-                f"""
-                    insert into main_fileforindividualorder(file)
-                    values('\{settings.MEDIA_ROOT}\{email}\{files[i].name}\');
-                """
-            )
-    return JsonResponse({'code': 200})
-
-
 def cart_product_info(request):
     data = []
     cart = json.loads(request.COOKIES['cart'].replace("'", '"'))

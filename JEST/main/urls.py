@@ -29,7 +29,6 @@ urlpatterns = [
     path('sendmail', login.EmailSender),
     path('login', login.login),
     path('account', login.account_page_renderer),
-    path('add_files', cart.add_files),
     path('cart-product-info', cart.cart_product_info),
     path('confirm_order', confirm_order.confirm_order),
     path('get-payment-methods', confirm_order.getPaymentMethods),
