@@ -156,5 +156,5 @@ EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'atrs_and_crafts@mail.ru'
+EMAIL_HOST_USER = 'arts_and_crafts43@mail.ru'
 EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
