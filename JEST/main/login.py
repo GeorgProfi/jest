@@ -60,7 +60,7 @@ def EmailSender(request):
     code = СodeGen()
     EmailCode[email] = code
 
-    send_mail('Ваш код подтверждения!', f'Ваш код: {code}', "atrs_and_crafts@mail.ru", [email], fail_silently=False)
+    send_mail('Ваш код подтверждения!', f'Ваш код: {code}', "arts_and_crafts43@mail.ru", [email], fail_silently=False)
 
     return JsonResponse({'code': 200})
 
