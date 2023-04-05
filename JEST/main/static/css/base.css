@@ -39,6 +39,7 @@ html[theme="main"]{
 }
 #body-content{
     padding-bottom: 130px;
+    min-height: 100vh;
 }
 
 .arrow-btn-u, .arrow-btn-d, .arrow-btn-l, .arrow-btn-r{

@@ -110,7 +110,6 @@ const formatToPhone = (event) => {
     const firstPart = input.substring(4, 7);
     const secondPart = input.substring(7, 9);
     const thirdPart = input.substring(9, 11);
-    console.log(input.length);
     if(input.length >8){event.target.value = `${countryCode}(${areaCode})${firstPart}-${secondPart}-${thirdPart}`;}
     else if(input.length>6){event.target.value = `${countryCode}(${areaCode})${firstPart}-${secondPart}`;}
     else if(input.length>4){event.target.value = `${countryCode}(${areaCode})${firstPart}`;}
@@ -426,12 +425,20 @@ async function confirmOrder(){
     req = new XMLHttpRequest();
     req.open("POST", '/confirm_order');
     req.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-    respone = req.send(bodyDict);
+    req.onreadystatechange = () => {
+        if (req.readyState === XMLHttpRequest.DONE) {
+          const status = req.status;
+          if (status === 0 || (status >= 200 && status < 400)) {
+            setCookie('cart', JSON.stringify({}), 14);
+            window.location.reload();
+          } else {
+            hideAddFilesWindowA();
+            addVisibleEvent(false, `Ошибка ${status}, попробуйте повторить позже!`)
+          }
+        }
+      };
+    req.send(bodyDict);
     
-    if(response['code']==200){
-        hidePopUpWindow()
-    };
-
 }
 
 
