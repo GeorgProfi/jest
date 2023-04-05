@@ -115,12 +115,17 @@ def confirm_order(request):
             fileSS.save(files[i].name, files[i])
             cursor.execute(
                 f"""
-                        insert into main_fileforindividualorder(file)
-                        values('\{settings.MEDIA_ROOT}\{client_email}\{files[i].name}\');
-                        SELECT currval(pg_get_serial_sequence('main_fileforindividualorder','id')) as lid;
-                        insert into main_fileorder(order_id, file_id)
-                        values(lid, {order_id});
-                    """
+                    insert into main_fileforindividualorder(file)
+                    values('\{settings.MEDIA_ROOT}\{client_email}\{files[i].name}\');
+                    SELECT currval(pg_get_serial_sequence('main_fileforindividualorder','id')) as lid;
+                """
+            )
+            file_id = df.dictfetchall(cursor)[0]['lid']
+            cursor.execute(
+                f"""
+                    insert into main_fileorder(order_id, file_id)
+                    values({file_id}, {order_id});
+                """
             )
     return JsonResponse({'code': 200})
 
