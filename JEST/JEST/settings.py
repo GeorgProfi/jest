@@ -32,7 +32,7 @@ CSRF_TRUSTED_ORIGINS = []
 
 MEDIA_URL = '/files-orders/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files-orders')
-ALLOWED_FILE_FORMATS = ['doc', 'docx', 'txt', 'pdf', 'odt', 'wps', 'jpg', 'bmp', 'png', 'svg', 'jpeg']
+ALLOWED_FILE_FORMATS = ['doc', 'docx', 'txt', 'pdf', 'odt', 'wps', 'jpg', 'bmp', 'png', 'svg', 'jpeg', 'gif']
 ALLOWED_FILE_SIZE = 20971520
 ALLOWED_NUMBER_OF_FILES = 5
 
