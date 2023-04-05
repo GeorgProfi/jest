@@ -29,14 +29,10 @@ class Order(models.Model):
     delivery_type = models.ForeignKey(DeliveryType, on_delete=models.CASCADE)
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
     comment = models.CharField(max_length=500, null=True)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.datetime}"
-
-
-class StatusOrder(models.Model):
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
 class Post(models.Model):

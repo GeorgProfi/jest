@@ -53,14 +53,15 @@ def confirm_order(request):
     with connection.cursor() as cursor:
         cursor.execute(
             f"""
-                insert into main_order(sum, datetime, address, comment, delivery_type_id, payment_method_id)
+                insert into main_order(sum, datetime, address, comment, delivery_type_id, payment_method_id, status_id)
                 values(
                     {orderData['sum']},
                     '{datetime.now()}',
                     '{orderData['address']}',
                     '{orderData['comment']}',
                     {orderData['delivery_type_id']},
-                    {orderData['payment_method_id']}
+                    {orderData['payment_method_id']},
+                    3
                 );
                 SELECT currval(pg_get_serial_sequence('main_order','id')) as lid;
             """
@@ -102,15 +103,6 @@ def confirm_order(request):
                 values({cart[key]}, {order_id}, {key.split('$')[0]}, {key.split('$')[1]});
             """
         cursor.execute(query)
-        cursor.execute(
-            f"""
-                insert into main_statusorder(order_id, status_id)
-                values(
-                    {order_id},
-                    3
-                );
-            """
-        )
         files = request.FILES.getlist('files')
         countFiles = len(files)
         if countFiles > settings.ALLOWED_NUMBER_OF_FILES:
