@@ -116,7 +116,7 @@ def confirm_order(request):
             cursor.execute(
                 f"""
                     insert into main_fileforindividualorder(file)
-                    values('\{settings.MEDIA_ROOT}\{client_email}\{files[i].name}\');
+                    values('\\files-orders\{client_email}\{files[i].name}');
                     SELECT currval(pg_get_serial_sequence('main_fileforindividualorder','id')) as lid;
                 """
             )
