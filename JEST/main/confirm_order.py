@@ -44,11 +44,10 @@ def getPaymentMethods(request):
 
 
 def confirm_order(request):
-    orderData = json.loads(request.body)
+    orderData = request.POST
     gen_session(request)
     cart = json.loads(request.COOKIES['cart'])
     cart_keys = cart.keys()
-    print(cart)
 
     with connection.cursor() as cursor:
         cursor.execute(

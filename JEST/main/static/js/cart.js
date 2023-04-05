@@ -57,7 +57,7 @@ async function createAsyncPOSTRequest(url, csrftoken, bodyDict){
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'X-CSRFToken':csrftoken
-        }, body:JSON.stringify(bodyDict)}).then(response=>{
+        }, body:bodyDict}).then(response=>{
           if(response.status==200){
             data = response.json();
             return resolve(data);
@@ -410,19 +410,28 @@ async function createPaymentTypesOptions(){
 }
 
 async function confirmOrder(){
-    bodyDict = {}
-    bodyDict['sum'] = Number(document.getElementById('sum-itself').innerHTML.replace('₽', '').replaceAll('&nbsp;', ''));
-    bodyDict['name'] = document.getElementById('name').innerHTML;
-    bodyDict['surname'] = document.getElementById('surname').innerHTML;
-    bodyDict['address'] = document.getElementById('address').innerHTML;
-    bodyDict['phone_number'] = document.getElementById('phone-number').innerHTML;
-    bodyDict['delivery_type_id'] = document.getElementById('delivery-type').value;
-    bodyDict['payment_method_id'] = document.getElementById('payment-type').value;
-    bodyDict['comment'] = commentary;
-    response = await createAsyncPOSTRequest('/confirm_order', getCookie('csrftoken'), bodyDict);
+    bodyDict = new FormData();
+    bodyDict.append('sum', Number(document.getElementById('sum-itself').innerHTML.replace('₽', '').replaceAll('&nbsp;', '')));
+    bodyDict.append('name', document.getElementById('name').value);
+    bodyDict.append('surname', document.getElementById('surname').value);
+    bodyDict.append('address', document.getElementById('address').value);
+    bodyDict.append('phone_number', document.getElementById('phone-number').value);
+    bodyDict.append('delivery_type_id', document.getElementById('delivery-type').value);
+    bodyDict.append('payment_method_id',document.getElementById('payment-type').value);
+    files = document.getElementById('files').files;
+    for(var i = 0; i<files.length; i++){
+        bodyDict.append('files', files[i]);
+    }
+    bodyDict.append('comment', commentary);
+    req = new XMLHttpRequest();
+    req.open("POST", '/confirm_order');
+    req.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+    respone = req.send(bodyDict);
+    
     if(response['code']==200){
         hidePopUpWindow()
     };
+
 }
 
 
