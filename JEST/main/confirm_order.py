@@ -124,7 +124,7 @@ def confirm_order(request):
             cursor.execute(
                 f"""
                     insert into main_fileorder(order_id, file_id)
-                    values({file_id}, {order_id});
+                    values({order_id}, {file_id});
                 """
             )
     return JsonResponse({'code': 200})
