@@ -149,7 +149,7 @@ class ProductOrder(models.Model):
 
 
 class FileForIndividualOrder(models.Model):
-    file = models.CharField(max_length=50)
+    file = models.CharField(max_length=200)
 
 
 class ClienFile(models.Model):
