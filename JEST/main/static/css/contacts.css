@@ -75,7 +75,7 @@ h3 {
 .contact-us-card{
   display: flex;
   flex-direction: row;
-  width: 1000px;
+  width: 1100px;
   flex-wrap: nowrap;
   justify-content: space-between;
   margin: 20px;
@@ -84,7 +84,7 @@ h3 {
   display: flex;
   flex-direction: row;
   grid-gap: 15px;
-  width: 300px;
+  width: fit-content;
   align-items: center;
 }
 .card-info-icon{
@@ -103,7 +103,7 @@ h3 {
 .info {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 230px;
   height: 100px;
   justify-content: center;
 }
@@ -145,7 +145,7 @@ h3 {
     width: 550px;
   }
   .emploee-info{
-    width: 350px;
+    width: fit-content;
   }
 }
 
@@ -161,8 +161,17 @@ h3 {
     width: 190px;
     row-gap: 5px;
   }
+  .contact-us{
+    text-align: center;
+    margin-inline: 20px;
+  }
+  .contact-us-card{
+    width: fit-content;
+    flex-direction: column;
+    row-gap: 15px;
+  }
   .emploee-info{
-    width: 190px;
+    width: fit-content;
   }
 }
   
@@ -183,18 +192,6 @@ h3 {
   .profile-image {
     max-width: 280px;
     max-height: 280px;
-  }
-  .emploee-info{
-    width: 280px;
-  }
-  .contact-us{
-    text-align: center;
-    margin-inline: 20px;
-  }
-  .contact-us-card{
-    width: fit-content;
-    flex-direction: column;
-    row-gap: 15px;
   }
 }
 
