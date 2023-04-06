@@ -23,7 +23,8 @@ async function createAsyncGETRequest(url){
 
 document.querySelector('#add-to-cart-btn').addEventListener('click', ()=>{
   previous_active = (previous_active>0)?previous_active:0;
-  addToCart(id, sizes_btns[previous_active].innerHTML, 1);
+  var size = (sizes_btns[previous_active].innerHTML != undefined)? sizes_btns[previous_active].innerHTML : 0;
+  addToCart(id, size, 1);
 })
 
 
