@@ -35,6 +35,7 @@ async function createAsyncGETRequest(url){
 }
 
 async function addToCart(id, size, count, showEvent=true){
+    checkSession();
     cart = JSON.parse(getCookie('cart'));
     idsize = String(id)+ '$' +String(size);
     if(cart!=null){
@@ -57,6 +58,7 @@ async function addToCart(id, size, count, showEvent=true){
 }
 
 async function deleteFromCart(id, size){
+  checkSession();
   cart = JSON.parse(getCookie('cart'));
   idsize = String(id)+ '$' +String(size);
   if(cart!=null){

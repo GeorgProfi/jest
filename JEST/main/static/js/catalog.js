@@ -67,15 +67,20 @@ async function uncheck_filters(){
     
 }
 
+function listOfFuncs(){
+    delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0);deactivateShowProductsBtn()
+}
+
 async function deactivateShowProductsBtn(){
     btn = document.getElementById('show-filters-btn');
-    btn.setAttribute('onclick', '');
+    btn.removeEventListener('click', listOfFuncs);
 }
 
 async function activateShowProductsBtn(){
     btn = document.getElementById('show-filters-btn');
-    btn.setAttribute('onclick',"delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0);deactivateShowProductsBtn();");
+    btn.addEventListener('click', listOfFuncs);
 }
+
 
 function showOnCheck(elem){
     checked = elem.checked;
@@ -193,7 +198,9 @@ async function fixGrid(){
     grid.className = "fixed";
 }
 
-function showFilterContent(elem){
+function showFilterContent(e){
+    elem = e.currentTarget;
+    elem.removeEventListener('click', showFilterContent, false);
     box = elem.parentNode;
     elem.children[1].className="arrow-btn-u"
     content = box.children[2];
@@ -201,10 +208,12 @@ function showFilterContent(elem){
     content.style="opacity:0;";
     div_line.style = "opacity:0"
     setTimeout(()=>{content.style="opacity:1;";}, 100);
-    elem.setAttribute('onclick',"hideFilterContent(this);");
+    elem.addEventListener('click', hideFilterContent);
 }
 
-function hideFilterContent(elem){
+function hideFilterContent(e){
+    elem = e.currentTarget;
+    elem.removeEventListener('click', hideFilterContent, false);
     box = elem.parentNode;
     content = box.children[2];
     div_line = box.children[1];
@@ -212,9 +221,9 @@ function hideFilterContent(elem){
     div_line.style = "opacity:1";
     setTimeout(()=>{
         content.style="display:none"
-    }, 300);
+    }, 100);
     elem.children[1].className="arrow-btn-d"
-    elem.setAttribute('onclick',"showFilterContent(this);");
+    elem.addEventListener('click', showFilterContent);
 }
 
 async function setSliderPadding(min_value, max_value){
@@ -316,9 +325,9 @@ async function create_and_fill_filters(){
             is_special = true;
         }
 
-        title_n_arrow = document.createElement('a');
+        var title_n_arrow = document.createElement('a');
         title_n_arrow.className = 'title-n-arrow flex-row';
-        title_n_arrow.setAttribute('onclick', 'showFilterContent(this)');
+        title_n_arrow.addEventListener('click', showFilterContent)
 
         title = document.createElement('h2');
         title.innerHTML = header;
@@ -349,7 +358,7 @@ async function create_and_fill_filters(){
 
             input = document.createElement('input');
             input.setAttribute('type', 'checkbox');
-            input.setAttribute('onchange', 'activateShowProductsBtn()');
+            input.addEventListener('change', activateShowProductsBtn);
             if(is_special){
                 input.setAttribute('onchange', input.getAttribute('onchange')+';showOnCheck(this)')
             }
@@ -427,6 +436,21 @@ async function delete_products(){
     html_count.setAttribute('value', html_grid.children.length);
 }
 
+async function showCardHoverPart(e){
+    elem = e.currentTarget;
+    elem.children[1].style='';
+    console.log(getComputedStyle(elem.parentNode).getPropertyValue('row-gap'));
+    sideMargin = parseInt(getComputedStyle(elem).getPropertyValue('border-left'));
+    topMargin = parseInt(getComputedStyle(elem).getPropertyValue('border-top'));
+    elem.style=`margin: -15px -${sideMargin}px -${Number(elem.offsetHeight) - parseInt(getComputedStyle(elem.parentNode).getPropertyValue('row-gap'))}px -${sideMargin}px`;
+}
+async function hideCardHoverPart(e){
+    elem = e.currentTarget;
+    elem.style=``;
+    elem.children[1].style='display:none';
+}
+
+
 async function create_products(url, empty=false){
     count = 0;
     if(!empty){
@@ -456,8 +480,8 @@ async function create_products(url, empty=false){
 
         card = document.createElement('div');
         card.className = 'product-card flex-column';
-        card.setAttribute('onMouseOver',"this.children[1].style=''");
-        card.setAttribute('onMouseOut',"this.children[1].style='display:none;'");
+        card.addEventListener('mouseover', showCardHoverPart);
+        card.addEventListener('mouseout', hideCardHoverPart);
 
         visible_part = document.createElement('a');
         visible_part.href=`/product_page/${product['id']}`;
@@ -491,8 +515,9 @@ async function create_products(url, empty=false){
 
         cart_button = document.createElement('button');
         cart_button.className = 'focus-btn cart-btn';
+        cart_button.prodId = product['id']
         cart_button.innerHTML = 'В корзину';
-        cart_button.setAttribute('onclick', `addToCart(${product['id']}, 0, 1)`)
+        cart_button.addEventListener('click', (e)=>addToCart(e.currentTarget.prodId, 0, 1))
         hover_part.appendChild(cart_button);
 
         add_info = document.createElement('div');
@@ -572,3 +597,4 @@ async function try_to_search(){
 
 create_and_fill_filters();
 try_to_search();
+activateShowProductsBtn();

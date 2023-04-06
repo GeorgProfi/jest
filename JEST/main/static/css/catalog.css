@@ -23,6 +23,7 @@
     row-gap: 20px;
 }
 #filters{
+    align-items: center;
     transition: all 0.3s linear 0s;
 }
 .div-line{
@@ -350,7 +351,7 @@ h2{
         max-width: 100px;
     }
     #products-grid.fixed{
-        max-width: 700px;
+        max-width: fit-content;
     }
     #products-grid{
         grid-template-columns: repeat(3, 1fr);
@@ -427,7 +428,7 @@ h2{
         width: 400px;
     }
     #products-grid.fixed{
-        width: fit-content;
+        width: 100%;
     }
     #head-catalog, #full-filters{
         width: 100%;

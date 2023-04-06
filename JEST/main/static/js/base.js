@@ -1,6 +1,7 @@
 email_g = '';
 numerics = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,0];
 there_is_error = false;
+
  
 addEventListener('resize', ()=>{if(document.activeElement['type']!='text'){hideSearchInput(); }});
 
@@ -94,7 +95,6 @@ function setCookie(cname, cvalue, exdays) {
 
 async function search(product){
     product = product.replace(/ /g, '+');
-    console.log(product);
     window.location.href = `/catalog?title=${product}`
 
 }
@@ -182,7 +182,7 @@ function hideMobileFilters(elem){
     mob_filter = document.getElementById('full-filters');
     mob_filter.style.transform = "translateX(-100%)";
     mob_filter.style = "opacity:0";
-    setTimeout(()=>{mob_filter.style = "display:none";}, 300);
+    setTimeout(()=>{mob_filter.style = "";}, 300);
 }
 
 
@@ -231,6 +231,7 @@ async function activatCodeInput(elem){
 }
 
 function accountEventHandler(){
+    checkSession();
     us = getCookie('us');
     if (us != null){
         window.location='/account';
@@ -260,6 +261,7 @@ function autopaste(event, elem){
 }
 
 async function try_enter(){
+    checkSession();
     email = email_g;
     codeinputs = document.getElementById('code-inputs');
     code = '';
@@ -274,4 +276,10 @@ async function try_enter(){
         showPopupError('Неверно введён код', 'code-enter');
     }
     
+}
+function checkSession(){
+    var sessionId = getCookie('csrftoken');
+    if(sessionId == null || sessionId == undefined){
+        window.location.reload();
+    }
 }

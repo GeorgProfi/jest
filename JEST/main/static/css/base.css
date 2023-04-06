@@ -288,7 +288,6 @@ header{
 #filter-mob-icon{
     width: 30px;
     height: 30px;
-    margin: 7px 16px;
     background-image: url("../svg/filter.svg");
 }
 
@@ -465,7 +464,7 @@ footer{
     border-color: var(--popup-code-input);
     color: var(--popup-code-input);
 }
-#code-inputs>input.error{
+input.error{
     border-color: var(--popup-error);
     color: var(--popup-error);
 }
