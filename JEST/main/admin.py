@@ -70,15 +70,11 @@ from django.urls import reverse
 from django.utils.http import urlencode
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-
-    #fields = ['sum','datetime','address','delivery_type','payment_method','comment','client_object']
-    list_display = ("datetime", "address", "client_name")
+    list_filter = ("status","delivery_type")
+    list_display = ("id","datetime","client_name", "address")
     def client_name(self, obj):
         idOrder= obj.id
         idClientorder = ClientOrder.objects.filter(order = idOrder)
+        print (idClientorder[0])
         return f'{idClientorder[0].client.name} {idClientorder[0].client.surname}'
 
-    def client_object(self, obj):
-        self.idOrder= obj.id
-        self.idClientorder = ClientOrder.objects.filter(order = self.idOrder)
-        return self.isClientorder
