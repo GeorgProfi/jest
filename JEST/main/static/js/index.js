@@ -2,6 +2,11 @@ window.onresize = ()=>{
   reviewsContainerOnResize();
 }
 
+function loadingAnimation() {
+  document.body.classList.toggle('loading');
+}
+
+
 
 async function createAsyncGETRequest(url){
     return new Promise((resolve, reject) => {
@@ -207,8 +212,7 @@ function add_review_to(side){
     reviews_block.children[column_count-1].style = "";
   }
 }
-create_why_reasons(),
-create_reviews(),
-create_faq(),
+create_why_reasons()
+create_reviews()
+create_faq()
 create_mpp()
-

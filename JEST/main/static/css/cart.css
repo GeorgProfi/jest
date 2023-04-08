@@ -149,6 +149,7 @@ h1{
 
 .add-files-btn{
     max-width: 165px;
+    height: fit-content;
     width: fit-content;
     padding: 10px;
     background-color: #434040;
@@ -197,7 +198,13 @@ h1{
     height: 120px;
 }
 
+#own-inner{
+    align-items: center;
+}
+
 #filenames{
+    flex-wrap: wrap;
+    max-width: 60%;
     margin-left: 10px;
     row-gap: 10px;
     column-gap: 10px;
@@ -284,6 +291,7 @@ h1{
         flex-direction: column;
         max-width: 200px;
         align-items: center;
+        justify-content: center;
     }
     #filenames{
         margin: 0;

@@ -6,7 +6,8 @@ already_sent = false;
 function loadProductsOnScroll(){
     if ((document.body.scrollTop/document.body.scrollHeight)>0.1){
         already_on_page = document.getElementById('products-count').getAttribute('value');
-        showFiltredProducts(Number(already_on_page)+10, already_on_page);
+        showFiltredProducts(Number(already_on_page)+10, already_on_page, 'scroll');
+        deactivateShowProductsBtn();
         window.onscroll = '';
 }}
 
@@ -68,7 +69,7 @@ async function uncheck_filters(){
 }
 
 function listOfFuncs(){
-    delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0);deactivateShowProductsBtn()
+    delete_products();create_products('', true);writeFiltersToCurrent();showFiltredProducts(10, 0, 'button');deactivateShowProductsBtn();
 }
 
 async function deactivateShowProductsBtn(){
@@ -164,7 +165,7 @@ function writeFiltersToCurrent(){
     current_filter['min_price'] = min_price;
 }
 
-async function showFiltredProducts(count, already_on_page){
+async function showFiltredProducts(count, already_on_page, sender){
     if(!already_sent){
     already_sent = true;
     max_price = current_filter['max_price'];
@@ -465,11 +466,17 @@ async function create_products(url, empty=false){
         }
         there_is_empty_cards = false;
     } else {
-        data = {'count':5, 'data':[{'id':'-1', 'title':'', 'image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=', 'price':'', 'gems':'', 'material':''}, 
-        {'id':'-1', 'title':'','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'', 'gems':'', 'material':''}, 
-        {'id':'-1', 'title':'','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=', 'price':'', 'gems':'', 'material':''},
-        {'id':'-1', 'title':'','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'', 'gems':'', 'material':''},
-        {'id':'-1','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'title':'', 'price':'', 'gems':'', 'material':''}]}
+        count = 10;
+        data = {'count':10, 'data':[{'id':'-1', 'title':'Всевидящее око', 'image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=', 'price':'20000', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'20000', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'20000', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'20000', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'20000', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'20000', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'20000', 'gems':'', 'material':''}, 
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=', 'price':'20000', 'gems':'', 'material':''},
+        {'id':'-1', 'title':'Всевидящее око','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'price':'20000', 'gems':'', 'material':''},
+        {'id':'-1','image':'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',  'title':'Всевидящее око', 'price':'20000', 'gems':'', 'material':''}]}
         products_data = data['data'];
         there_is_empty_cards = true
         html_count.setAttribute('value', 15);
@@ -493,6 +500,7 @@ async function create_products(url, empty=false){
 
         image = document.createElement('img');
         image.className = 'product-image centered';
+        if(empty)image.className+=" animated-background";
         image.src = product['image'];
         visible_part.appendChild(image);
 
@@ -501,11 +509,13 @@ async function create_products(url, empty=false){
         
         title = document.createElement('span');
         title.className = 'product-big-text';
+        if(empty)title.className+=" animated-background";
         title.innerHTML = product['title'];
         product_visible_info.appendChild(title);
 
         price = document.createElement('span');
         price.className = 'product-big-text';
+        if(empty)price.className+=" animated-background";
         price.innerHTML = Number(product['price']).toLocaleString("ru-RU") + '₽';
         product_visible_info.appendChild(price);
 
@@ -559,6 +569,7 @@ async function create_products(url, empty=false){
             card.append(hover_part);
             html_grid.appendChild(card);
             html_count.innerHTML = `Результат: ${html_grid.children.length}`;
+            if(empty)html_count.innerHTML = `Результат: `;
             html_count.setAttribute('value', html_grid.children.length);
         }
     }
@@ -594,7 +605,7 @@ async function try_to_search(){
         min_price = price_slider.children[3].value;
         current_filter['max_price'] = 30000;
         current_filter['min_price'] = min_price;
-        showFiltredProducts(15, 0)}, 300);
+        showFiltredProducts(15, 0, 'no products')}, 300);
     }
 }
 

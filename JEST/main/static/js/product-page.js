@@ -94,7 +94,7 @@ async function fillProductInfo(){
   description.className = "";
   description.style = "";
 
-  charcs = document.getElementById('product-characteristics');
+  charcs = document.getElementById('product-characteristic');
   materials = data['material'];
   materials = (materials == null || materials == undefined)?{}:materials;
   for(izi = 0; izi<materials.length; izi++){

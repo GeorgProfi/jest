@@ -26,6 +26,7 @@ html[theme="main"]{
     --popup-code-input:#464A9F;
     --arrow-color:rgba(0, 0, 0, 0);
     --body-no-image:#C2C1C1;
+    --body-no-image-first-stage:#eeeeee;
     --focus-link:#FFFFFF;
     --empty-color:#C2C1C1;
     --footer-text:#FFFFFF;
@@ -33,6 +34,29 @@ html[theme="main"]{
     --cart-product-card:#F8F8F8;
     --nav-link-active:#000000;
 }
+
+@keyframes placeHolderShimmer {
+    0% {
+      background-position: -500px 0
+    }
+    100% {
+      background-position: 500px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    color: transparent !important;
+    animation-timing-function: linear;
+    background-color: var(--body-no-image-first-stage);
+    background: linear-gradient(to right, var(--body-no-image-first-stage) 8%, var(--body-no-image) 18%, var(--body-no-image-first-stage) 33%);
+    background-size: 500px 100vh;
+    position: relative;
+}
+  
 
 .empty{
     background-color: var(--empty-color);

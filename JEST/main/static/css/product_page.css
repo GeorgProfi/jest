@@ -85,6 +85,7 @@ a .border0 {
 }
 
 #product-page-center {
+  row-gap: 20px;
   grid-area: center;
 }
 

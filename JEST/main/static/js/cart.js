@@ -284,98 +284,115 @@ function hideAddFilesWindowA(){
 async function createCartInfo(){
     cart = JSON.parse(getCookie('cart'));
     cart = (cart==undefined)?{}:cart;
-    if(Object.keys(cart).length>0){
-        
+    keys = Object.keys(cart)
+    if(keys.length>0){
         product_html = document.getElementById('products');
         productCard = document.createElement('div');
         productCard.className = 'product-card flex-row';
         productCard.style.opacity = 0;
         product_html.appendChild(productCard);
-        data = await createAsyncGETRequest('/cart-product-info');
+        var emptyData = [];
+        var fakeKeys = [];
+        for(var z = 1; z<keys.length+1; z++){
+            emptyData.push({'id': `-${z}`, 'image': "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=", 'price': 15000, 'title': "Всевидящее око"});
+            fakeKeys.push(`-${z}$${z}`);
+        }
+        createCartCards(emptyData,keys.length, fakeKeys, true);
+        var data = await createAsyncGETRequest('/cart-product-info');
         count = data['count'];
         data = JSON.parse(data['data']);
-        product_html.innerHTML = "";
-        for(jji = 0; jji<count; jji++){
-            product = data[jji];
-            regexp = new RegExp(`${product['id']}`)
-            sizes = Object.keys(cart).filter(key=>key.split('$')[0]==product['id']);
-            if(product['id']!=0){
-                for(zzi = 0; zzi<sizes.length; zzi++){
-                    size = sizes[zzi].split('$')[1];
-
-                    productCard = document.createElement('div');
-                    productCard.className = 'product-card flex-row';
-
-                    productLinkable = document.createElement('a');
-                    productLinkable.className = 'product-linkable flex-row';
-                    productLinkable.setAttribute('href', `/product_page/${product['id']}`);
-
-                    productImage = document.createElement('img');
-                    productImage.className = 'prodcut-image';
-                    productImage.setAttribute('src', product['image']);
-                    productLinkable.appendChild(productImage);
-
-                    productTitleID = document.createElement('div');
-                    productTitleID.className = 'product-titleId flex-column';
-
-                    productTitle = document.createElement('span');
-                    productTitle.className = 'product-title';
-                    productTitle.innerHTML = product['title'];
-                    productTitleID.appendChild(productTitle);
-
-                    productID = document.createElement('span');
-                    productID.className = 'product-id';
-                    productID.innerHTML = product['id'];
-                    productTitleID.appendChild(productID);
-                    productLinkable.appendChild(productTitleID);
-                    productCard.appendChild(productLinkable);
-
-                    productPrice = document.createElement('span');
-                    productPrice.className = 'product-price';
-                    productPrice.innerHTML = product['price'].toLocaleString('ru-RU')+'₽';
-                    productCard.appendChild(productPrice);
-
-                    productSize = document.createElement('span');
-                    productSize.className = 'product-size';
-                    productSize.innerHTML = (size>0)?size:'';
-                    productCard.appendChild(productSize);
-
-                    productQuantityControls = document.createElement('div');
-                    productQuantityControls.className = 'count-controls flex-row';
-
-                    productMinusBtn = document.createElement('buttton');
-                    productMinusBtn.className = 'product-control';
-                    productMinusBtn.innerHTML = '-';
-                    productMinusBtn.setAttribute('onclick', `addToCart(${product['id']}, ${size}, -1);setCount(${product['id']}, ${size}, this.parentNode.children[1]), false`);
-                    productQuantityControls.appendChild(productMinusBtn);
-
-                    productQuantity = document.createElement('span');
-                    productQuantity.className = 'counter';
-                    productQuantity.innerHTML = cart[sizes[zzi]];
-                    productQuantityControls.appendChild(productQuantity);
-
-                    productPlusBtn = document.createElement('buttton');
-                    productPlusBtn.className = 'product-control';
-                    productPlusBtn.innerHTML = '+';
-                    productPlusBtn.setAttribute('onclick', `addToCart(${product['id']}, ${size}, 1);setCount(${product['id']}, ${size}, this.parentNode.children[1])`);
-                    productQuantityControls.appendChild(productPlusBtn);
-                    productCard.appendChild(productQuantityControls);
-
-                    productDeleteBtn = document.createElement('buttton');
-                    productDeleteBtn.className = 'product-delete';
-                    productDeleteBtn.setAttribute('onclick', `deleteFromCart(${product['id']}, ${size});setCount(${product['id']}, ${size}, this);`);
-                    productCard.appendChild(productDeleteBtn);
-
-                    product_html.appendChild(productCard);
-                }
-            } else {
-                own_order = document.getElementById('own-order');
-                own_order.style="";
-            }
-        }
+        createCartCards(data, keys.length, keys, false);
         recalculateAndSetSumm();
     } else {
         createCartEmptyCard();
+    }
+}
+async function createCartCards(data, count, cartKeys, isEmpty = 0){
+    product_html = document.getElementById('products');
+    product_html.innerHTML = "";
+    for(jji = 0; jji<count; jji++){
+        product = data[jji];
+        regexp = new RegExp(`${product['id']}`);
+        sizes = cartKeys.filter(key=>key.split('$')[0]==product['id']);
+        if(product['id']!=0){
+            for(zzi = 0; zzi<sizes.length; zzi++){
+                size = sizes[zzi].split('$')[1];
+
+                productCard = document.createElement('div');
+                productCard.className = 'product-card flex-row';
+
+                productLinkable = document.createElement('a');
+                productLinkable.className = 'product-linkable flex-row';
+                if(!isEmpty)productLinkable.setAttribute('href', `/product_page/${product['id']}`);
+
+                productImage = document.createElement('img');
+                productImage.className = 'prodcut-image';
+                if(isEmpty)productImage.className += " animated-background";
+                productImage.setAttribute('src', product['image']);
+                productLinkable.appendChild(productImage);
+
+                productTitleID = document.createElement('div');
+                productTitleID.className = 'product-titleId flex-column';
+
+                productTitle = document.createElement('span');
+                productTitle.className = 'product-title';
+                if(isEmpty)productTitle.className += " animated-background";
+                productTitle.innerHTML = product['title'];
+                productTitleID.appendChild(productTitle);
+
+                productID = document.createElement('span');
+                productID.className = 'product-id';
+                if(isEmpty)productID.className += " animated-background";
+                productID.innerHTML = product['id'];
+                productTitleID.appendChild(productID);
+                productLinkable.appendChild(productTitleID);
+                productCard.appendChild(productLinkable);
+
+                productPrice = document.createElement('span');
+                productPrice.className = 'product-price';
+                if(isEmpty)productPrice.className += " animated-background";
+                productPrice.innerHTML = product['price'].toLocaleString('ru-RU')+'₽';
+                productCard.appendChild(productPrice);
+
+                productSize = document.createElement('span');
+                productSize.className = 'product-size';
+                if(isEmpty)productSize.className += " animated-background";
+                productSize.innerHTML = (size>0)?size:'';
+                productCard.appendChild(productSize);
+
+                productQuantityControls = document.createElement('div');
+                productQuantityControls.className = 'count-controls flex-row';
+
+                productMinusBtn = document.createElement('buttton');
+                productMinusBtn.className = 'product-control';
+                productMinusBtn.innerHTML = '-';
+                if(!isEmpty)productMinusBtn.setAttribute('onclick', `addToCart(${product['id']}, ${size}, -1);setCount(${product['id']}, ${size}, this.parentNode.children[1]), false`);
+                productQuantityControls.appendChild(productMinusBtn);
+
+                productQuantity = document.createElement('span');
+                productQuantity.className = 'counter';
+                if(isEmpty)productQuantity.className += " animated-background";
+                productQuantity.innerHTML = cart[sizes[zzi]];
+                productQuantityControls.appendChild(productQuantity);
+
+                productPlusBtn = document.createElement('buttton');
+                productPlusBtn.className = 'product-control';
+                productPlusBtn.innerHTML = '+';
+                if(!isEmpty)productPlusBtn.setAttribute('onclick', `addToCart(${product['id']}, ${size}, 1);setCount(${product['id']}, ${size}, this.parentNode.children[1])`);
+                productQuantityControls.appendChild(productPlusBtn);
+                productCard.appendChild(productQuantityControls);
+
+                productDeleteBtn = document.createElement('buttton');
+                productDeleteBtn.className = 'product-delete';
+                if(!isEmpty)productDeleteBtn.setAttribute('onclick', `deleteFromCart(${product['id']}, ${size});setCount(${product['id']}, ${size}, this);`);
+                productCard.appendChild(productDeleteBtn);
+
+                product_html.appendChild(productCard);
+            }
+        } else {
+            own_order = document.getElementById('own-order');
+            own_order.style="";
+        }
     }
 }
 

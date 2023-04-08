@@ -12,6 +12,10 @@ const isNumericInput = (event) => {
     );
 };
 
+function loadingAnimation() {
+    document.body.classList.toggle('loading');
+}
+
 
 async function createAsyncPOSTRequest(url, csrftoken, bodyDict){
     return new Promise((resolve, reject) => {
