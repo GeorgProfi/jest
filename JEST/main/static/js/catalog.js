@@ -308,6 +308,8 @@ async function create_and_fill_filters(){
     evt = new Event('change');
     max_price_slider.dispatchEvent(evt);
     min_price_slider.dispatchEvent(evt);
+    price_anchor = document.getElementById('price-box').children[0];
+    price_anchor.addEventListener('click', showFilterContent)
     for(var i in filter_headers_value){
         header = i;
         values = data[filter_headers_value[header]];
