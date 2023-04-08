@@ -439,10 +439,11 @@ async function delete_products(){
 async function showCardHoverPart(e){
     elem = e.currentTarget;
     elem.children[1].style='';
-    console.log(getComputedStyle(elem.parentNode).getPropertyValue('row-gap'));
-    sideMargin = parseInt(getComputedStyle(elem).getPropertyValue('border-left'));
-    topMargin = parseInt(getComputedStyle(elem).getPropertyValue('border-top'));
-    elem.style=`margin: -15px -${sideMargin}px -${Number(elem.offsetHeight) - parseInt(getComputedStyle(elem.parentNode).getPropertyValue('row-gap'))}px -${sideMargin}px`;
+    sideMargin = parseFloat(getComputedStyle(elem).getPropertyValue('border-left'));
+    topMargin = parseFloat(getComputedStyle(elem).getPropertyValue('border-top'));
+    rowGap = parseFloat(getComputedStyle(elem.parentNode).getPropertyValue('row-gap'));
+    columnGap = parseFloat(getComputedStyle(elem.parentNode).getPropertyValue('column-gap'));
+    elem.style=`margin: -${topMargin}px -${sideMargin+columnGap}px -${Number(elem.offsetHeight) - topMargin}px -${sideMargin}px`;
 }
 async function hideCardHoverPart(e){
     elem = e.currentTarget;

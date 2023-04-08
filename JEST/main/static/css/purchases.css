@@ -58,6 +58,17 @@ span {
   row-gap: 5px;
   width: 300px;
 }
+.order-product-title{
+  width: 200px;
+}
+.order-product-count{
+  width: 10px;
+}
+
+.order-product-price{
+  width: 70px;
+}
+
 .order-total-sum{
   width: fit-content;
   height: fit-content;
