@@ -97,7 +97,7 @@ function showOnCheck(elem){
             hidden_content = hidden_container.children[2];
             for (jjjj = 0; jjjj<hidden_content.children.length; jjjj++){
                 check_box = hidden_content.children[jjjj];
-                if(check_box.getAttribute('showOn').split(',').includes(checkbox_title)){
+                if(check_box.getAttribute('showOn').split(',').includes(checkbox_title)&&check_box.id != "null"){
                     check_box.style = "";
                     hidden_container.style='';
                 }
@@ -604,6 +604,7 @@ async function try_to_search(){
             }
             create_products(url_base);   
     } else{
+        delete_products();
         fixGrid();
     }
     }else{

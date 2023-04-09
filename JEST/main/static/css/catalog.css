@@ -331,7 +331,7 @@ h2{
 
 @media screen and (max-width: 1600px){
     #products-grid.fixed{
-        min-width: 800px;
+        min-width: fit-content;
     }
     #products-grid{
         grid-template-columns: repeat(3, 1fr);

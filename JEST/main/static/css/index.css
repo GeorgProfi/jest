@@ -243,22 +243,22 @@ h4{
 
 .faq-container{
     display: flex;
-    row-gap: 28px;
     flex-direction: column;
     cursor: pointer;
     width: 780px;
-    padding: 28px 0;
-    height: fit-content;
     border: 3px solid var(--body-border);
     border-radius: 10px;
+    height: fit-content;
+    transition: all ease-in-out 0.3s height;
 }
 
 .faq-question{
     font-family: 'Montserrat';
     font-weight: 700;
     font-size: 20px;
-    padding: 0px 20px;
+    padding: 28px 20px;
     color: var(--body-h);
+
 }
 
 .faq-line{
@@ -272,8 +272,10 @@ h4{
     font-weight: 500;
     display: none;
     font-size: 16px;
-    padding: 0px 20px;
+    padding: 28px 20px;
     color: var(--body-h);
+    margin: -1px 0;
+    transition: all ease-in-out 0.3s;
 }
 @media screen and (max-width: 1600px){
     #reviews-block{
@@ -297,7 +299,12 @@ h4{
     .review-container{
         width: 170px;
         min-height: 207px;
-        height: fit-content;
+        max-height: 207px;
+    }
+    .review-text{
+        max-height: 70%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     #focus-banner-image{
         width: 270px;

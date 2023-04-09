@@ -185,16 +185,19 @@ async function create_mpp(){
 }
 
 async function open_faq(elem){
-  elem.setAttribute('onclick',"close_faq(this)");
+  elem.setAttribute('onclick',"");
   for(let i = 1; i<elem.children.length; i++){
-   elem.children[i].style='display:inline';
+   elem.children[i].style='opacity:0; display:flex; position:absolute;';
+   setTimeout(()=>elem.children[i].style='opacity:1; display:flex;', 30);
+   setTimeout(()=>elem.setAttribute('onclick',"close_faq(this)"), 270);
   }
 }
 
 async function close_faq(elem){
-  elem.setAttribute('onclick',"open_faq(this)");
+  elem.setAttribute('onclick',"");
   for(let i = 1; i<elem.children.length; i++){
-   elem.children[i].style='display:none';
+    elem.children[i].style='opacity:0; display:flex;';
+    setTimeout(()=>{elem.setAttribute('onclick',"open_faq(this)"); elem.children[i].style='display:none;', 300});
   }
 }
 function add_review_to(side){
