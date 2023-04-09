@@ -6,6 +6,7 @@ from . import main_page, history, contacts, catalog, login, cart, product_page, 
 
 admin.site.site_header = f'Arts & Crafts\nПанель Управления'
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page.render_main),
