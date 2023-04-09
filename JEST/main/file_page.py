@@ -9,7 +9,8 @@ from JEST import settings
 
 def get_file(request, email, path):
     query = f"""
-        select * from main_client
+        select main_client.email from
+        main_client join main_emailuuid on main_client.email = main_emailuuid.email
         where uuid = '{request.session.session_key}';
         """
     with connection.cursor() as cursor:
@@ -19,7 +20,6 @@ def get_file(request, email, path):
     try:
         id_and_email = rows[0]
         client_email = id_and_email['email']
-        print(client_email)
     except Exception:
         client_email = ''
     if email == client_email:
