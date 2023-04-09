@@ -66,7 +66,6 @@ class Client(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
-    uuid = uuid = models.CharField(max_length=32)
     phone_number = models.CharField(max_length=20)
 
 
@@ -191,3 +190,9 @@ class Faqs(models.Model):
 
     def __str__(self):
         return f"{self.question} (id={self.id}) "
+
+
+class EmailUUID(models.Model):
+    email = models.CharField(max_length=50)
+    uuid = models.CharField(max_length=32)
+

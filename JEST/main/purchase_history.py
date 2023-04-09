@@ -10,11 +10,20 @@ import json
 
 def purchases(request):
 
-    query = f"""
-    select * from purchases
-    where uuid = '{request.session.session_key}';
-    """
+
     with connection.cursor() as cursor:
+        cursor.execute(
+            f"""
+                select main_client.email from
+                main_client join main_emailuuid on main_client.email = main_emailuuid.email
+                where uuid = '{request.session.session_key}';
+            """
+        )
+        email = df.dictfetchall(cursor)[0]['email']
+        query = f"""
+            select * from purchases
+            where email = '{email}';
+            """
         data = []
         cursor.execute(query)
         rows = df.dictfetchall(cursor)
