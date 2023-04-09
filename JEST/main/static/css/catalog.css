@@ -1,6 +1,7 @@
 #sides{
     display: flex;
     flex-direction: row;
+    width: 100%;
     padding: 55px 0;
     column-gap: 125px;   
 }
@@ -239,7 +240,7 @@ h2{
     row-gap: 40px;
 }
 #products-grid.fixed{
-    width: 1100px;
+    min-width: 1085px;
 }
 
 .card-visible-part{
@@ -330,7 +331,7 @@ h2{
 
 @media screen and (max-width: 1600px){
     #products-grid.fixed{
-        max-width: 800px;
+        min-width: 800px;
     }
     #products-grid{
         grid-template-columns: repeat(3, 1fr);
@@ -397,6 +398,9 @@ h2{
     #products-grid{
         column-gap: 10vw;
     }
+    #products-grid.fixed{
+        min-width: 100%;
+    }
     #products-text-headers{
         justify-content: center;
     }
@@ -415,6 +419,7 @@ h2{
         display: none;
     }
     #head-catalog {
+        transition: all 0.3s ease-in-out;
         column-gap: 20px;
         flex-wrap: nowrap;
         justify-content: space-between;

@@ -469,6 +469,12 @@ async function confirmOrder(){
         req = new XMLHttpRequest();
         req.open("POST", '/confirm_order');
         req.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+        waiter = document.getElementById('waiter');
+        waiter.style = "";
+        filesWaiter = document.getElementById('files-waiter');
+        if(files.length>0){
+            filesWaiter.style.display = 'flex';
+        }
         req.onreadystatechange = () => {
             if (req.readyState === XMLHttpRequest.DONE) {
             const status = req.status;
@@ -481,6 +487,7 @@ async function confirmOrder(){
             }
             }
         };
+
         req.send(bodyDict);}
     } else {
         showLoginWindow();

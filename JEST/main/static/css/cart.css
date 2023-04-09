@@ -16,6 +16,24 @@ h1{
     color: var(--body-h);
 }
 
+#waiter{
+    content: '';
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--body-text);
+    display: grid;
+    z-index: 999;
+    position: fixed;
+    align-content: center;
+}
+#waiter span{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
 #sides{
     column-gap: 40px;
 }

@@ -145,6 +145,10 @@
         </div>
     </div>
     <div id="confirm-order-window" style="display: none;" class="popup-modal-window" onclick="hidePopUpWindow(event, this)">
+        <div id="waiter" style="display:none;">
+            <span>Пожалуйста подождите, заказ оформляется</span>
+            <span id="files-waiter" style="display:none;">Загрузка файлов может занять какое-то время</span>
+        </div>
         <div id="confirm-order-inner" class="popup-content flex-column centered centered-v">
             <span class="popup-header-text">Введите данные</span>
             <div class="flex-column">

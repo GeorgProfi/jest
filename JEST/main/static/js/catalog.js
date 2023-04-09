@@ -1,10 +1,11 @@
 
 window.onscroll = loadProductsOnScroll;
 already_sent = false;
+previous_is_zero = false;
 
 
 function loadProductsOnScroll(){
-    if ((document.body.scrollTop/document.body.scrollHeight)>0.1){
+    if ((document.body.scrollTop/document.body.scrollHeight)>0.1 && !previous_is_zero){
         already_on_page = document.getElementById('products-count').getAttribute('value');
         showFiltredProducts(Number(already_on_page)+10, already_on_page, 'scroll');
         deactivateShowProductsBtn();
@@ -74,11 +75,13 @@ function listOfFuncs(){
 
 async function deactivateShowProductsBtn(){
     btn = document.getElementById('show-filters-btn');
+    btn.innerHTML = "Подождите";
     btn.removeEventListener('click', listOfFuncs);
 }
 
 async function activateShowProductsBtn(){
     btn = document.getElementById('show-filters-btn');
+    btn.innerHTML = "Показать";
     btn.addEventListener('click', listOfFuncs);
 }
 
@@ -460,6 +463,11 @@ async function create_products(url, empty=false){
     if(!empty){
         data = await createAsyncGETRequest(url);
         count = data['count'];
+        if(count<1){
+            previous_is_zero = true;
+        } else{
+            previous_is_zero = false;
+        }
         products_data = JSON.parse(data['data']);
         if(there_is_empty_cards){
             delete_products();
