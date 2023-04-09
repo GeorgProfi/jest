@@ -95,16 +95,17 @@ def login(request):
             if len(cursor.fetchall()) <= 0:
                 cursor.execute(
                     f"""
-                        INSERT INTO main_client(email, uuid)
+                        INSERT INTO main_client(email)
+                        VALUES('{email}');
+                        INSERT INTO main_emailuuid(email, uuid)
                         VALUES('{email}', '{request.session.session_key}');
                     """
                 )
             else:
                 cursor.execute(
                     f"""
-                        UPDATE main_client
-                        set uuid = '{request.session.session_key}'
-                        where email = '{email}';
+                        INSERT INTO main_emailuuid(email, uuid)
+                        VALUES('{email}', '{request.session.session_key}');
                     """
                 )
         return JsonResponse({'code': 200, 'us': user_roles[USER]})

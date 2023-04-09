@@ -44,6 +44,7 @@ def getPaymentMethods(request):
 
 
 def confirm_order(request):
+    print('gerpiogjiporjgpiojspogpoer')
     orderData = request.POST
     gen_session(request)
     cart = json.loads(request.COOKIES['cart'])
@@ -68,7 +69,8 @@ def confirm_order(request):
         order_id = df.dictfetchall(cursor)[0]['lid']
         cursor.execute(
             f"""
-                select id, email from main_client
+                select main_client.email, main_client.id from
+                main_client join main_emailuuid on main_client.email = main_emailuuid.email
                 where uuid = '{request.session.session_key}';
             """
         )
