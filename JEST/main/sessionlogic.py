@@ -7,9 +7,15 @@ from django.contrib.sessions.backends.file import SessionStore
 
 def gen_session(request):
     django.middleware.csrf.get_token(request)
-    if request.session.session_key is None:
+    request.session.modified = True
+    try:
+        if request.session.session_key is None:
+            request.session['uuid-ban'] = None
+            request.session['count'] = 0
+    except AttributeError:
         request.session['uuid-ban'] = None
         request.session['count'] = 0
+
 
 
 

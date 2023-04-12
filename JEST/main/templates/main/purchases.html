@@ -52,6 +52,7 @@
             <h2>Мои данные</h2>
             <div id="user-data" class="flex-row"> 
             </div>
+            <button id="thereisnoexit" onclick="accountExit()">Выйти из аккаунта</button>
              <!-- надпись "МОИ ЗАКАЗЫ" -->
              <h2>Мои заказы</h2>
                 <div id="orders" class="flex-column"></div>
@@ -93,6 +94,11 @@
             <button class="focus-btn" onclick="try_enter();">Войти</button>
             <a class="popup-footer-text" href="#">Запросить код повторно</a>
         </div>
+    </div>
+    <div id="event-pool" class="flex-column">
+    </div>
+    <div id="waiter" style="display:none;">
+        <span>Пожалуйста подождите, экономим место на жестком диске :)</span>
     </div>
     <footer>
         <div class="container">

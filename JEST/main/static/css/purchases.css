@@ -10,6 +10,17 @@ h5, h4{
 span {
   font-size: 14px;
 }
+#thereisnoexit{
+  width: fit-content;
+  cursor: pointer;
+  margin-top: 15px;
+  color: var(--body-focus-btn-text);
+  background-color:var(--body-fg);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+
+}
 
 .arrow-btn-d, .arrow-btn-u{
   width: 50px;

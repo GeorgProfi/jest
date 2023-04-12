@@ -12,7 +12,6 @@ from .models import Client
 from django.db import connection
 from . import dictfetchall as df
 
-
 ### STATUS GUIDE ###
 ### USER - ce73628f-b89c-47e3-8949-5d68301f277f ####
 ### MANAGER - 5b612290-d5bc-4632-8e21-bf0c1c81abb9 ###
@@ -23,7 +22,7 @@ user_roles = ['ce73628f-b89c-47e3-8949-5d68301f277f', '5b612290-d5bc-4632-8e21-b
 
 superusers_emails = User.objects.filter(is_superuser=True).values_list('email')
 
-staff_email = User.objects.filter(is_staff = True).values_list('email')
+staff_email = User.objects.filter(is_staff=True).values_list('email')
 USER = 0
 MANAGER = 1
 ADMIN = 2
@@ -75,7 +74,8 @@ def login(request):
         request.session.save()
 
     if not checkBan(request):
-        print('До окончания бана осталось: ', datetime.now() - datetime.strptime(request.session['uuid-ban'], '%Y-%m-%d %H:%M:%S.%f'))
+        print('До окончания бана осталось: ',
+              datetime.now() - datetime.strptime(request.session['uuid-ban'], '%Y-%m-%d %H:%M:%S.%f'))
         return JsonResponse({'code': 23})
 
     data = json.loads(request.body)
@@ -124,7 +124,7 @@ def account_page_renderer(request):
         if request.COOKIES.get('us'):
             response.delete_cookie("us")
         return response
-    user_role = request.COOKIES['us']
+    user_role = request.COOKIES.get('us', '')
     role_index = -1
     for zi in range(len(user_roles)):
         if user_role == user_roles[zi]:
@@ -138,3 +138,10 @@ def account_page_renderer(request):
         return render(request, 'main/manager_page.html')
     elif role_index == ADMIN:
         return redirect('/admin')
+
+
+def exit(request):
+    request.session.flush()
+    gen_session(request)
+    request.session.modified = True
+    return JsonResponse({'code':'200'})

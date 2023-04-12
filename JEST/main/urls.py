@@ -34,5 +34,6 @@ urlpatterns = [
     path('confirm_order', confirm_order.confirm_order),
     path('get-payment-methods', confirm_order.getPaymentMethods),
     path('get-delivery-types', confirm_order.getDeliveryTypes),
-    path('files-orders/<str:email>/<str:path>', file_page.get_file)
+    path('files-orders/<str:email>/<str:path>', file_page.get_file),
+    path('exit', login.exit)
 ]

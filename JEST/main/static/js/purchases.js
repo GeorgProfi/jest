@@ -19,6 +19,20 @@ async function showAddInfo(elem){
   elem.className = "arrow-btn-u centered-v"
 }
 
+async function accountExit(){
+  waiter = document.getElementById('waiter');
+  waiter.style = "";
+  response = await createAsyncGETRequest('exit');
+  if(response['code']==200){
+    eraseCookie('us');
+    window.location.href = '/';
+  }
+  else{
+    waiter.style = "display:none;";
+    addVisibleEvent(false, 'Извините, что-пошло не так! Попробуйте позже!');
+  }
+}
+
 async function hideAddInfo(elem){
   container = elem.parentNode.parentNode;
   container.children[1].style = 'display:none;';
@@ -28,6 +42,11 @@ async function hideAddInfo(elem){
 
 async function createOrdersList(){
     data = await createAsyncGETRequest('purchases');
+    var code = data['code'];
+    var serverError = false;
+    if(code == 23){
+      serverError = true;
+    }
     count = data['count'];
     data = JSON.parse(data['data']);
     if(data.length>0){
@@ -172,13 +191,20 @@ async function createOrdersList(){
         myOrders.appendChild(orderContainer);
       }
     } else {
+        if(serverError)addVisibleEvent(false, 'Извините, что-пошло не так! Попробуйте позже!');
         body_container = document.getElementById('body-content');
         body_container.innerHTML = '';
         margin_container = document.createElement('div');
-        margin_container.className = 'container';
+        margin_container.className = 'container flex-column';
+        margin_container.style = "row-gap:10px";
         empty_tag = document.createElement('h2');
         empty_tag.innerHTML = "Пока что тут пусто! Сделайте заказ!"
+        exitBtn = document.createElement('button');
+        exitBtn.setAttribute('id', 'thereisnoexit');
+        exitBtn.addEventListener('click', accountExit);
+        exitBtn.innerHTML = 'Выйти из аккаунта';
         margin_container.appendChild(empty_tag);
+        margin_container.appendChild(exitBtn);
         body_container.appendChild(margin_container);
 
     }

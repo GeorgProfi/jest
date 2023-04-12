@@ -9,8 +9,6 @@ import json
 
 
 def purchases(request):
-
-
     with connection.cursor() as cursor:
         cursor.execute(
             f"""
@@ -19,7 +17,10 @@ def purchases(request):
                 where uuid = '{request.session.session_key}';
             """
         )
-        email = df.dictfetchall(cursor)[0]['email']
+        cursor_data = df.dictfetchall(cursor)
+        if len(cursor_data) < 1:
+            return JsonResponse({'code': '23', 'data':json.dumps([])})
+        email = cursor_data[0]['email']
         query = f"""
             select * from purchases
             where email = '{email}';
