@@ -10,9 +10,10 @@ def get_product_with_similarity_titles(request):
     if 'title' in request.GET:
         titles = request.GET['title'].split()
         result = []
+        productObjects = Product.objects.all()
         for title in titles:
             title = title.lower()
-            for el in Product.objects.all():
+            for el in productObjects:
                 title_fragments = el.title.lower().split()
                 percent_for_fragments = []
                 for fragment in title_fragments:
@@ -32,3 +33,6 @@ def get_product_with_similarity_titles(request):
             'data': f"{json.dumps(data)}"
         }
     )
+
+
+
