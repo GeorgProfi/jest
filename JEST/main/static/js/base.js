@@ -215,7 +215,7 @@ function changeToCodeEnter(){
     email = document.getElementById('mail-input').value;
     if(isValid(email)){
         email_g = email;
-        createAsyncPOSTRequest('sendmail', getCookie('csrftoken'), {'email':email});
+        createAsyncPOSTRequest('/sendmail', getCookie('csrftoken'), {'email':email});
         mail_enter = document.getElementById('mail-enter');
         mail_enter.style.display = 'none';
         code_enter = document.getElementById('code-enter')
@@ -276,7 +276,7 @@ async function try_enter(){
     for(zi = 0; zi<codeinputs.children.length; zi++){
         code+=codeinputs.children[zi].value;
     }
-    response = await createAsyncPOSTRequest('login', getCookie('csrftoken'), {'email':email, 'code':code});
+    response = await createAsyncPOSTRequest('/login', getCookie('csrftoken'), {'email':email, 'code':code});
     if(response['code']==200){
         setCookie('us', response['us'], 1490);
         window.location.reload();
@@ -291,3 +291,5 @@ function checkSession(){
         window.location.reload();
     }
 }
+codeEnter = document.getElementById('tryagain');
+codeEnter.addEventListener('click', changeToCodeEnter);

@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="/static/css/base.css">
         <link rel="stylesheet" href="/static/css/purchases.css">
         <link rel="shortcut icon" type="image/png" href="/static/images/favicon.ico">
-        <script type="text/javascript" src="/static/js/purchases.js"></script>
-        <script type="text/javascript" src="/static/js/base.js"></script>
+        <script type="text/javascript" src="/static/js/purchases.js" defer></script>
+        <script type="text/javascript" src="/static/js/base.js" defer></script>
         <title>Мои заказы</title>
     </head>
 <body>
@@ -92,7 +92,7 @@
             </div>
             <span style="display:none ;" class="popup-error"></span>
             <button class="focus-btn" onclick="try_enter();">Войти</button>
-            <a class="popup-footer-text" href="#">Запросить код повторно</a>
+            <a class="popup-footer-text"  id="tryagain">Запросить код повторно</a>
         </div>
     </div>
     <div id="event-pool" class="flex-column">

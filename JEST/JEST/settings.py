@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-c6)e7$)zw-21ax=@d95&)#)xvfy*)iq-d+g^32zim$=ev00s^r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
-CSRF_TRUSTED_ORIGINS = []
+ALLOWED_HOSTS = ['0b80-178-141-216-226.ngrok-free.app', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://0b80-178-141-216-226.ngrok-free.app']
 
 # file requirements
 
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'JEST.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-"""
+
 DB_SERVER_IP = DATABASE_ip
 DB_PORT = DATABASE_port
 SSH_PORT = SSH_port
@@ -97,8 +97,8 @@ db_tunnel = SSHTunnelForwarder(
     ssh_password=SSH_password,
     remote_bind_address=(DATABASE_host, DB_PORT)
 )
-db_tunnel.start() """
-"""
+db_tunnel.start()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -108,17 +108,8 @@ DATABASES = {
         'HOST': DATABASE_host,
         'PORT': db_tunnel.local_bind_port
     }
-}"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '320mjlxe',
-        'HOST': '127.0.0.1',
-        'PORT': 8350
-    }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

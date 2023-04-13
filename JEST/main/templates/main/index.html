@@ -143,7 +143,7 @@
             </div>
         </div>
     <script type="text/javascript" src="/static/js/index.js"></script>
-    <script type="text/javascript" src="/static/js/base.js"></script>
+    <script type="text/javascript" src="/static/js/base.js" defer></script>
     </div>
     <div id="login-window" style="display: none;" class="popup-modal-window" onclick="hideLoginWindow(event, this)">
         <div id="mail-enter" class="popup-content flex-column centered centered-v">
@@ -177,7 +177,7 @@
             </div>
             <span style="display:none ;" class="popup-error"></span>
             <button class="focus-btn" onclick="try_enter();">Войти</button>
-            <a class="popup-footer-text" href="#">Запросить код повторно</a>
+            <a class="popup-footer-text" id="tryagain">Запросить код повторно</a>
         </div>
     </div>
     <div id="event-pool" class="flex-column">
