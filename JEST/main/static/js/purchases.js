@@ -169,6 +169,7 @@ async function createOrdersList(){
         orderProductFiles.appendChild(orderProductsContainer);
 
         files = order['files'];
+        console.log(files);
         if(files){
           orderFiles = document.createElement('div');
           orderFiles.className = 'order-add-info-files flex-column';

@@ -22,6 +22,16 @@ class Status(models.Model):
         return f"{self.status} (id={self.id}) "
 
 
+class FileForIndividualOrder(models.Model):
+    file = models.CharField(max_length=200)
+
+    def __str__(self):
+        parts = self.file.split('\\')
+
+        return f"{parts[len(parts)-2]}\\{parts[len(parts)-1]} (id={self.id})"
+
+
+
 class Order(models.Model):
     sum = models.IntegerField()
     datetime = models.DateTimeField()
@@ -32,7 +42,7 @@ class Order(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.datetime}"
+        return f"Заказ №{self.id}"
 
 
 class Post(models.Model):
@@ -68,6 +78,8 @@ class Client(models.Model):
     email = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
 
+    def __str__(self):
+        return f"{self.surname} {self.name} (id={self.id})"
 
 class ClientReview(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
@@ -145,10 +157,6 @@ class ProductOrder(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.IntegerField()
     size = models.FloatField()
-
-
-class FileForIndividualOrder(models.Model):
-    file = models.CharField(max_length=200)
 
 
 class ClienFile(models.Model):

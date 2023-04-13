@@ -42,8 +42,7 @@ def purchases(request):
                 'count_products': row['count_products'],
                 'products': row['products'],
                 'count_files': row['count_files'],
-                'files': row['files'],
-            }
+                'files':row['files']}
             data.append(block_data)
     return JsonResponse(
         {

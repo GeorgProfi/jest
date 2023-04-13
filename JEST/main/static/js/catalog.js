@@ -193,11 +193,12 @@ async function showFiltredProducts(count, already_on_page, sender){
             }   
         }
     }
+    fixGrid();
     create_products(url);
     }
 }
 
-async function fixGrid(){
+function fixGrid(){
     grid = document.getElementById('products-grid');
     grid.className = "fixed";
 }
@@ -602,7 +603,8 @@ async function try_to_search(){
             for(ziiz = 2; ziiz<=count; ziiz++){
                 url_base+=`+${data[`title${ziiz}`]}`;
             }
-            create_products(url_base);   
+            create_products(url_base);
+            fixGrid();
     } else{
         delete_products();
         fixGrid();
