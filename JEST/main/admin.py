@@ -174,12 +174,15 @@ class UIDFilter(InputFilter):
 class filesOrderInline(admin.TabularInline):
     model = FileOrder
 
+class productOrderInline(admin.TabularInline):
+    model = ProductOrder
+
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_filter = (UIDFilter, "status", "delivery_type")
     list_display = ("id", "datetime", "client_name", "client_phone", "address")
-    inlines = [filesOrderInline]
+    inlines = [filesOrderInline, productOrderInline]
 
     def __str__(self):
         return self.id

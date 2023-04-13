@@ -204,7 +204,9 @@ header{
     z-index: 1;
 }
 
-
+#tryagain{
+    cursor:pointer;
+}
 #body-content{
     width: 100%;
     overflow: hidden;

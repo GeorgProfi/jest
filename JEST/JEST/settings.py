@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'JEST.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-DB_SERVER_IP = DATABASE_ip
+"""DB_SERVER_IP = DATABASE_ip
 DB_PORT = DATABASE_port
 SSH_PORT = SSH_port
 db_tunnel = SSHTunnelForwarder(
@@ -97,9 +97,9 @@ db_tunnel = SSHTunnelForwarder(
     ssh_password=SSH_password,
     remote_bind_address=(DATABASE_host, DB_PORT)
 )
-db_tunnel.start()
+db_tunnel.start()"""
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DATABASE_name,
@@ -108,8 +108,18 @@ DATABASES = {
         'HOST': DATABASE_host,
         'PORT': db_tunnel.local_bind_port
     }
-}
+}"""
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '320mjlxe',
+        'HOST': '127.0.0.1',
+        'PORT': 8350
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
